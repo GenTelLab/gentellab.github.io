@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>研究方向 - 浙江大学滨江研究院</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="研究院首页">
+        <img class="brand-logo" src="https://dummyimage.com/48x48/0b5cff/ffffff&text=R" alt="研究院标志">
+        <span class="brand-text">浙江大学滨江研究院</span>
+      </a>
+      <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开菜单">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" role="navigation" aria-label="主导航">
+        <ul class="nav-list">
+          <li><a href="research.html">研究方向</a></li>
+          <li><a href="team.html">学术团队</a></li>
+          <li><a href="publications.html">论文成果</a></li>
+          <li><a href="news.html">新闻动态</a></li>
+          <li><a href="contact.html" class="btn btn-primary">联系我们</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="section">
+      <div class="container section-head">
+        <h1>研究方向</h1>
+        <p>以下为研究院重点研究领域（占位）。</p>
+      </div>
+      <div class="container tabs">
+        <ul class="tab-list" role="tablist">
+          <li><button role="tab" aria-selected="true">人工智能</button></li>
+          <li><button role="tab" aria-selected="false">数据科学</button></li>
+          <li><button role="tab" aria-selected="false">智能制造</button></li>
+          <li><button role="tab" aria-selected="false">网络安全</button></li>
+        </ul>
+        <div class="tab-panels">
+          <div class="tab-panel active"><div class="cards"><article class="card"><h3>大模型与安全</h3><p>模型对齐、可解释与鲁棒性。</p></article><article class="card"><h3>强化学习</h3><p>人机协同与策略优化。</p></article></div></div>
+          <div class="tab-panel"><div class="cards"><article class="card"><h3>知识图谱</h3><p>图学习与推理。</p></article><article class="card"><h3>隐私计算</h3><p>联邦学习与差分隐私。</p></article></div></div>
+          <div class="tab-panel"><div class="cards"><article class="card"><h3>数字孪生</h3><p>工业系统建模。</p></article><article class="card"><h3>机器人视觉</h3><p>检测与跟踪。</p></article></div></div>
+          <div class="tab-panel"><div class="cards"><article class="card"><h3>零信任架构</h3><p>身份与访问控制。</p></article><article class="card"><h3>密码学工程</h3><p>同态加密与SM系列。</p></article></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img class="brand-logo" src="https://dummyimage.com/32x32/0b5cff/ffffff&text=R" alt="研究院标志">
+        <span>浙江大学滨江研究院</span>
+      </div>
+      <nav class="footer-nav" aria-label="页脚导航">
+        <a href="about.html">关于我们</a>
+        <a href="news.html">新闻</a>
+        <a href="contact.html">联系</a>
+      </nav>
+      <div class="footer-meta">
+        <span>版权所有 © <span id="year"></span> 浙江大学滨江研究院</span>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="返回顶部">↑</button>
+  <script src="assets/main.js" defer></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+
+
