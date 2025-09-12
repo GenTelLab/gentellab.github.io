@@ -3,24 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="浙江大学滨江研究院研究方向：人工智能、数据科学、智能制造、网络安全等前沿技术领域">
+  <meta name="keywords" content="研究方向, 人工智能, 数据科学, 智能制造, 网络安全, 机器学习, 知识图谱">
+  <meta name="theme-color" content="#0b5cff">
   <title>研究方向 - 浙江大学滨江研究院</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="研究院首页">
-        <img class="brand-logo" src="https://dummyimage.com/48x48/0b5cff/ffffff&text=R" alt="研究院标志">
+        <img class="brand-logo" src="image/logo.png" alt="研究院标志">
         <span class="brand-text">浙江大学滨江研究院</span>
       </a>
+
       <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开菜单">
         <span class="nav-toggle-bar" aria-hidden="true"></span>
         <span class="nav-toggle-bar" aria-hidden="true"></span>
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
+
       <nav id="site-nav" class="site-nav" role="navigation" aria-label="主导航">
         <ul class="nav-list">
-          <li><a href="research.html">研究方向</a></li>
+          <li><a href="research.html" class="active">研究方向</a></li>
           <li><a href="team.html">学术团队</a></li>
           <li><a href="publications.html">论文成果</a></li>
           <li><a href="news.html">新闻动态</a></li>
@@ -34,20 +44,252 @@
     <section class="section">
       <div class="container section-head">
         <h1>研究方向</h1>
-        <p>以下为研究院重点研究领域（占位）。</p>
+        <p>围绕"智能+产业+社会"，我们重点布局以下方向，致力于前沿技术突破与产业应用创新。</p>
       </div>
-      <div class="container tabs">
-        <ul class="tab-list" role="tablist">
-          <li><button role="tab" aria-selected="true">人工智能</button></li>
-          <li><button role="tab" aria-selected="false">数据科学</button></li>
-          <li><button role="tab" aria-selected="false">智能制造</button></li>
-          <li><button role="tab" aria-selected="false">网络安全</button></li>
-        </ul>
-        <div class="tab-panels">
-          <div class="tab-panel active"><div class="cards"><article class="card"><h3>大模型与安全</h3><p>模型对齐、可解释与鲁棒性。</p></article><article class="card"><h3>强化学习</h3><p>人机协同与策略优化。</p></article></div></div>
-          <div class="tab-panel"><div class="cards"><article class="card"><h3>知识图谱</h3><p>图学习与推理。</p></article><article class="card"><h3>隐私计算</h3><p>联邦学习与差分隐私。</p></article></div></div>
-          <div class="tab-panel"><div class="cards"><article class="card"><h3>数字孪生</h3><p>工业系统建模。</p></article><article class="card"><h3>机器人视觉</h3><p>检测与跟踪。</p></article></div></div>
-          <div class="tab-panel"><div class="cards"><article class="card"><h3>零信任架构</h3><p>身份与访问控制。</p></article><article class="card"><h3>密码学工程</h3><p>同态加密与SM系列。</p></article></div></div>
+
+      <!-- 研究方向标签页 -->
+      <div class="container">
+        <div class="tabs">
+          <ul class="tab-list" role="tablist">
+            <li><button class="tab-button" role="tab" aria-selected="true" aria-controls="ai-panel" id="ai-tab">人工智能</button></li>
+            <li><button class="tab-button" role="tab" aria-selected="false" aria-controls="data-panel" id="data-tab">数据科学</button></li>
+            <li><button class="tab-button" role="tab" aria-selected="false" aria-controls="manufacturing-panel" id="manufacturing-tab">智能制造</button></li>
+            <li><button class="tab-button" role="tab" aria-selected="false" aria-controls="security-panel" id="security-tab">网络安全</button></li>
+          </ul>
+
+          <!-- 人工智能面板 -->
+          <div class="tab-panels">
+            <div class="tab-panel active" role="tabpanel" id="ai-panel" aria-labelledby="ai-tab">
+              <div class="cards">
+                <article class="card">
+                  <h3>大模型与安全</h3>
+                  <p>模型对齐、可解释与鲁棒性。研究大语言模型的安全对齐技术，确保AI系统的可靠性和可控性。</p>
+                  <ul>
+                    <li>模型对齐与价值观对齐</li>
+                    <li>可解释AI与透明度</li>
+                    <li>对抗攻击与防御</li>
+                    <li>模型鲁棒性评估</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="大模型安全详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>强化学习</h3>
+                  <p>人机协同与策略优化。探索智能体在复杂环境中的学习与决策机制。</p>
+                  <ul>
+                    <li>多智能体强化学习</li>
+                    <li>人机协作决策</li>
+                    <li>策略优化算法</li>
+                    <li>安全强化学习</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="强化学习详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>多模态感知</h3>
+                  <p>融合视觉、语音、文本等多种模态信息，构建更智能的感知系统。</p>
+                  <ul>
+                    <li>视觉-语言理解</li>
+                    <li>多模态融合</li>
+                    <li>跨模态检索</li>
+                    <li>多模态生成</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="多模态感知详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>联邦学习</h3>
+                  <p>在保护数据隐私的前提下，实现分布式机器学习与知识共享。</p>
+                  <ul>
+                    <li>隐私保护技术</li>
+                    <li>分布式训练</li>
+                    <li>异构数据融合</li>
+                    <li>通信优化</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="联邦学习详情">了解更多</a>
+                </article>
+              </div>
+            </div>
+
+            <!-- 数据科学面板 -->
+            <div class="tab-panel" role="tabpanel" id="data-panel" aria-labelledby="data-tab">
+              <div class="cards">
+                <article class="card">
+                  <h3>知识图谱</h3>
+                  <p>构建大规模知识图谱，实现知识的结构化表示与智能推理。</p>
+                  <ul>
+                    <li>知识抽取与融合</li>
+                    <li>图谱构建与维护</li>
+                    <li>知识推理与问答</li>
+                    <li>图谱应用开发</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="知识图谱详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>数据治理</h3>
+                  <p>建立完善的数据管理体系，确保数据质量、安全与合规。</p>
+                  <ul>
+                    <li>数据质量管理</li>
+                    <li>数据标准化</li>
+                    <li>数据生命周期管理</li>
+                    <li>数据合规与审计</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="数据治理详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>隐私计算</h3>
+                  <p>在保护数据隐私的前提下，实现数据的价值挖掘与共享。</p>
+                  <ul>
+                    <li>同态加密</li>
+                    <li>安全多方计算</li>
+                    <li>差分隐私</li>
+                    <li>可信执行环境</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="隐私计算详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>高性能数据分析</h3>
+                  <p>针对大规模数据的高效处理与分析技术。</p>
+                  <ul>
+                    <li>分布式计算</li>
+                    <li>流式数据处理</li>
+                    <li>图计算优化</li>
+                    <li>实时分析系统</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="高性能数据分析详情">了解更多</a>
+                </article>
+              </div>
+            </div>
+
+            <!-- 智能制造面板 -->
+            <div class="tab-panel" role="tabpanel" id="manufacturing-panel" aria-labelledby="manufacturing-tab">
+              <div class="cards">
+                <article class="card">
+                  <h3>工业视觉</h3>
+                  <p>基于计算机视觉的工业检测、识别与质量控制技术。</p>
+                  <ul>
+                    <li>缺陷检测算法</li>
+                    <li>目标识别与跟踪</li>
+                    <li>质量控制系统</li>
+                    <li>视觉引导机器人</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="工业视觉详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>数字孪生</h3>
+                  <p>构建物理世界的数字化镜像，实现虚实融合的智能制造。</p>
+                  <ul>
+                    <li>数字孪生建模</li>
+                    <li>实时同步技术</li>
+                    <li>预测性维护</li>
+                    <li>虚拟仿真优化</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="数字孪生详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>人机协作</h3>
+                  <p>研究人类与机器人的安全协作机制与智能交互技术。</p>
+                  <ul>
+                    <li>安全协作控制</li>
+                    <li>意图识别</li>
+                    <li>协作任务规划</li>
+                    <li>人机界面设计</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="人机协作详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>自适应控制</h3>
+                  <p>面向复杂制造环境的智能控制系统与优化算法。</p>
+                  <ul>
+                    <li>自适应算法</li>
+                    <li>智能控制策略</li>
+                    <li>系统优化</li>
+                    <li>故障诊断</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="自适应控制详情">了解更多</a>
+                </article>
+              </div>
+            </div>
+
+            <!-- 网络安全面板 -->
+            <div class="tab-panel" role="tabpanel" id="security-panel" aria-labelledby="security-tab">
+              <div class="cards">
+                <article class="card">
+                  <h3>软硬件协同安全</h3>
+                  <p>从系统层面构建端到端的安全防护体系。</p>
+                  <ul>
+                    <li>硬件安全模块</li>
+                    <li>软件安全防护</li>
+                    <li>系统级安全</li>
+                    <li>安全芯片设计</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="软硬件协同安全详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>密码学工程</h3>
+                  <p>密码算法的工程化实现与性能优化技术。</p>
+                  <ul>
+                    <li>密码算法实现</li>
+                    <li>性能优化</li>
+                    <li>侧信道攻击防护</li>
+                    <li>密码协议设计</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="密码学工程详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>零信任安全</h3>
+                  <p>基于"永不信任，始终验证"理念的网络安全架构。</p>
+                  <ul>
+                    <li>身份认证</li>
+                    <li>访问控制</li>
+                    <li>网络分段</li>
+                    <li>持续监控</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="零信任安全详情">了解更多</a>
+                </article>
+                <article class="card">
+                  <h3>安全治理</h3>
+                  <p>建立完善的信息安全管理体系与治理机制。</p>
+                  <ul>
+                    <li>安全策略制定</li>
+                    <li>风险评估</li>
+                    <li>合规管理</li>
+                    <li>安全培训</li>
+                  </ul>
+                  <a class="card-link" href="#" aria-label="安全治理详情">了解更多</a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 研究平台 -->
+    <section class="section section-alt" aria-label="研究平台">
+      <div class="container">
+        <div class="section-head">
+          <h2>研究平台</h2>
+          <p>我们拥有先进的研究平台与实验环境，为科研创新提供有力支撑。</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>高性能计算平台</h3>
+            <p>配备先进GPU集群，支持大规模深度学习训练与科学计算。</p>
+            <a class="card-link" href="#" aria-label="高性能计算平台详情">了解更多</a>
+          </article>
+          <article class="card">
+            <h3>智能制造实验室</h3>
+            <p>集成工业机器人、视觉系统与数字孪生技术的综合实验平台。</p>
+            <a class="card-link" href="#" aria-label="智能制造实验室详情">了解更多</a>
+          </article>
+          <article class="card">
+            <h3>网络安全靶场</h3>
+            <p>模拟真实网络环境的攻防演练与安全测试平台。</p>
+            <a class="card-link" href="#" aria-label="网络安全靶场详情">了解更多</a>
+          </article>
+          <article class="card">
+            <h3>数据科学中心</h3>
+            <p>提供大数据处理、分析与可视化的综合服务平台。</p>
+            <a class="card-link" href="#" aria-label="数据科学中心详情">了解更多</a>
+          </article>
         </div>
       </div>
     </section>
@@ -56,13 +298,14 @@
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img class="brand-logo" src="https://dummyimage.com/32x32/0b5cff/ffffff&text=R" alt="研究院标志">
+        <img class="brand-logo" src="image/logo.png" alt="研究院标志">
         <span>浙江大学滨江研究院</span>
       </div>
       <nav class="footer-nav" aria-label="页脚导航">
         <a href="about.html">关于我们</a>
         <a href="news.html">新闻</a>
         <a href="contact.html">联系</a>
+        <a href="https://zjubi.zju.edu.cn" target="_blank" rel="noopener noreferrer nofollow">隐私政策</a>
       </nav>
       <div class="footer-meta">
         <span>版权所有 © <span id="year"></span> 浙江大学滨江研究院</span>
@@ -71,9 +314,28 @@
   </footer>
 
   <button id="backToTop" class="back-to-top" aria-label="返回顶部">↑</button>
+
   <script src="assets/main.js" defer></script>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // 标签页切换功能
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetPanel = button.getAttribute('aria-controls');
+        
+        // 移除所有活动状态
+        tabButtons.forEach(btn => btn.setAttribute('aria-selected', 'false'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        
+        // 设置当前活动状态
+        button.setAttribute('aria-selected', 'true');
+        document.getElementById(targetPanel).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
-
-
