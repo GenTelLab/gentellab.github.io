@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Gentel Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {margin:0; font-family:Arial, sans-serif;}
+
+    /* ===== 顶部导航 ===== */
+    header {
+      background:#fff;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    header nav {
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1200px; margin:0 auto; padding:12px 20px;
+    }
+    header nav ul {
+      display:flex; list-style:none; gap:20px; margin:0; padding:0;
+    }
+    header nav a {
+      text-decoration:none; color:#333;
+    }
+    header nav a:hover {color:#2563eb;}
+
+    /* ===== 底部导航 ===== */
+    /* ===== Footer 顶部信息区 ===== */
+    footer{ background:#2f62ee; color:#fff; }
+    /* ===== Footer 顶部信息区（3列：总部 | 合作+电话 | 二维码） ===== */
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:26px 20px 10px; }
+    .footer-title { font-size:18px; font-weight:700; margin:0 0 14px; }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 2fr 1.2fr 160px; /* 左 中 右 */
+      gap:28px;
+      align-items: start;                     /* 顶部对齐——与"合作/电话"同一水平线 */
+      padding-bottom:18px;
+      border-bottom:1px solid rgba(255,255,255,.45);
+    }
+    .footer-col p{ margin:.35rem 0; opacity:.95; }
+
+    /* 中间列：合作在上，电话在下 */
+    .footer-contact{ display:grid; row-gap: 14px; }
+
+    /* 右侧二维码：顶对齐，靠右 */
+    .footer-qrcode{
+      align-self: start;       /* 顶部对齐 */
+      justify-self: end;       /* 贴右边 */
+      text-align:center;
+    }
+    .footer-qrcode .qrcode{
+      width:120px; height:120px; border-radius:8px;
+      background:rgba(255,255,255,.65);
+      display:block; margin:0 auto;
+    }
+    .footer-qrcode .caption{ font-size:13px; margin-top:8px; opacity:.95; }
+    .footer-bottom {
+      max-width:1200px;        /* 与上方保持同宽 */
+      margin:0 auto;           /* 居中 */
+      padding:12px 20px 18px;
+      display:flex;
+      justify-content:space-between; /* 左右对齐 */
+      align-items:center;
+      flex-wrap:wrap;
+      border-top:1px solid rgba(255,255,255,.45); /* 上边界线，与上方分隔 */
+    }
+
+    .footer-bottom .legal-left,
+    .footer-bottom .legal-right {
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:6px;                 /* 间隔 */
+    }
+
+    .sep { margin:0 8px; opacity:.7; }
+    .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
+
+    /* 小屏改为一列 */
+    @media (max-width: 900px){
+      .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      .footer-qrcode{ justify-self: start; }
+    }
+
+    /* ===== 横幅区域 ===== */
+    .hero {
+      height: 420px;
+      background-image: url('主页图片/Slice 104@2x.png');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      text-align: center; 
+      color: #000;
+      position: absolute;
+      top: 50%; /* 垂直居中：背景图片的中间位置 */
+      left: calc((100vw - 1200px) / 2 + 20px + 10px + 15px); /* 与logo水平对齐 */
+      transform: translateY(-50%); /* 只垂直居中 */
+    }
+    .hero-content h1 {margin:0; font-size:32px; line-height: 1;}
+    .hero-content p {margin:8px 0 0;}
+
+     /* ===== 主内容区 ===== */
+     .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 30px;
+    }
+    
+    /* 侧边栏 */
+    .sidebar {
+      width: 250px;
+      flex-shrink: 0;
+    }
+    
+    .search-box {
+      margin-bottom: 25px;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    
+    .search-box input:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    
+    .filter-section {
+      background-color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      padding: 15px 20px;
+      margin-bottom: 20px;
+    }
+    
+    .filter-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #2c3e50;
+    }
+    
+    .filter-group {
+      margin-bottom: 15px;
+    }
+    
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .filter-group label:hover {
+      color: #3498db;
+    }
+    
+    .filter-group input[type="checkbox"] {
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    .filter-group input[type="radio"] {
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    .apply-filters {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    
+    .apply-filters:hover {
+      background-color: #2980b9;
+    }
+    
+    /* 主内容区 */
+    .main-content {
+      flex: 1;
+    }
+    
+    .content-header {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .content-title {
+      font-size: 24px;
+      margin: 0 0 10px 0;
+      color: #2c3e50;
+    }
+    
+    .content-desc {
+      color: #7f8c8d;
+      margin: 0;
+    }
+    
+    /* 文献列表 */
+    .publications-list {
+      margin-bottom: 30px;
+    }
+    
+    .publication-item {
+      background-color: #fff;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-left: 4px solid #3498db;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .publication-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .pub-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+      color: #2c3e50;
+    }
+    
+    .pub-title a {
+      color: #2c3e50;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .pub-title a:hover {
+      color: #3498db;
+    }
+    
+    .pub-authors {
+      font-size: 14px;
+      color: #555;
+      margin: 0 0 8px 0;
+    }
+    
+    .pub-field {
+      font-size: 14px;
+      color: #555;
+      margin: 0 0 8px 0;
+      font-style: italic;
+    }
+    
+    .pub-meta {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin: 0 0 10px 0;
+    }
+    
+    .pub-coop {
+      font-size: 14px;
+      color: #555;
+      margin: 0 0 10px 0;
+    }
+    
+    .pub-links {
+      display: flex;
+      gap: 15px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .pub-links a {
+      color: #3498db;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    
+    .pub-links a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+    
+    .pub-links i {
+      margin-right: 5px;
+    }
+    
+    /* 分页控件 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+    
+    .pagination-btn {
+      padding: 8px 15px;
+      margin: 0 5px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .pagination-btn:hover:not(:disabled) {
+      border-color: #3498db;
+      color: #3498db;
+    }
+    
+    .pagination-btn.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #3498db;
+    }
+    
+    .pagination-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      border-color: #ddd;
+      color: #999;
+      background-color: #f9f9f9;
+    }
+    
+
+    /* 响应式设计 */
+    @media (max-width: 900px){
+      .footer-grid{ 
+        grid-template-columns: 1fr; 
+        gap:18px; 
+      }
+      .footer-qrcode{ 
+        justify-self: start; 
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+      }
+      
+      header nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero {
+        height: 300px;
+      }
+      
+      .hero-content h1 {
+        font-size: 28px;
+      }
+
+      /* 移动端分页优化 */
+      .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      
+      .pagination-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 全局导航 ===== -->
+  <header>
+    <nav>
+      <a href="/">
+        <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
+      </a>
+      <ul>
+        <li><a href="main.html">Home</a></li>    
+        <li><a href="研究方向.html">Research Directions</a></li>          
+        <li><a href="publications.html">Research Achievements</a></li>
+        <li><a href="team.html">Staff Introduction</a></li>
+        <li><a href="join_us.html">Join Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== 横幅区（背景图 + 标题） ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>标题标题标题</h1>
+      <p>*****************</p>
+    </div>
+  </section>
+
+
+   <!-- ===== 页面主体内容区域 ===== -->
+   <div class="container">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+      <div class="search-box">
+        <input type="text" placeholder="Searching for literature...">
+          </div>
+          
+          <div class="filter-section">
+        <h3 class="filter-title">Document type</h3>
+        <div class="filter-group">
+          <label><input type="checkbox" checked> journal article</label>
+          <label><input type="checkbox" checked> conference paper</label>
+          <label><input type="checkbox" checked> dissertation</label>
+          <label><input type="checkbox" checked> Research report</label>
+              </div>
+        <button class="apply-filters">Apply filter</button>
+              </div>
+      
+      <div class="filter-section">
+        <h3 class="filter-title">Research field</h3>
+        <div class="filter-group">
+          <label><input type="checkbox" checked> Large model</label>
+          <label><input type="checkbox" checked> Computer Vision</label>
+          <label><input type="checkbox" checked> Multi-agent</label>
+          <label><input type="checkbox" checked> Device traceability</label>
+          <label><input type="checkbox" checked> Robotics</label>
+              </div>
+        <button class="apply-filters">Apply filter</button>
+          </div>
+          
+          <div class="filter-section">
+        <h3 class="filter-title">Year of publication</h3>
+        <div class="filter-group">
+          <label><input type="radio" name="year" checked> All years</label>
+          <label><input type="radio" name="year"> Year 2023</label>
+          <label><input type="radio" name="year"> Year 2022</label>
+          <label><input type="radio" name="year"> Year 2021</label>
+          <label><input type="radio" name="year"> Year 2020 and before</label>
+              </div>
+        <button class="apply-filters">Apply filter</button>
+              </div>
+              </div>
+    
+    <!-- 主内容区 -->
+    <div class="main-content">
+      <div class="content-header">
+        <h2 class="content-title">Academic published literature</h2>
+              </div>
+      
+      <!-- 文献列表 -->
+      <div id="publications-list" class="publications-list">
+        <!-- 文献内容将通过JavaScript动态生成 -->
+          </div>
+          
+      <!-- 分页控件 -->
+      <div class="pagination">
+        <button id="prev-page" class="pagination-btn" disabled>
+          <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <div id="page-numbers">
+          <!-- 页码将通过JavaScript动态生成 -->
+              </div>
+        <button id="next-page" class="pagination-btn">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+              </div>
+          </div>
+        </div>
+        
+  <script>
+    // 配置参数
+    const ITEMS_PER_PAGE = 3; // 每页显示3个文献
+    const TOTAL_PAGES = 10;   // 总共10页
+    
+    // 完整的30篇文献数据（10页 × 3篇/页）
+    const allPublications = [
+      // 第1页
+      {
+        title: "MCP-Guard: A Defense Framework for Model Context Protocol Integrity in Large Language Model Applications",
+        authors: "Wenpeng Xing, Zhonghao Qi, Yupeng Qin, Yilin Li, Caini Chang, Jiahui Yu, Changting Lin, Zhenzhen Xie, Meng Han.",
+        field: "大模型安全，模型上下文协议",
+        Publish: "arXiv preprint arXiv:2508.10991",
+        Cooperating_unit: "浙江大学，山东大学，GenTel.io, 香港中文大学，浙大滨江研究院",
+        Article_link: "https://arxiv.org/abs/2508.10991",
+        pdf: "#",
+        Project_link: "",
+        category: "Large model"
+      },
+      {
+        title: "SproutBench: A Benchmark for Safe and Ethical Large Language Models for Youth",
+        authors: "Wenpeng Xing, Lanyi Wei, Haixiao Hu, Rongchang Li, Mohan Li, Changting Lin, Meng Han.",
+        field: "模型可信",
+        Publish: "arXiv preprint arXiv:2508.11009",
+        Cooperating_unit: "浙江大学，上海财经大学，GenTel.io, 广州大学，浙大滨江研究院",
+        Article_link: "https://arxiv.org/abs/2508.11009",
+        pdf: "#",
+        Project_link: "",
+        category: "Large model"
+      },
+      {
+        title: "HGMF: A Hierarchical Gaussian Mixture Framework for Scalable Tool Invocation within the Model Context Protocol",
+        authors: "Wenpeng Xing, Zhipeng Chen, Changting Lin, Meng Han.",
+        field: "模型上下文协议",
+        Publish: "arXiv preprint arXiv:2508.07602",
+        Cooperating_unit: "浙江大学，浙大滨江研究院，GenTel.io, 集美大学",
+        Article_link: "https://arxiv.org/abs/2508.07602",
+        pdf: "#",
+        Project_link: "",
+        category: "Large model"
+      },
+      // 第2页
+      {
+        title: "Latent Fusion Jailbreak: Blending Harmful and Harmless Representations to Elicit Unsafe LLM Outputs",
+        authors: "Wenpeng Xing, Mohan Li, Chunqiang Hu, Haitao XuNingyu Zhang, Bo Lin, Meng Han.",
+        field: "大模型越狱，大模型可信",
+        Publish: "arXiv preprint arXiv:2508.10029",
+        Cooperating_unit: "浙江大学，广州大学，重庆大学",
+        Article_link: "https://arxiv.org/abs/2508.10029",
+        pdf: "#",
+        Project_link: "",
+        category: "Large model"
+      },
+      {
+        title: "CoDe-NeRF: Neural Rendering via Dynamic Coefficient Decomposition",
+        authors: "Wenpeng Xing, Jie Chen, Zaifeng Yang, Tiancheng Zhao, Gaolei Li, Changting Lin, Yike Guo, Meng Han.",
+        field: "三维可视计算",
+        Publish: "arXiv preprint arXiv:2508.06632",
+        Cooperating_unit: "浙江大学，香港浸会大学，新加坡科技研究局，浙大滨江研究院，上海交通大学，香港科技大学",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "https://arxiv.org/abs/2508.06632",
+        category: "Computer Vision"
+      },
+      {
+        title: "UW-3DGS: Underwater 3D Reconstruction with Physics-Aware Gaussian Splatting",
+        authors: "Wenpeng Xing, Jie Chen, Zaifeng Yang, Changting Lin, Jianfeng Dong, Chaochao Chen, Xun Zhou, Meng Han.",
+        field: "三维可视计算",
+        Publish: "arXiv preprint arXiv:2508.06169",
+        Cooperating_unit: "浙江大学，浙大滨江研究院，GenTel.io",
+        Article_link: "https://arxiv.org/abs/2508.06169",
+        pdf: "#",
+        Project_link: "",
+        category: "Computer Vision"
+      },
+      // 第3页
+      {
+        title: "IDCNet: Image Decomposition and Cross-View Distillation for Generalizable Deepfake Detection",
+        authors: "Zhiyuan Wang, Yanxiang Chen, Yuanzhi Yao, Meng Han, Wenpeng Xing, Meng Li.",
+        field: "伪造检测",
+        Publish: "IEEE Transactions on Information Forensics and Security",
+        Cooperating_unit: "浙江大学，合肥工业大学，浙大滨江研究院",
+        Article_link: "https://ieeexplore.ieee.org/abstract/document/11098842",
+        pdf: "#",
+        Project_link: "",
+        category: "Large model"
+      },
+      {
+        title: "NCDI-Diffusion: Neural Contextual and Directional Inversion for Novel View Synthesis through Diffusion Models",
+        authors: "Wenpeng Xing, Jie Chen, Zaifeng Yang, Xin Tong, Changting Lin, Meng Han.",
+        field: "三维可视计算",
+        Publish: "ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+        Cooperating_unit: "浙江大学，香港浸会大学，新加坡科技研究局，浙大滨江研究院，中国人民公安大学，GenTel.io",
+        Article_link: "https://ieeexplore.ieee.org/abstract/document/10889871",
+        pdf: "#",
+        Project_link: "",
+        category: "Large model"
+      },
+      {
+        title: "IDE: A Multi-Agent-Driven Iterative Framework for Dynamic Evaluation of LLMs",
+        authors: "Xin Tong, Bo Jin, Jingya Wang, Wenpeng Xing, Tian Xia, Meng Han.",
+        field: "多智能体",
+        Publish: "ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+        Cooperating_unit: "浙江大学，公安部第三研究所，中国人民公安大学，中国人民大学",
+        Article_link: "https://ieeexplore.ieee.org/abstract/document/10890123",
+        pdf: "#",
+        Project_link: "",
+        category: "Multi-agent"
+      },
+      // 第4页
+      {
+        title: "Distill To Detect: Amplifying Anomalies in Backdoor Models through Knowledge Distillation",
+        authors: "Chang Hu; Xuyang Teng; Wenpeng Xing; Han Chen; Chenhao Ye; Meng Han.",
+        field: "模型可信",
+        Publish: "ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+        Cooperating_unit: "浙大滨江研究院，GenTel.io,杭州电子科技大学",
+        Article_link: "https://ieeexplore.ieee.org/abstract/document/10888729",
+        pdf: "#",
+        Project_link: "#",
+        category: "Large model"
+      },
+      {
+        title: "Gentel-safe: A unified benchmark and shielding framework for defending against prompt injection attacks",
+        authors: "Rongchang Li, Minjie Chen, Chang Hu, Han Chen, Wenpeng Xing, Meng Han.",
+        field: "大模型安全",
+        Publish: "arXiv preprint arXiv:2409.19521",
+        Cooperating_unit: "浙江大学，GenTel.io",
+        Article_link: "https://arxiv.org/abs/2409.19521",
+        pdf: "#",
+        Project_link: "#",
+        category: "Large model"
+      },
+      {
+        title: "Towards robust and secure embodied ai: A survey on vulnerabilities and attacks",
+        authors: "Wenpeng Xing, Minghao Li, Mohan Li, Meng Han.",
+        field: "具身智能，模型可信",
+        Publish: "arXiv preprint arXiv:2502.13175",
+        Cooperating_unit: "浙江大学，浙大滨江研究院，GenTel.io, 广州大学，重庆大学",
+        Article_link: "https://arxiv.org/abs/2502.13175",
+        pdf: "#",
+        Project_link: "#",
+        category: "Large model"
+      },
+      // 第5页
+      {
+        title: "MEraser: An Effective Fingerprint Erasure Approach for Large Language Models",
+        authors: "Jingxuan Zhang and Zhenhua Xu, Rui Hu, Wenpeng Xing, Xuhong Zhang, Meng Han.",
+        field: "大模型，指纹擦除",
+        Publish: "ACL2025Main",
+        Cooperating_unit: "#",
+        Article_link: "https://aclanthology.org/2025.acl-long.1455/",
+        pdf: "#",
+        Project_link: "https://github.com/JingxuanZhang77/MEraser",
+        category: "Large model"
+      },
+      {
+        title: "InSty: A Robust Multi-Level Cross-Granularity Fingerprint Embedding Algorithm for Multi-Turn Dialogue in Large Language Models",
+        authors: "Zhenhua Xu, Meng Han, Xubin Yue, Wenpeng Xing.",
+        field: "大模型，指纹嵌入",
+        Publish: "SCIENTIA SINICA Informationis",
+        Cooperating_unit: "#",
+        Article_link: "https://www.sciengine.com/SSI/doi/10.1360/SSI-2025-0022",
+        pdf: "#",
+        Project_link: "#",
+        category: "Large model"
+      },
+      {
+        title: "CTCC: A Robust and Stealthy Fingerprinting Framework for Large Language Models via Cross-Turn Contextual Correlation Backdoor",
+        authors: "Zhenhua Xu, Xixiang Zhao, Xubin Yue, shengwei tian, Changting Lin, Meng Han.",
+        field: "大模型，指纹嵌入",
+        Publish: "EMNLP2025Main",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "https://github.com/Xuzhenhua55/CTCC",
+        category: "Large model"
+      },
+      // 第6页
+      {
+        title: "EverTracer: Hunting Stolen Large Language Models via Stealthy and Robust Probabilistic Fingerprint",
+        authors: "Zhenhua Xu, Meng Han, Wenpeng Xing.",
+        field: "大模型，指纹嵌入",
+        Publish: "EMNLP2025Main",
+        Cooperating_unit: "#",
+        Article_link: "https://arxiv.org/abs/2509.03058",
+        pdf: "#",
+        Project_link: "https://github.com/Xuzhenhua55/EverTracer",
+        category: "Large model"
+      },
+      {
+        title: "Unlocking the Effectiveness of LoRA-FP for Seamless Transfer Implantation of Fingerprints in Downstream Models",
+        authors: "Zhenhua Xu, Zhaokun Yan, Binhan Xu, Xin Tong, Haitao Xu, Yourong Chen, Meng Han.",
+        field: "大模型，指纹迁移",
+        Publish: "EMNLP2025Finding",
+        Cooperating_unit: "#",
+        Article_link: "https://arxiv.org/abs/2509.00820",
+        pdf: "#",
+        Project_link: "https://github.com/Xuzhenhua55/LoRA-FP",
+        category: "Large model"
+      },
+      {
+        title: "Fingerprint Vector: Enabling Scalable and Efficient Model Fingerprint Transfer via Vector Addition",
+        authors: "Zhenhua Xu, Qichen Liu, Zhebo Wang, Wenpeng Xing, Dezhang Kong, Mohan Li, Meng Han.",
+        field: "大模型，指纹迁移",
+        Publish: "arXiv",
+        Cooperating_unit: "浙江大学，集美大学，浙大滨江研究院",
+        Article_link: "https://arxiv.org/abs/2409.08846",
+        pdf: "#",
+        Project_link: "https://github.com/Xuzhenhua55/Fingerprint-Vector",
+        category: "Large model"
+      },
+      // 第7页
+      {
+        title: "Copyright Protection for Large Language Models: A Survey of Methods, Challenges, and Trends",
+        authors: "Zhenhua Xu, Xubin Yue, Zhebo Wang, Qichen Liu, Xixiang Zhao, Jingxuan Zhang, Wenjun Zeng, Wengpeng Xing, Dezhang Kong, Changting Lin, Meng Han.",
+        field: "大模型，版权保护，综述",
+        Publish: "arXiv",
+        Cooperating_unit: "香港中文大学，浙大滨江研究院",
+        Article_link: "https://arxiv.org/abs/2508.11548",
+        pdf: "#",
+        Project_link: "https://github.com/Xuzhenhua55/awesome-llm-copyright-protection",
+        category: "Large model"
+      },
+      {
+        title: "PREE: Towards Harmless and Adaptive Fingerprint Editing in Large Language Models via Knowledge Prefix Enhancement",
+        authors: "Xubin Yue and Zhenhua Xu (co-first authors), Wenpeng Xing, Jiahui Yu, Mohan Li, Meng Han.",
+        field: "大模型，指纹嵌入",
+        Publish: "EMNLP2025Finding",
+        Cooperating_unit: "山东大学，GenTel.io",
+        Article_link: "https://arxiv.org/abs/2509.00918",
+        pdf: "#",
+        Project_link: "#",
+        category: "Large model"
+      },
+      {
+        title: "RAP-SM: Robust Adversarial Prompt via Shadow Models for Copyright Verification of Large Language Models",
+        authors: "Zhebo Wang,Zhenhua Xu , Maike Li, Wenpeng Xing, Chunqiang Hu, Chen Zhi, Meng Han.",
+        field: "大模型，指纹生成",
+        Publish: "arXiv",
+        Cooperating_unit: "浙江大学，山东大学",
+        Article_link: "https://arxiv.org/abs/2505.06304",
+        pdf: "#",
+        Project_link: "#",
+        category: "Large model"
+      },
+      // 第8页
+      {
+        title: "Deepfake Video Traceability and Authentication via Source Attribution",
+        authors: "Canghai Shi, Minglei Qiao, Zhuang Li, Zahid Akthtar, Bin Wang, Meng Han, Tong Qiao.",
+        field: "伪造检测，设备溯源",
+        Publish: "IET Biometrics",
+        Cooperating_unit: "杭州电子科技大学，纽约州立大学理工学院，浙江省智能物联网络与数据安全重点实验室，西安电子科技大学杭研院，浙大滨江研究院",
+        Article_link: "http://dx.doi.org/10.1049/bme2/5687970",
+        pdf: "#",
+        Project_link: "#",
+        category: "Device traceability"
+      },
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "",
+        category: "#"
+      },
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "",
+        category: "#"
+      },
+      // 第9页
+      {
+        title: "#",
+        authors: "##",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "",
+        category: "#"
+      },
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "",
+        category: "#"
+      },
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "#",
+        category: "#"
+      },
+      // 第10页
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "#",
+        category: "#"
+      },
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "#",
+        category: "#"
+      },
+      {
+        title: "#",
+        authors: "#",
+        field: "#",
+        Publish: "#",
+        Cooperating_unit: "#",
+        Article_link: "#",
+        pdf: "#",
+        Project_link: "#",
+        category: "#"
+      }
+    ];
+    
+    // 当前页码和筛选状态
+    let currentPage = 1;
+    let filteredPublications = allPublications;
+    let isSearchMode = false;
+    
+    // 获取筛选条件
+    function getFilterConditions() {
+      const searchTerm = document.querySelector('.search-box input').value.toLowerCase().trim();
+      
+      // 获取文档类型筛选
+      const docTypeFilters = [];
+      document.querySelectorAll('.filter-section:nth-child(2) input[type="checkbox"]:checked').forEach(checkbox => {
+        docTypeFilters.push(checkbox.nextSibling.textContent.trim());
+      });
+      
+      // 获取研究领域筛选
+      const fieldFilters = [];
+      document.querySelectorAll('.filter-section:nth-child(3) input[type="checkbox"]:checked').forEach(checkbox => {
+        fieldFilters.push(checkbox.nextSibling.textContent.trim());
+      });
+      
+      // 获取年份筛选
+      const yearFilter = document.querySelector('.filter-section:nth-child(4) input[type="radio"]:checked');
+      const selectedYear = yearFilter ? yearFilter.nextSibling.textContent.trim() : 'All years';
+      
+      return { searchTerm, docTypeFilters, fieldFilters, selectedYear };
+    }
+    
+    // 按首字母顺序匹配搜索
+    function matchesTitleSequence(title, searchTerm) {
+      if (!searchTerm) return true;
+      
+      const titleLower = title.toLowerCase();
+      const searchLower = searchTerm.toLowerCase();
+      let searchIndex = 0;
+      
+      // 遍历标题中的每个字符
+      for (let i = 0; i < titleLower.length && searchIndex < searchLower.length; i++) {
+        // 如果当前字符匹配搜索词中的下一个字符
+        if (titleLower[i] === searchLower[searchIndex]) {
+          searchIndex++;
+        }
+      }
+      
+      // 如果搜索词中的所有字符都按顺序匹配了，返回true
+      return searchIndex === searchLower.length;
+    }
+    
+    // 筛选文献
+    function filterPublications() {
+      const { searchTerm, docTypeFilters, fieldFilters, selectedYear } = getFilterConditions();
+      
+      filteredPublications = allPublications.filter(pub => {
+        // 搜索条件 - 按首字母顺序匹配标题
+        if (searchTerm && !matchesTitleSequence(pub.title, searchTerm)) {
+          return false;
+        }
+        
+        // 文档类型筛选
+        if (docTypeFilters.length > 0) {
+          const pubType = getPublicationType(pub);
+          if (!docTypeFilters.includes(pubType)) {
+            return false;
+          }
+        }
+        
+        // 研究领域筛选
+        if (fieldFilters.length > 0) {
+          if (!fieldFilters.includes(pub.category)) {
+            return false;
+          }
+        }
+        
+        // 年份筛选
+        if (selectedYear !== 'All years') {
+          const pubYear = getPublicationYear(pub);
+          if (selectedYear === 'Year 2023' && pubYear !== 2023) return false;
+          if (selectedYear === 'Year 2022' && pubYear !== 2022) return false;
+          if (selectedYear === 'Year 2021' && pubYear !== 2021) return false;
+          if (selectedYear === 'Year 2020 and before' && pubYear > 2020) return false;
+        }
+        
+        return true;
+      });
+      
+      // 更新分页
+      const totalPages = Math.ceil(filteredPublications.length / ITEMS_PER_PAGE);
+      if (currentPage > totalPages) {
+        currentPage = Math.max(1, totalPages);
+      }
+    }
+    
+    // 获取文献类型
+    function getPublicationType(pub) {
+      if (pub.Publish.toLowerCase().includes('arxiv')) return 'field article';
+      if (pub.Publish.toLowerCase().includes('journal') || pub.Publish.toLowerCase().includes('transactions')) return 'field article';
+      if (pub.Publish.toLowerCase().includes('conference') || pub.Publish.toLowerCase().includes('proceedings')) return 'conference paper';
+      if (pub.Publish.toLowerCase().includes('dissertation') || pub.Publish.toLowerCase().includes('thesis')) return 'dissertation';
+      return 'Research report';
+    }
+    
+    // 获取发表年份
+    function getPublicationYear(pub) {
+      const yearMatch = pub.Publish.match(/(\d{4})/);
+      return yearMatch ? parseInt(yearMatch[1]) : 2023;
+    }
+    
+    // 渲染文献列表
+    function renderPublications(page) {
+      const container = document.getElementById('publications-list');
+      container.innerHTML = '';
+      
+      // 计算当前页的文献索引范围
+      const startIndex = (page - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const currentPubs = filteredPublications.slice(startIndex, endIndex);
+      
+      if (currentPubs.length === 0) {
+        container.innerHTML = '<p>No publications found matching your criteria.</p>';
+        return;
+      }
+      
+      currentPubs.forEach(pub => {
+        const pubItem = document.createElement('div');
+        pubItem.className = 'publication-item';
+        
+        // 构建链接部分
+        let linksHtml = '';
+        if (pub.Article_link && pub.Article_link !== '#') {
+          linksHtml += `<a href="${pub.Article_link}" target="_blank"><i class="fas fa-external-link-alt"></i> Article</a>`;
+        }
+        if (pub.pdf && pub.pdf !== '#') {
+          linksHtml += `<a href="${pub.pdf}" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>`;
+        }
+        if (pub.Project_link && pub.Project_link !== '') {
+          linksHtml += `<a href="${pub.Project_link}" target="_blank"><i class="fas fa-flask"></i> Project</a>`;
+        }
+        
+        pubItem.innerHTML = `
+          <h3 class="pub-title"><a href="${pub.Article_link || '#'}" target="_blank">${pub.title}</a></h3>
+          <p class="pub-authors">${pub.authors}</p>
+          <p class="pub-field">${pub.field}</p>
+          <p class="pub-meta">${pub.Publish}</p>
+          <p class="pub-coop"><strong></strong> ${pub.Cooperating_unit}</p>
+          <div class="pub-links">
+            ${linksHtml}
+          </div>
+        `;
+        
+        container.appendChild(pubItem);
+      });
+    }
+    
+    // 渲染分页控件
+    function renderPagination() {
+      const pageNumbersContainer = document.getElementById('page-numbers');
+      const prevBtn = document.getElementById('prev-page');
+      const nextBtn = document.getElementById('next-page');
+      
+      // 清空现有页码
+      pageNumbersContainer.innerHTML = '';
+      
+      // 计算总页数
+      const totalPages = Math.ceil(filteredPublications.length / ITEMS_PER_PAGE);
+      
+      // 生成页码按钮
+      for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+        pageBtn.textContent = i;
+        
+        pageBtn.addEventListener('click', () => {
+          currentPage = i;
+          renderPublications(currentPage);
+          renderPagination();
+        });
+        
+        pageNumbersContainer.appendChild(pageBtn);
+      }
+      
+      // 更新上一页/下一页按钮状态
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages;
+      
+      // 上一页按钮事件
+      prevBtn.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPublications(currentPage);
+          renderPagination();
+        }
+      };
+      
+      // 下一页按钮事件
+      nextBtn.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPublications(currentPage);
+          renderPagination();
+        }
+      };
+    }
+
+    // 应用筛选和搜索
+    function applyFilters() {
+      // 检查是否有任何筛选条件被激活
+      const { searchTerm, docTypeFilters, fieldFilters, selectedYear } = getFilterConditions();
+      const hasActiveFilters = searchTerm || 
+        docTypeFilters.length < 4 || // 如果有未选中的文档类型
+        fieldFilters.length < 5 ||   // 如果有未选中的研究领域
+        selectedYear !== 'All years'; // 如果选择了特定年份
+      
+      if (hasActiveFilters) {
+        // 有筛选条件时，应用筛选
+        filterPublications();
+      } else {
+        // 没有筛选条件时，显示所有文献
+        filteredPublications = allPublications;
+      }
+      
+      currentPage = 1;
+      renderPublications(currentPage);
+      renderPagination();
+      
+      // 显示分页控件
+      document.querySelector('.pagination').style.display = 'flex';
+    }
+    
+    // 重置筛选
+    function resetFilters() {
+      // 重置搜索框
+      document.querySelector('.search-box input').value = '';
+      
+      // 重置所有复选框为选中状态
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = true;
+      });
+      
+      // 重置年份选择为"All years"
+      const allYearsRadio = document.querySelector('input[type="radio"]');
+      if (allYearsRadio) {
+        allYearsRadio.checked = true;
+      }
+      
+      // 重置筛选结果，显示所有文献
+      filteredPublications = allPublications;
+      currentPage = 1;
+      renderPublications(currentPage);
+      renderPagination();
+    }
+    
+    // 初始化页面
+    document.addEventListener('DOMContentLoaded', () => {
+      // 初始渲染第一页（显示所有文献，不进行筛选）
+      filteredPublications = allPublications;
+      renderPublications(currentPage);
+      renderPagination();
+      
+      // 搜索功能
+      const searchInput = document.querySelector('.search-box input');
+      searchInput.addEventListener('input', () => {
+        applyFilters();
+      });
+      
+      // 筛选功能
+      const filterButtons = document.querySelectorAll('.apply-filters');
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          applyFilters();
+        });
+      });
+      
+      // 为所有筛选选项添加实时筛选
+      document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+        input.addEventListener('change', () => {
+          applyFilters();
+        });
+      });
+      
+      // 添加重置按钮功能（可选）
+      const resetButton = document.createElement('button');
+      resetButton.textContent = 'Reset Filters';
+      resetButton.className = 'apply-filters';
+      resetButton.style.backgroundColor = '#e74c3c';
+      resetButton.style.marginTop = '10px';
+      resetButton.addEventListener('click', resetFilters);
+      
+      // 将重置按钮添加到最后一个筛选区域
+      const lastFilterSection = document.querySelector('.filter-section:last-child');
+      lastFilterSection.appendChild(resetButton);
+    });
+  </script>
+
+  <!-- ===== 底部导航 ===== -->
+  <footer>
+    <div class="footer-wrap">
+      <h3 class="footer-title">Constact Us</h3>
+    
+      <div class="footer-grid">
+        <!-- 左：总部 -->
+        <div class="footer-col footer-address">
+          <p>Headquarters：239 Jucai Road, Huoju Innovation Center, Building 2, 17th Floor, Hangzhou, China</p>
+        </div>
+    
+        <!-- 中：合作 + 电话（上下两行） -->
+        <div class="footer-col footer-contact">
+          <p>Cooperation：xxxxxxxxxxxxxxxxxxxx</p>
+          <p>Phone：xxxxxxxxxxxxxxxxxxxx</p>
+        </div>
+    
+        <!-- 右：公众号二维码（预留图片位） -->
+        <div class="footer-qrcode">
+          <div class="qrcode" aria-label="微信公众号二维码占位"></div>   #####替换公众号二维码########
+          <div class="caption">WeChat Official Account</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="legal-left">
+        <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
+        <span class="sep">|</span>
+        <span>浙ICP备2021034072号</span>
+        <span class="sep">|</span>
+        <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
+        <span>浙公网安备33010802013572号</span>
+      </div>
+      <div class="legal-right">
+        <a href="/legal.html">Legal Statement</a>   ######法律声明跳转########
+        <span class="sep">|</span>
+        <a href="/privacy.html">Privacy Policy</a>     ######隐私政策跳转########
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
