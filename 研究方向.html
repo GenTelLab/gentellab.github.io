@@ -54,7 +54,7 @@
       height: 420px;
       background-image: url('主页图片/Slice 100.png');
       background-repeat: no-repeat;
-      background-position: center top;
+      background-position: center -200px;
       background-size: cover;
       position: relative;
       display: flex;
@@ -63,14 +63,18 @@
     }
     .hero-content { 
       text-align: center; 
-      color: white;
+      color: #fff;
       position: absolute;
-      top: 50%; /* 垂直居中：背景图片的中间位置 */
-      left: calc((100vw - 1200px) / 2 + 20px + 10px + 15px + 800px); 
-      transform: translateY(-50%); /* 只垂直居中 */
+      bottom: 0; /* 紧贴底部 */
+      left: 50%;
+      transform: translateX(-50%); /* 水平居中 */
+      background: rgba(0, 0, 0, 0.1); /* 更透明的背景 */
+      padding: 20px 40px;
+      border-radius: 8px 8px 0 0; /* 只有上方圆角 */
+      backdrop-filter: blur(5px); /* 减少模糊效果 */
     }
-    .hero-content h1 {margin:0; font-size:50px; line-height: 1;}
-    .hero-content p {margin:8px 0 0;}
+    .hero-content h1 {margin:0; font-size:32px; line-height: 1.2;}
+    .hero-content p {margin:12px 0 0; font-size:16px; line-height: 1.5;}
     
     /* 响应式设计 */
     @media (max-width: 768px) {
