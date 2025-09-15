@@ -22,8 +22,32 @@
     }
     header nav a {
       text-decoration:none; color:#333;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
-    header nav a:hover {color:#2563eb;}
+    header nav a:hover {
+      color:#2563eb;
+      background-color: rgba(37, 99, 235, 0.05);
+    }
+    
+    /* 蓝色下划线动画效果 */
+    header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background-color: #2563eb;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    header nav a:hover::after {
+      transform: scaleX(1);
+    }
 
     /* ========== Mega 下拉基础（含“无形桥”与位移修复） ========== */
     header nav { position: relative; }            /* 参照定位 */
@@ -98,7 +122,7 @@
       height: 420px;
       background-image: url('主页图片/Slice 100.png');
       background-repeat: no-repeat;
-      background-position: center top;
+      background-position: center -200px;
       background-size: cover;
       position: relative;
       display: flex;
@@ -107,14 +131,32 @@
     }
     .hero-content { 
       text-align: center; 
-      color: #000;
+      color: #fff;
       position: absolute;
-      top: 50%; /* 垂直居中：背景图片的中间位置 */
-      left: calc((100vw - 1200px) / 2 + 20px + 10px + 15px); /* 与logo水平对齐 */
-      transform: translateY(-50%); /* 只垂直居中 */
+      bottom: 0; /* 紧贴底部 */
+      left: 50%;
+      transform: translateX(-50%); /* 水平居中 */
+      background: rgba(0, 0, 0, 0.1); /* 更透明的背景 */
+      padding: 20px 40px;
+      border-radius: 8px 8px 0 0; /* 只有上方圆角 */
+      backdrop-filter: blur(5px); /* 减少模糊效果 */
     }
-    .hero-content h1 {margin:0; font-size:32px; line-height: 1;}
-    .hero-content p {margin:8px 0 0;}
+    .hero-content h1 {margin:0; font-size:32px; line-height: 1.2;}
+    .hero-content p {margin:12px 0 0; font-size:16px; line-height: 1.5;}
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 16px 24px;
+        bottom: 0; /* 移动端也紧贴底部 */
+      }
+      .hero-content h1 {
+        font-size: 24px;
+      }
+      .hero-content p {
+        font-size: 14px;
+      }
+    }
   
     /* ===== 正文区域 ===== */
     .section {
@@ -139,15 +181,88 @@
       background: #fff; border-radius: 16px; overflow: hidden;
       text-decoration: none;
       box-shadow: 0 10px 24px rgba(0,0,0,.08);
-      transition: transform .18s ease, box-shadow .18s ease;
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
-    .research .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 36px rgba(0,0,0,.12); }
+    .research .card:hover{ 
+      transform: translateY(-8px) scale(1.02); 
+      box-shadow: 0 25px 50px rgba(0,0,0,.15); 
+    }
     .research .card:focus-visible{ outline: 2px solid #2563eb; outline-offset: 3px; }
+    
+    /* 添加悬停时的边框光效 */
+    .research .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 16px;
+      padding: 2px;
+      background: linear-gradient(45deg, #2563eb, #3b82f6, #60a5fa, #2563eb);
+      background-size: 300% 300%;
+      opacity: 0;
+      transition: opacity .3s ease;
+      z-index: -1;
+    }
+    
+    .research .card:hover::before {
+      opacity: 1;
+      animation: gradient-border 2s ease infinite;
+    }
+    
+    @keyframes gradient-border {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     .research .card-img{ aspect-ratio: 16/9; background:#f3f4f6; }
     .research .card-img img{ width:100%; height:100%; object-fit:cover; display:block; }
     .research .card-caption{
       text-align:center; padding:16px 12px;
-      font-weight:700; color:#3b4048; background:#fff; border-top: 1px solid #f1f3f5;
+      font-weight:700; color:#525861; background:#fff; border-top: 1px solid #f1f3f5;
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .research .card-title {
+      transition: color .4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    
+    .research .card-description {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #6b7280;
+      margin-top: 0;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+      padding: 0 4px;
+      transform: translateY(-10px);
+    }
+    
+    .research .card:hover .card-caption {
+      transform: translateY(-2px);
+      padding-bottom: 24px;
+    }
+    
+    .research .card:hover .card-title {
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+    
+    .research .card:hover .card-description {
+      opacity: 1;
+      max-height: 120px;
+      margin-top: 12px;
+      transform: translateY(0);
     }
   
     /* ===== 科研成果（2列×2行） ===== */
@@ -180,11 +295,11 @@
     .pub .title {
       margin: 0 48px 8px 0;
       padding-left: 4px;
-      font-weight: 700; line-height: 1.35; color: #111827; text-align: left;
+      font-weight: 700; line-height: 1.35; color: #4b5563; text-align: left;
     }
     .pub .meta{
       position: absolute; left: 18px; bottom: 12px;
-      font-size: 13px; color: #6b7280;
+      font-size: 13px; color: #9ca3af;
     }
     .pub .pdf{
       position: absolute; right: 18px; bottom: 12px;
@@ -195,24 +310,50 @@
     @media (max-width: 900px){
       .pub .pub-row{ grid-template-columns: 1fr; }
     }
+    
+    
+    /* ===== 研究成果区域背景 ===== */
+    .publications-background {
+      background-color: #f1f3f4; /* 稍深一点的灰色背景 */
+      padding: 40px 0; /* 上下留白 */
+    }
+    
+    .publications-background .section.pub {
+      margin: 0 auto; /* 重置margin */
+    }
   
     /* ===== 底部导航 ===== */
     footer{ background:#2f62ee; color:#fff; }
     .footer-wrap { max-width:1200px; margin:0 auto; padding:26px 20px 10px; }
     .footer-title { font-size:18px; font-weight:700; margin:0 0 14px; }
     .footer-grid{
-      display:grid; grid-template-columns: 2fr 1.2fr 160px;
-      gap:28px; align-items: start;
-      padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,.45);
+      display:grid;
+      grid-template-columns: 1fr 320px; /* 左：合作/电话 右：两个二维码 */
+      gap:28px;
+      align-items: start;
+      padding-bottom:18px;
+      border-bottom:1px solid rgba(255,255,255,.45);
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
     .footer-contact{ display:grid; row-gap: 14px; }
-    .footer-qrcode{ align-self: start; justify-self: end; text-align:center; }
-    .footer-qrcode .qrcode{
-      width:120px; height:120px; border-radius:8px; background:rgba(255,255,255,.65);
-      display:block; margin:0 auto;
+    .footer-qrcode{
+      align-self: start;
+      justify-self: end;
+      display: flex;
+      gap: 20px;
+      text-align: center;
     }
-    .footer-qrcode .caption{ font-size:13px; margin-top:8px; opacity:.95; }
+    .qrcode-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qrcode-item .qrcode{
+      width:120px; height:120px; border-radius:8px;
+      background:rgba(255,255,255,.65);
+      display:block;
+    }
+    .qrcode-item .caption{ font-size:13px; margin-top:8px; opacity:.95; }
     .footer-bottom {
       max-width:1200px; margin:0 auto; padding:12px 20px 18px;
       display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
@@ -225,12 +366,41 @@
   
     @media (max-width: 900px){
       .footer-grid{ grid-template-columns: 1fr; gap:18px; }
-      .footer-qrcode{ justify-self: start; }
+      .footer-qrcode{ 
+        justify-self: center; 
+        flex-direction: column;
+        gap: 16px;
+      }
     }
   
     /* ===== 响应式（研究方向卡片栅格） ===== */
-    @media (max-width: 1024px){ .research .card-row{ grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 640px){ .research .card-row{ grid-template-columns: 1fr; } }
+    @media (max-width: 1024px){ 
+      .research .card-row{ grid-template-columns: repeat(2, 1fr);} 
+    }
+    
+    @media (max-width: 640px){ 
+      .research .card-row{ grid-template-columns: 1fr; gap: 20px; } 
+      
+      /* 移动端调整卡片描述的最大高度 */
+      .research .card:hover .card-description {
+        max-height: 140px;
+      }
+      
+      /* 移动端减少卡片缩放效果 */
+      .research .card:hover{ 
+        transform: translateY(-4px) scale(1.01); 
+      }
+      
+      /* 移动端调整字体大小 */
+      .research .card-title {
+        font-size: 15px;
+      }
+      
+      .research .card-description {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+    }
 
   
   </style>
@@ -256,14 +426,14 @@
   <!-- ===== 横幅区（背景图 + 标题） ===== -->
   <section class="hero">
     <div class="hero-content">
-    <h1>标题标题标题</h1>
-    <p>*****************</p>
+    <h1>Gentel Research Institute</h1>
+    <p>Co-located in Silicon Valley and Beijing, Gentel Research brings together top talents from around the world to focus on future-looking fundamental research in artificial intelligence.</p>
     </div>
   </section>
   
   <!-- ===== 背景图下方正文 ===== -->
   <section class="section research">
-    <h2 style="text-align:center; font-size:28px; margin:0 0 20px;">Research Directions</h2>
+     <h2 style="text-align:center; font-size:36px; margin:0 0 20px;">RESEARCH DIRECTIONS</h2>
   
     <div class="card-row">
       <!-- 卡片1：文本水印与模型指纹 -->
@@ -271,29 +441,46 @@
         <div class="card-img">
           <img src="主页图片/Slice 101@2x.png" alt="文本水印与模型指纹">
         </div>
-        <div class="card-caption">Text Watermarking and Model Fingerprint</div>
+        <div class="card-caption">
+          <div class="card-title">Text Watermarking and Model Fingerprint</div>
+          <div class="card-description">
+            Developing advanced techniques for embedding invisible watermarks in text and creating unique model fingerprints to protect intellectual property and ensure model authenticity in AI systems.
+          </div>
+        </div>
       </a>
-  
+
       <!-- 卡片2：强化学习 -->
       <a class="card" href="research_2.html">
         <div class="card-img">
           <img src="主页图片/Slice 102@2x.png" alt="强化学习">
         </div>
-        <div class="card-caption">Reinforcement Learning</div>
+        <div class="card-caption">
+          <div class="card-title">Reinforcement Learning</div>
+          <div class="card-description">
+            Exploring cutting-edge reinforcement learning algorithms and applications, focusing on multi-agent systems, policy optimization, and real-world deployment challenges.
+          </div>
+        </div>
       </a>
-  
+
       <!-- 卡片3：智能体系统 -->
       <a class="card" href="research_3.html">
         <div class="card-img">
           <img src="主页图片/Slice 103@2x.png" alt="智能体系统">
         </div>
-        <div class="card-caption">Agentic Systems</div>
+        <div class="card-caption">
+          <div class="card-title">Agentic Systems</div>
+          <div class="card-description">
+            Building intelligent autonomous agents that can reason, plan, and interact in complex environments, with applications in robotics, virtual assistants, and decision-making systems.
+          </div>
+        </div>
       </a>
     </div>
   </section>
   
-  <section class="section pub">
-    <h2 style="text-align:center; font-size:28px; margin:0 0 20px;">Research Achievements</h2>
+  <!-- ===== 带背景色的研究成果区域 ===== -->
+  <div class="publications-background">
+    <section class="section pub">
+     <h2 style="text-align:center; font-size:36px; margin:0 0 20px;">PUBLICATIONS</h2>
   
     <div class="pub-row">
   
@@ -305,7 +492,7 @@
         </div>
         <h3 class="title">MEraser: An Effective Fingerprint Erasure Approach for Large Language Models</h3>
         <div class="meta">Author · ACL2025Main</div>
-        <a class="pdf" href="assets/papers/meraser.pdf" target="_blank" rel="noopener">PDF</a>   ######pdf链接#########
+        <a class="pdf" href="https://arxiv.org/abs/2506.12551" target="_blank" rel="noopener">PDF</a>   ######pdf链接#########
       </article>
   
       <!-- 卡片 2 -->
@@ -335,10 +522,11 @@
     </div>
   
     <div style="text-align:center; margin-top:10px;">
-      <a href="/publications/" style="color:#2563eb; text-decoration:none;">More →</a>
+      <a href="publications.html" style="color:#2563eb; text-decoration:none;">More →</a>
     </div>
-  </section>
-  
+    </section>
+  </div>
+  <!-- ===== 背景色区域结束 ===== -->
 
 
   <!-- ===== 底部导航 ===== -->
@@ -348,21 +536,22 @@
     <h3 class="footer-title">Contact Us</h3>
   
     <div class="footer-grid">
-      <!-- 左：总部 -->
-      <div class="footer-col footer-address">
-        <p>Headquarters：239 Jucai Road, Huoju Innovation Center, Building 2, 17th Floor, Hangzhou, China</p>
-      </div>
-  
-      <!-- 中：合作 + 电话（上下两行） -->
+      <!-- 左：合作 + 电话（上下两行） -->
       <div class="footer-col footer-contact">
         <p>Cooperation：xxxxxxxxxxxxxxxxxxxx</p>
         <p>Phone：xxxxxxxxxxxxxxxxxxxx</p>
       </div>
   
-      <!-- 右：公众号二维码（预留图片位） -->
+      <!-- 右：两个二维码并排 -->
       <div class="footer-qrcode">
-        <div class="qrcode" aria-label="微信公众号二维码占位"></div>   #####替换公众号二维码########
-        <div class="caption">WeChat Official Account</div>
+        <div class="qrcode-item">
+          <div class="qrcode" aria-label="浙大滨江研究院"></div>  
+          <div class="caption">WeChat Official Account</div>
+        </div>
+        <div class="qrcode-item">
+          <div class="qrcode" aria-label="君通未来"></div>   
+          <div class="caption">Contact Us</div>
+        </div>
       </div>
     </div>
   </div>

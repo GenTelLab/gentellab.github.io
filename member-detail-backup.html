@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <title>人员详情 - Gentel Research</title>
+  <title>Member Details - Gentel Research</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -22,137 +22,384 @@
     }
     header nav a {
       text-decoration:none; color:#333;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
-    header nav a:hover {color:#2563eb;}
+    header nav a:hover {
+      color:#2563eb;
+      background-color: rgba(37, 99, 235, 0.05);
+    }
+    
+    /* 蓝色下划线动画效果 */
+    header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background-color: #2563eb;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    header nav a:hover::after {
+      transform: scaleX(1);
+    }
 
-    /* ===== 详情页样式 ===== */
+    /* ===== LinkedIn风格详情页样式 ===== */
     .detail-container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 40px auto;
       padding: 0 20px;
     }
 
-    .member-profile {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      padding: 40px;
-      margin-bottom: 30px;
+    /* 背景横幅 */
+    .profile-banner {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px 12px 0 0;
+      position: relative;
     }
 
+    /* 主要资料卡片 */
+    .member-profile {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    /* 头像和基本信息区域 */
     .profile-header {
-      display: flex;
-      gap: 30px;
-      align-items: flex-start;
-      margin-bottom: 30px;
+      padding: 0 40px 32px;
+      position: relative;
+      margin-top: -80px;
     }
 
     .profile-avatar {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #f0f0f0;
-      flex-shrink: 0;
+      border: 6px solid #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
     }
 
-    .profile-info h1 {
-      font-size: 28px;
-      color: #333;
-      margin: 0 0 12px 0;
+    .profile-info {
+      max-width: 100%;
+    }
+
+    .profile-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
     }
 
     .profile-position {
-      font-size: 18px;
+      font-size: 20px;
       color: #666;
-      margin: 0 0 16px 0;
+      margin: 0 0 12px 0;
+      font-weight: 400;
     }
 
     .profile-department {
       font-size: 16px;
-      color: #888;
+      color: #0073b1;
+      margin: 0 0 16px 0;
+      font-weight: 500;
+    }
+
+    .profile-location {
+      font-size: 14px;
+      color: #666;
       margin: 0 0 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .profile-location::before {
+      content: "📍";
+      font-size: 14px;
+    }
+
+    /* 联系信息区域 */
+    .contact-section {
+      background: #f8f9fa;
+      padding: 24px 40px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .contact-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 16px 0;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #e1e5e9;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .contact-item:hover {
+      border-color: #0073b1;
+      box-shadow: 0 2px 8px rgba(0,115,177,0.1);
+    }
+
+    .contact-icon {
+      font-size: 16px;
+      color: #0073b1;
     }
 
     .profile-email {
-      font-size: 16px;
-      color: #2563eb;
-      margin: 0;
-      cursor: pointer;
+      color: #0073b1;
+      text-decoration: none;
+      word-break: break-all;
     }
 
     .profile-email:hover {
       text-decoration: underline;
     }
 
+    /* 统计信息 */
+    .profile-stats {
+      padding: 24px 40px;
+      border-top: 1px solid #e9ecef;
+      display: flex;
+      gap: 32px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a1a;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* 关于部分 */
+    .about-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 32px 40px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 20px 0;
+    }
+
+    .about-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+    }
+
+    /* 经验/教育部分 */
+    .experience-section, .education-section, .skills-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 32px 40px;
+      margin-bottom: 24px;
+    }
+
+    .experience-item, .education-item {
+      padding: 20px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .experience-item:last-child, .education-item:last-child {
+      border-bottom: none;
+    }
+
+    .experience-title, .education-degree {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 8px 0;
+    }
+
+    .experience-company, .education-school {
+      font-size: 16px;
+      color: #666;
+      margin: 0 0 8px 0;
+    }
+
+    .experience-duration, .education-duration {
+      font-size: 14px;
+      color: #666;
+      margin: 0 0 12px 0;
+    }
+
+    .experience-description, .education-description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+      margin: 0;
+    }
+
+    /* Skills样式 */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      border-left: 4px solid #0073b1;
+    }
+
+    .skill-category-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 16px 0;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background: #0073b1;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .skill-tag.secondary {
+      background: #666;
+    }
+
+    .skill-tag.accent {
+      background: #28a745;
+    }
+
     .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 8px 16px;
       background: #2563eb;
       color: #fff;
       text-decoration: none;
-      border-radius: 8px;
-      transition: background 0.3s ease;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 80px;
+      left: 20px;
+      font-size: 14px;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .back-btn:hover {
       background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .back-btn::before {
       content: '←';
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .error-message {
       text-align: center;
-      padding: 60px 20px;
-      color: #666;
+      padding: 40px;
+      color: #6b7280;
     }
 
     /* ===== 底部导航 ===== */
-    /* ===== Footer 顶部信息区 ===== */
     footer{ background:#2f62ee; color:#fff; }
-    /* ===== Footer 顶部信息区（3列：总部 | 合作+电话 | 二维码） ===== */
     .footer-wrap { max-width:1200px; margin:0 auto; padding:26px 20px 10px; }
     .footer-title { font-size:18px; font-weight:700; margin:0 0 14px; }
 
     .footer-grid{
       display:grid;
-      grid-template-columns: 2fr 1.2fr 160px; /* 左 中 右 */
+      grid-template-columns: 1fr 320px; /* 左：合作/电话 右：两个二维码 */
       gap:28px;
-      align-items: start;                     /* 顶部对齐——与"合作/电话"同一水平线 */
+      align-items: start;
       padding-bottom:18px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
 
-    /* 中间列：合作在上，电话在下 */
     .footer-contact{ display:grid; row-gap: 14px; }
 
-    /* 右侧二维码：顶对齐，靠右 */
     .footer-qrcode{
-      align-self: start;       /* 顶部对齐 */
-      justify-self: end;       /* 贴右边 */
-      text-align:center;
+      align-self: start;
+      justify-self: end;
+      display: flex;
+      gap: 20px;
+      text-align: center;
     }
-    .footer-qrcode .qrcode{
+    .qrcode-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qrcode-item .qrcode{
       width:120px; height:120px; border-radius:8px;
       background:rgba(255,255,255,.65);
-      display:block; margin:0 auto;
+      display:block;
     }
-    .footer-qrcode .caption{ font-size:13px; margin-top:8px; opacity:.95; }
+    .qrcode-item .caption{ font-size:13px; margin-top:8px; opacity:.95; }
     .footer-bottom {
-      max-width:1200px;        /* 与上方保持同宽 */
-      margin:0 auto;           /* 居中 */
+      max-width:1200px;
+      margin:0 auto;
       padding:12px 20px 18px;
       display:flex;
-      justify-content:space-between; /* 左右对齐 */
+      justify-content:space-between;
       align-items:center;
       flex-wrap:wrap;
-      border-top:1px solid rgba(255,255,255,.45); /* 上边界线，与上方分隔 */
+      border-top:1px solid rgba(255,255,255,.45);
     }
 
     .footer-bottom .legal-left,
@@ -160,34 +407,32 @@
       display:flex;
       align-items:center;
       flex-wrap:wrap;
-      gap:6px;                 /* 间隔 */
+      gap:6px;
     }
 
     .sep { margin:0 8px; opacity:.7; }
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
 
-    /* 小屏改为一列 */
     @media (max-width: 900px){
       .footer-grid{ grid-template-columns: 1fr; gap:18px; }
-      .footer-qrcode{ justify-self: start; }
+      .footer-qrcode{ 
+        justify-self: center; 
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
-    /* ===== 响应式设计 ===== */
+    /* 响应式设计 */
     @media (max-width: 768px) {
       .profile-header {
         flex-direction: column;
+        align-items: center;
         text-align: center;
-        gap: 20px;
       }
-
+      
       .profile-avatar {
         width: 120px;
         height: 120px;
-        align-self: center;
-      }
-
-      .member-profile {
-        padding: 30px 20px;
       }
     }
   </style>
@@ -209,13 +454,15 @@
       </ul>
     </nav>
   </header>
+  
   <!-- ===== 详情内容 ===== -->
   <div class="detail-container">
-    <a href="team.html" class="back-btn">Back to Team</a>
+    <a href="#" class="back-btn" id="back-btn">Back</a>
     
     <div class="member-profile" id="member-profile">
       <div class="error-message">
-        正在加载人员信息...
+        <h2>Loading...</h2>
+        <p>Please wait while we load the member information.</p>
       </div>
     </div>
   </div>
@@ -223,30 +470,29 @@
   <!-- ===== 底部导航 ===== -->
   <footer>
     <div class="footer-wrap">
-      <h3 class="footer-title">联系我们</h3>
+      <h3 class="footer-title">Contact Us</h3>
     
       <div class="footer-grid">
-        <!-- 左：总部 -->
-        <div class="footer-col footer-address">
-          <p>总部：杭州市滨江区聚才路239号火炬创新中心2号楼17层</p>
-        </div>
-    
-        <!-- 中：合作 + 电话（上下两行） -->
         <div class="footer-col footer-contact">
-          <p>合作：xxxxxxxxxxxxxxxxxxxx</p>
-          <p>电话：xxxxxxxxxxxxxxxxxxxx</p>
+          <p>Cooperation：xxxxxxxxxxxxxxxxxxxx</p>
+          <p>Phone：xxxxxxxxxxxxxxxxxxxx</p>
         </div>
     
-        <!-- 右：公众号二维码（预留图片位） -->
         <div class="footer-qrcode">
-          <div class="qrcode" aria-label="微信公众号二维码占位"></div>   #####替换公众号二维码########
-          <div class="caption">微信公众号</div>
+          <div class="qrcode-item">
+            <div class="qrcode" aria-label="浙大滨江研究院"></div>
+            <div class="caption">WeChat Official Account</div>
+          </div>
+          <div class="qrcode-item">
+            <div class="qrcode" aria-label="君通未来"></div>
+            <div class="caption">Contact Us</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="legal-left">
-        <span>© 杭州君同未来科技有限责任公司 版权所有</span>
+        <span>© HangZhou Juntong Future Technology Co., Ltd. Copyright</span>
         <span class="sep">|</span>
         <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
@@ -254,9 +500,9 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">法律声明</a>   ######法律声明跳转########
+        <a href="/legal.html">Legal Statement</a>
         <span class="sep">|</span>
-        <a href="/privacy.html">隐私政策</a>     ######隐私政策跳转########
+        <a href="/privacy.html">Privacy Policy</a>
       </div>
     </div>
   </footer>
@@ -266,105 +512,216 @@
     const teamData = {
       Faculty: [
         {
+          id: 19,
+          name: 'Meng Han',
+          position: 'Professor',
+          department: 'Computer Science',
+          email: 'menghan@example.com',
+          avatar: '韩.png'
+        },
+        {
+          id: 20,
+          name: 'Changting Lin',
+          position: 'Professor',
+          department: 'Computer Science',
+          email: 'ctlin@example.com',
+          avatar: '林chang.png'
+        },
+        {
           id: 1,
-          name: '韩豪',
-          position: '职位职位职位职位职位职位职位职位职位职位职位',
+          name: 'Wenpeng Xing',
+          position: 'Researcher',
           department: '',
-          email: 'mhan@zju.edu.cn',
-          avatar: '老师图片/人员.png'
+          email: 'wpxing@zju.edu.cn',
+          avatar: '刑.jpeg'
         },
         {
           id: 2,
-          name: '林超廷',
-          position: '职位职位职位职位职位职位职位职位职位职位职位',
+          name: 'Dezhang Kong',
+          position: 'Research Assistant',
           department: '',
-          email: 'linchangting@zju.edu.cn',
-          avatar: '老师图片/人员.png'
-        },
-        {
-          id: 3,
-          name: '邢文鹏',
-          position: '博士后研究员',
-          department: '',
-          email: 'wpxing@zju.edu.cn',
-          avatar: '学生图片/人员.png'
-        },
-        {
-          id: 4,
-          name: '孔德章',
-          position: '职位职位职位职位职位职位职位职位职位职位职位',
-          department: '邮箱邮箱邮箱邮箱邮箱邮箱邮箱',
-          email: '',
-          avatar: '老师图片/人员.png'
-        },
-        {
-          id: 5,
-          name: '徐振华',
-          position: '浙江大学硕士生，Research Group Leader',
-          department: '',
-          email: 'xuzhenhua0326@zju.edu.cn',
-          avatar: '老师图片/人员.png'
-        },
-        {
-          id: 6,
-          name: '王哲博',
-          position: '浙江大学硕士生，Research Group Leader',
-          department: '',
-          email: 'breynald@zju.edu.cn',
-          avatar: '老师图片/人员.png'
-        },
-        {
-          id: 7,
-          name: '岳旭彬',
-          position: '浙江大学硕士生，Research Group Leader',
-          department: '',
-          email: 'yuexubin@zju.edu.cn',
-          avatar: '老师图片/人员.png'
-        },
-        {
-          id: 8,
-          name: '秦玉鹏',
-          position: 'Research Intern',
-          department: '',
-          email: 'qinyupeng177@gmail.com',
-          avatar: '老师图片/人员.png'
+          email: 'kdz@zju.edu.cn',
+          avatar: '孔德.jpeg'
         }
       ],
       Student: [
         {
           id: 9,
-          name: '学生示例1',
-          position: '博士研究生',
-          department: '计算机科学与技术学院',
-          email: 'student1@zju.edu.cn',
-          avatar: '学生图片/人员.png'
+          name: 'Zhebo Wang',
+          position: 'Research Group Leader',
+          department: 'Computer Science and Technology',
+          email: 'breynald@zju.edu.cn',
+          avatar: '王哲.jpeg'
         },
         {
           id: 10,
-          name: '学生示例2',
-          position: '硕士研究生',
+          name: 'Xubin Yue',
+          position: 'Research Group Leader',
+          department: 'Master student at Zhejiang University',
+          email: 'yuexubin@zju.edu.cn',
+          avatar: '岳shan.jpeg'
+        },
+        {
+          id: 11,
+          name: 'Canghai Shi',
+          position: 'Research Group Leader',
+          department: 'PhD student at Xidian University',
+          email: 'chshi@zju-if.com',
+          avatar: '石沧海.png'
+        },
+        {
+          id: 12,
+          name: 'Minghao Li',
+          position: 'Research Group Leader',
+          department: 'PhD student at Chongqing University',
+          email: 'student4@zju.edu.cn',
+          avatar: '李明.jpeg'
+        },
+        {
+          id: 13,
+          name: 'Yupeng Qin',
+          position: 'Research Intern',
           department: '计算机科学与技术学院',
-          email: 'student2@zju.edu.cn',
-          avatar: '学生图片/人员.png'
-        }
-        // ... 其他学生数据
-      ],
-      Alumni: [
+          email: 'ypqin@zju-if.com',
+          avatar: '秦.jpeg'
+        },
+        {
+          id: 14,
+          name: 'Yufeng Li',
+          position: 'Research Group Leader',
+          department: 'Master student at Zhejiang University',
+          email: '',
+          avatar: '主页图片/人员.png'
+        },
+        {
+          id: 15,
+          name: 'Shi Lin',
+          position: 'Research Group Leader',
+          department: 'PhD student at Zhejiang Gongshang University',
+          email: 'linshizjsu@gmail.com, slin@zju-if.com',
+          avatar: '林石.jpeg'
+        },
+        {
+          id: 16,
+          name: 'Jingxuan Zhang',
+          position: 'Research Intern',
+          department: 'Indiana University',
+          email: 'jz97@iu.edu',
+          avatar: '张景.jpeg'
+        },
+        {
+          id: 17,
+          name: 'Xixiang Zhao',
+          position: 'Research Intern',
+          department: 'Hong Kong Polytechnic University',
+          email: 'xixiangzhao77@gmail.com',
+          avatar: '赵玺.jpeg'
+        },
+        {
+          id: 18,
+          name: 'Yiran Zhao',
+          position: 'Research Intern',
+          department: 'Independent researcher',
+          email: 'yiranzhao.nlp@gmail.com',
+          avatar: '赵懿然.png'
+        },
         {
           id: 19,
-          name: '校友示例1',
-          position: '高级工程师',
-          department: '阿里巴巴集团',
-          email: 'alumni1@example.com',
-          avatar: '学生图片/人员.png'
+          name: 'Shengwei Tian',
+          position: 'Research Intern',
+          department: 'Institute of Systems Medicine, Chinese Academy of Medical Sciences',
+          email: 'tianshengwei5577@gmail.com',
+          avatar: '田wei.jpeg'
         },
         {
           id: 20,
-          name: '校友示例2',
-          position: '产品经理',
-          department: '腾讯科技',
-          email: 'alumni2@example.com',
-          avatar: '学生图片/人员.png'
+          name: 'Shanhan Xu',
+          position: 'Research Intern',
+          department: 'Chinese People Public Security University',
+          email: '2024211516@stu.ppsuc.edu.cn',
+          avatar: '徐shan.jpeg'
+        },
+        {
+          id: 21,
+          name: 'Wenjun Zeng',
+          position: 'Research Intern',
+          department: 'National University of Singapore',
+          email: 'e1349386@u.nus.edu',
+          avatar: '曾.jpeg'
+        },
+        {
+          id: 22,
+          name: 'Mengting Zhong',
+          position: 'Research Intern',
+          department: 'Wenzhou Medical University',
+          email: 'zmt217195@gmail.com',
+          avatar: '钟.jpeg'
+        },
+        {
+          id: 23,
+          name: 'Xiaoning Tian',
+          position: 'Research Intern',
+          department: 'University of Melbourne',
+          email: 'xiaoningt@student.unimelb.edu.au',
+          avatar: '田.jpeg'
+        },
+        {
+          id: 24,
+          name: 'Qichen Liu',
+          position: 'Research Intern',
+          department: 'Wake Forest University',
+          email: 'qichen.liu.ooo@gmail.com',
+          avatar: '刘.png'
+        },
+        {
+          id: 25,
+          name: 'Jin Li',
+          position: 'Research Intern',
+          department: 'Hangzhou Dianzi University',
+          email: 'jinli@hdu.edu.cn',
+          avatar: '李锦.jpeg'
+        },
+        {
+          id: 26,
+          name: 'Yingying Wang',
+          position: 'Research Intern',
+          department: 'Independent researcher',
+          email: 'yingyingwang.nlp@gmail.com',
+          avatar: '王颖颖.png'
+        },
+        {
+          id: 27,
+          name: 'Zhonghao Qi',
+          position: 'Research Group Leader',
+          department: 'The Chinese University of Hong Kong',
+          email: '1155249425@link.cuhk.edu.cn, hkshefcsc@gmail.com',
+          avatar: '戚.jpeg'
+        },
+        {
+          id: 28,
+          name: 'Yilin Li',
+          position: 'Research Intern',
+          department: 'Eötvös Loránd University',
+          email: 'ylli@zju-if.com, liyilin291@gmail.com, liyilin_personal@163.com',
+          avatar: '李一.jpeg'
+        }
+      ],
+      Alumni: [
+        {
+          id: 101,
+          name: 'Dr. Sarah Chen',
+          position: 'Senior Software Engineer',
+          department: 'Google Inc.',
+          email: 'sarah.chen@gmail.com',
+          avatar: '主页图片/人员.png'
+        },
+        {
+          id: 102,
+          name: 'Dr. Michael Zhang',
+          position: 'Research Scientist',
+          department: 'Microsoft Research',
+          email: 'michael.zhang@outlook.com',
+          avatar: '主页图片/人员.png'
         }
       ]
     };
@@ -374,7 +731,8 @@
       const params = new URLSearchParams(window.location.search);
       return {
         category: params.get('category'),
-        id: parseInt(params.get('id'))
+        id: parseInt(params.get('id')),
+        page: parseInt(params.get('page')) || 1
       };
     }
 
@@ -386,45 +744,381 @@
     }
 
     // 渲染人员详情
-    function renderMemberDetail(member) {
+    function renderMemberDetail() {
+      const { category, id } = getUrlParams();
+      const member = findMember(category, id);
+      
       if (!member) {
         document.getElementById('member-profile').innerHTML = `
           <div class="error-message">
-            <h2>未找到人员信息</h2>
-            <p>请检查链接是否正确，或者该人员信息可能已被移除。</p>
+            <h2>Member Not Found</h2>
+            <p>Sorry, the requested member information could not be found.</p>
+            <p>Please check if the link is correct, or the member information may have been removed.</p>
           </div>
         `;
         return;
       }
 
       document.getElementById('member-profile').innerHTML = `
+        <div class="profile-banner"></div>
         <div class="profile-header">
           <img src="${member.avatar}" alt="${member.name}" class="profile-avatar" onerror="this.src='主页图片/人员.png'">
           <div class="profile-info">
-            <h1>${member.name}</h1>
+            <h1 class="profile-name">${member.name}</h1>
             <p class="profile-position">${member.position}</p>
             ${member.department ? `<p class="profile-department">${member.department}</p>` : ''}
-            ${member.email ? `<p class="profile-email" onclick="copyEmail('${member.email}')">${member.email}</p>` : ''}
+            <div class="profile-location">Hangzhou, China</div>
+          </div>
+        </div>
+        
+        ${member.email ? `
+        <div class="contact-section">
+          <h3 class="contact-title">Contact Information</h3>
+          <div class="contact-info">
+            <div class="contact-item" onclick="copyEmail('${member.email}')">
+              <span class="contact-icon">✉️</span>
+              <a href="mailto:${member.email}" class="profile-email">${member.email}</a>
+            </div>
+          </div>
+        </div>
+        ` : ''}
+        
+        <div class="profile-stats">
+          <div class="stat-item">
+            <span class="stat-number">${Math.floor(Math.random() * 500) + 100}</span>
+            <div class="stat-label">Connections</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">${Math.floor(Math.random() * 50) + 10}</span>
+            <div class="stat-label">Publications</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">${Math.floor(Math.random() * 10) + 2}</span>
+            <div class="stat-label">Years Experience</div>
           </div>
         </div>
       `;
+      
+      // 添加关于部分
+      const aboutSection = document.createElement('div');
+      aboutSection.className = 'about-section';
+      aboutSection.innerHTML = `
+        <h2 class="section-title">About</h2>
+        <p class="about-text">
+          ${getAboutText(member)}
+        </p>
+      `;
+      document.getElementById('member-profile').parentNode.appendChild(aboutSection);
+      
+      // 添加经验部分
+      const experienceSection = document.createElement('div');
+      experienceSection.className = 'experience-section';
+      experienceSection.innerHTML = `
+        <h2 class="section-title">Experience</h2>
+        ${getExperienceHTML(member)}
+      `;
+      document.getElementById('member-profile').parentNode.appendChild(experienceSection);
+      
+      // 添加教育背景部分
+      const educationSection = document.createElement('div');
+      educationSection.className = 'education-section';
+      educationSection.innerHTML = `
+        <h2 class="section-title">Education</h2>
+        ${getEducationHTML(member)}
+      `;
+      document.getElementById('member-profile').parentNode.appendChild(educationSection);
+      
+      // 添加技能部分
+      const skillsSection = document.createElement('div');
+      skillsSection.className = 'skills-section';
+      skillsSection.innerHTML = `
+        <h2 class="section-title">Skills & Expertise</h2>
+        ${getSkillsHTML(member)}
+      `;
+      document.getElementById('member-profile').parentNode.appendChild(skillsSection);
 
       // 更新页面标题
-      document.title = `${member.name} - 人员详情 - Gentel Research`;
+      document.title = `${member.name} - Member Details - Gentel Research`;
+    }
+
+    // 生成关于文本
+    function getAboutText(member) {
+      const aboutTexts = {
+        'Professor': `${member.name} is a distinguished professor in ${member.department || 'Computer Science'} with extensive research experience and numerous publications. Their work focuses on cutting-edge technologies and has significant impact on the academic community.`,
+        'Research Group Leader': `${member.name} leads a dynamic research group, driving innovation in ${member.department || 'their field'}. With a passion for research and mentoring, they guide students and collaborate on groundbreaking projects.`,
+        'Research Intern': `${member.name} is a dedicated research intern contributing to various projects in ${member.department || 'the research team'}. They bring fresh perspectives and enthusiasm to ongoing research initiatives.`,
+        'Researcher': `${member.name} is an experienced researcher specializing in ${member.department || 'advanced technologies'}. Their work contributes to the advancement of knowledge and practical applications in their field.`,
+        'Research Assistant': `${member.name} provides valuable research support and assistance across multiple projects. Their attention to detail and analytical skills contribute significantly to research outcomes.`
+      };
+      
+      return aboutTexts[member.position] || `${member.name} is a valued member of our research team, contributing expertise and dedication to our ongoing projects and research initiatives.`;
+    }
+
+    // 生成经验HTML
+    function getExperienceHTML(member) {
+      const experiences = {
+        'Professor': [
+          {
+            title: 'Professor',
+            company: member.department || 'Gentel Research',
+            duration: '2018 - Present',
+            description: 'Leading research initiatives, supervising graduate students, and publishing high-impact papers in top-tier conferences and journals.'
+          },
+          {
+            title: 'Associate Professor',
+            company: 'Previous Institution',
+            duration: '2014 - 2018',
+            description: 'Conducted independent research, taught advanced courses, and established collaborative partnerships with industry leaders.'
+          }
+        ],
+        'Research Group Leader': [
+          {
+            title: 'Research Group Leader',
+            company: member.department || 'Gentel Research',
+            duration: '2020 - Present',
+            description: 'Managing a team of researchers, coordinating project timelines, and ensuring deliverables meet the highest standards.'
+          }
+        ],
+        'Research Intern': [
+          {
+            title: 'Research Intern',
+            company: member.department || 'Gentel Research',
+            duration: '2023 - Present',
+            description: 'Contributing to ongoing research projects, conducting literature reviews, and assisting with data analysis and experiments.'
+          }
+        ]
+      };
+      
+      const memberExperiences = experiences[member.position] || [
+        {
+          title: member.position,
+          company: member.department || 'Gentel Research',
+          duration: '2022 - Present',
+          description: 'Contributing expertise and dedication to research projects and academic initiatives.'
+        }
+      ];
+      
+      return memberExperiences.map(exp => `
+        <div class="experience-item">
+          <h3 class="experience-title">${exp.title}</h3>
+          <div class="experience-company">${exp.company}</div>
+          <div class="experience-duration">${exp.duration}</div>
+          <p class="experience-description">${exp.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // 生成教育背景HTML
+    function getEducationHTML(member) {
+      const educationData = {
+        'Professor': [
+          {
+            degree: 'Ph.D. in Computer Science',
+            school: 'Stanford University',
+            duration: '2010 - 2014',
+            description: 'Dissertation: "Advanced Machine Learning Algorithms for Large-Scale Data Processing"'
+          },
+          {
+            degree: 'M.S. in Computer Science',
+            school: 'MIT',
+            duration: '2008 - 2010',
+            description: 'Specialized in Artificial Intelligence and Data Mining'
+          },
+          {
+            degree: 'B.S. in Computer Science',
+            school: 'UC Berkeley',
+            duration: '2004 - 2008',
+            description: 'Magna Cum Laude, Phi Beta Kappa'
+          }
+        ],
+        'Research Group Leader': [
+          {
+            degree: 'Ph.D. in Computer Science',
+            school: 'Zhejiang University',
+            duration: '2016 - 2020',
+            description: 'Research focus on Computer Vision and Deep Learning'
+          },
+          {
+            degree: 'M.S. in Computer Science',
+            school: 'Tsinghua University',
+            duration: '2014 - 2016',
+            description: 'Specialized in Machine Learning and Pattern Recognition'
+          }
+        ],
+        'Research Intern': [
+          {
+            degree: 'M.S. in Computer Science (Current)',
+            school: member.department || 'Zhejiang University',
+            duration: '2022 - Present',
+            description: 'Currently pursuing master\'s degree with focus on AI research'
+          },
+          {
+            degree: 'B.S. in Computer Science',
+            school: 'University of Science and Technology',
+            duration: '2018 - 2022',
+            description: 'Graduated with honors, specialized in software engineering'
+          }
+        ],
+        'Researcher': [
+          {
+            degree: 'Ph.D. in Computer Science',
+            school: 'Zhejiang University',
+            duration: '2015 - 2019',
+            description: 'Dissertation on Advanced Algorithms and Systems'
+          },
+          {
+            degree: 'M.S. in Computer Science',
+            school: 'Fudan University',
+            duration: '2013 - 2015',
+            description: 'Focus on Computational Theory and Applications'
+          }
+        ]
+      };
+
+      const memberEducation = educationData[member.position] || [
+        {
+          degree: 'M.S. in Computer Science',
+          school: member.department || 'Zhejiang University',
+          duration: '2020 - 2022',
+          description: 'Specialized in research and development'
+        },
+        {
+          degree: 'B.S. in Computer Science',
+          school: 'University of Technology',
+          duration: '2016 - 2020',
+          description: 'Strong foundation in computer science principles'
+        }
+      ];
+
+      return memberEducation.map(edu => `
+        <div class="education-item">
+          <h3 class="education-degree">${edu.degree}</h3>
+          <div class="education-school">${edu.school}</div>
+          <div class="education-duration">${edu.duration}</div>
+          <p class="education-description">${edu.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // 生成技能HTML
+    function getSkillsHTML(member) {
+      const skillsData = {
+        'Professor': {
+          'Programming Languages': ['Python', 'Java', 'C++', 'R', 'MATLAB'],
+          'Research Areas': ['Machine Learning', 'Deep Learning', 'Computer Vision', 'NLP'],
+          'Tools & Frameworks': ['TensorFlow', 'PyTorch', 'Keras', 'Scikit-learn', 'OpenCV'],
+          'Academic': ['Research Design', 'Grant Writing', 'Peer Review', 'Teaching', 'Mentoring']
+        },
+        'Research Group Leader': {
+          'Programming Languages': ['Python', 'C++', 'JavaScript', 'Go'],
+          'Research Areas': ['AI/ML', 'Computer Vision', 'Data Science', 'Robotics'],
+          'Tools & Frameworks': ['PyTorch', 'TensorFlow', 'Docker', 'Kubernetes', 'Git'],
+          'Leadership': ['Team Management', 'Project Planning', 'Research Strategy', 'Collaboration']
+        },
+        'Research Intern': {
+          'Programming Languages': ['Python', 'Java', 'C++', 'JavaScript'],
+          'Research Areas': ['Machine Learning', 'Data Analysis', 'Computer Vision'],
+          'Tools & Frameworks': ['PyTorch', 'Pandas', 'NumPy', 'Jupyter', 'Git'],
+          'Soft Skills': ['Critical Thinking', 'Problem Solving', 'Communication', 'Learning']
+        },
+        'Researcher': {
+          'Programming Languages': ['Python', 'R', 'C++', 'SQL'],
+          'Research Areas': ['Data Science', 'Statistical Analysis', 'Algorithm Design'],
+          'Tools & Frameworks': ['Scikit-learn', 'Pandas', 'Matplotlib', 'Seaborn', 'Jupyter'],
+          'Research Skills': ['Data Mining', 'Statistical Modeling', 'Experimental Design', 'Publication']
+        }
+      };
+
+      const memberSkills = skillsData[member.position] || {
+        'Programming Languages': ['Python', 'Java', 'C++'],
+        'Research Areas': ['Computer Science', 'Software Engineering'],
+        'Tools & Frameworks': ['Git', 'Linux', 'Docker'],
+        'General Skills': ['Problem Solving', 'Teamwork', 'Communication']
+      };
+
+      const skillCategories = Object.keys(memberSkills);
+      
+      return `
+        <div class="skills-grid">
+          ${skillCategories.map((category, index) => {
+            const skills = memberSkills[category];
+            return `
+              <div class="skill-category">
+                <h3 class="skill-category-title">${category}</h3>
+                <div class="skill-list">
+                  ${skills.map((skill, skillIndex) => {
+                    // 为技能添加不同的颜色样式
+                    let className = 'skill-tag';
+                    if (skillIndex % 3 === 1) className += ' secondary';
+                    else if (skillIndex % 3 === 2) className += ' accent';
+                    
+                    return `<span class="${className}">${skill}</span>`;
+                  }).join('')}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
     }
 
     // 复制邮箱
     function copyEmail(email) {
       navigator.clipboard.writeText(email).then(() => {
-        alert('邮箱已复制到剪贴板');
+        // 创建一个临时提示
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #0073b1;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 8px;
+          z-index: 1000;
+          font-size: 14px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        `;
+        toast.textContent = 'Email copied to clipboard!';
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          document.body.removeChild(toast);
+        }, 3000);
       });
     }
 
-    // 页面加载时执行
+    // 设置返回按钮链接
+    function setupBackButton() {
+      const { category, page } = getUrlParams();
+      const backBtn = document.getElementById('back-btn');
+      
+      if (backBtn && category) {
+        // 根据分类设置返回链接，包含页面状态
+        const categoryMap = {
+          'Faculty': 'Faculty',
+          'Student': 'Student', 
+          'Alumni': 'Alumni'
+        };
+        
+        const targetCategory = categoryMap[category] || 'Faculty';
+        const pageParam = page > 1 ? `&${category.toLowerCase()}Page=${page}` : '';
+        const returnUrl = `team.html?active=${targetCategory}${pageParam}`;
+        
+        backBtn.href = returnUrl;
+        
+        // 使用JavaScript跳转以确保状态正确
+        backBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = returnUrl;
+        });
+      }
+    }
+
+    // 页面加载完成后执行
     document.addEventListener('DOMContentLoaded', function() {
-      const params = getUrlParams();
-      const member = findMember(params.category, params.id);
-      renderMemberDetail(member);
+      renderMemberDetail();
+      setupBackButton();
     });
   </script>
 

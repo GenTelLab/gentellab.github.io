@@ -22,8 +22,32 @@
     }
     header nav a {
       text-decoration:none; color:#333;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
-    header nav a:hover {color:#2563eb;}
+    header nav a:hover {
+      color:#2563eb;
+      background-color: rgba(37, 99, 235, 0.05);
+    }
+    
+    /* 蓝色下划线动画效果 */
+    header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background-color: #2563eb;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    header nav a:hover::after {
+      transform: scaleX(1);
+    }
 
     /* ===== LinkedIn风格详情页样式 ===== */
     .detail-container {
@@ -301,21 +325,29 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 8px 16px;
       background: #2563eb;
       color: #fff;
       text-decoration: none;
-      border-radius: 8px;
-      transition: background 0.3s ease;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 80px;
+      left: 20px;
+      font-size: 14px;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .back-btn:hover {
       background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .back-btn::before {
       content: '←';
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .error-message {
@@ -331,7 +363,7 @@
 
     .footer-grid{
       display:grid;
-      grid-template-columns: 2fr 1.2fr 160px;
+      grid-template-columns: 1fr 320px; /* 左：合作/电话 右：两个二维码 */
       gap:28px;
       align-items: start;
       padding-bottom:18px;
@@ -344,14 +376,21 @@
     .footer-qrcode{
       align-self: start;
       justify-self: end;
-      text-align:center;
+      display: flex;
+      gap: 20px;
+      text-align: center;
     }
-    .footer-qrcode .qrcode{
+    .qrcode-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qrcode-item .qrcode{
       width:120px; height:120px; border-radius:8px;
       background:rgba(255,255,255,.65);
-      display:block; margin:0 auto;
+      display:block;
     }
-    .footer-qrcode .caption{ font-size:13px; margin-top:8px; opacity:.95; }
+    .qrcode-item .caption{ font-size:13px; margin-top:8px; opacity:.95; }
     .footer-bottom {
       max-width:1200px;
       margin:0 auto;
@@ -376,7 +415,11 @@
 
     @media (max-width: 900px){
       .footer-grid{ grid-template-columns: 1fr; gap:18px; }
-      .footer-qrcode{ justify-self: start; }
+      .footer-qrcode{ 
+        justify-self: center; 
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
     /* 响应式设计 */
@@ -414,7 +457,7 @@
   
   <!-- ===== 详情内容 ===== -->
   <div class="detail-container">
-    <a href="#" class="back-btn" id="back-btn">Back to Team</a>
+    <a href="#" class="back-btn" id="back-btn">Back</a>
     
     <div class="member-profile" id="member-profile">
       <div class="error-message">
@@ -430,18 +473,20 @@
       <h3 class="footer-title">Contact Us</h3>
     
       <div class="footer-grid">
-        <div class="footer-col footer-address">
-          <p>Headquarters：239 Jucai Road, Huoju Innovation Center, Building 2, 17th Floor, Hangzhou, China</p>
-        </div>
-    
         <div class="footer-col footer-contact">
           <p>Cooperation：xxxxxxxxxxxxxxxxxxxx</p>
           <p>Phone：xxxxxxxxxxxxxxxxxxxx</p>
         </div>
     
         <div class="footer-qrcode">
-          <div class="qrcode" aria-label="微信公众号二维码占位"></div>
-          <div class="caption">WeChat Official Account</div>
+          <div class="qrcode-item">
+            <div class="qrcode" aria-label="浙大滨江研究院"></div>
+            <div class="caption">WeChat Official Account</div>
+          </div>
+          <div class="qrcode-item">
+            <div class="qrcode" aria-label="君通未来"></div>
+            <div class="caption">Contact Us</div>
+          </div>
         </div>
       </div>
     </div>
@@ -472,7 +517,7 @@
           position: 'Professor',
           department: 'Computer Science',
           email: 'menghan@example.com',
-          avatar: '主页图片/人员.png'
+          avatar: '韩.png'
         },
         {
           id: 20,
@@ -480,7 +525,7 @@
           position: 'Professor',
           department: 'Computer Science',
           email: 'ctlin@example.com',
-          avatar: '主页图片/人员.png'
+          avatar: '林chang.png'
         },
         {
           id: 1,
