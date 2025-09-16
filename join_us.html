@@ -34,9 +34,9 @@
 
     .footer-grid{
       display:grid;
-      grid-template-columns: 2fr 1.2fr 160px; /* 左 中 右 */
+      grid-template-columns: 1fr 320px; /* 左：合作/电话 右：两个二维码 */
       gap:28px;
-      align-items: start;                     /* 顶部对齐——与"合作/电话"同一水平线 */
+      align-items: start;
       padding-bottom:18px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
@@ -47,16 +47,23 @@
 
     /* 右侧二维码：顶对齐，靠右 */
     .footer-qrcode{
-      align-self: start;       /* 顶部对齐 */
-      justify-self: end;       /* 贴右边 */
-      text-align:center;
+      align-self: start;
+      justify-self: end;
+      display: flex;
+      gap: 20px;
+      text-align: center;
     }
-    .footer-qrcode .qrcode{
+    .qrcode-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qrcode-item .qrcode{
       width:120px; height:120px; border-radius:8px;
       background:rgba(255,255,255,.65);
-      display:block; margin:0 auto;
+      display:block;
     }
-    .footer-qrcode .caption{ font-size:13px; margin-top:8px; opacity:.95; }
+    .qrcode-item .caption{ font-size:13px; margin-top:8px; opacity:.95; }
     .footer-bottom {
       max-width:1200px;        /* 与上方保持同宽 */
       margin:0 auto;           /* 居中 */
@@ -82,7 +89,11 @@
     /* 小屏改为一列 */
     @media (max-width: 900px){
       .footer-grid{ grid-template-columns: 1fr; gap:18px; }
-      .footer-qrcode{ justify-self: start; }
+      .footer-qrcode{ 
+        justify-self: center; 
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
     /* ===== 横幅区域 ===== */
@@ -243,32 +254,29 @@
   </div>
 
   <!-- ===== 页面主体内容区域 ===== -->
-  <main>
-    <h1>页面内容区域</h1>
-    <p>这里放置页面的主要内容</p>
-  </main>
 
   <!-- ===== 底部导航 ===== -->
   <footer>
     <div class="footer-wrap">
-      <h3 class="footer-title">Constact Us</h3>
+      <h3 class="footer-title">Contact Us</h3>
     
       <div class="footer-grid">
-        <!-- 左：总部 -->
-        <div class="footer-col footer-address">
-          <p>Headquarters：239 Jucai Road, Huoju Innovation Center, Building 2, 17th Floor, Hangzhou, China</p>
-        </div>
-    
-        <!-- 中：合作 + 电话（上下两行） -->
+        <!-- 左：合作 + 电话（上下两行） -->
         <div class="footer-col footer-contact">
           <p>Cooperation：xxxxxxxxxxxxxxxxxxxx</p>
           <p>Phone：xxxxxxxxxxxxxxxxxxxx</p>
         </div>
     
-        <!-- 右：公众号二维码（预留图片位） -->
+        <!-- 右：两个二维码并排 -->
         <div class="footer-qrcode">
-          <div class="qrcode" aria-label="微信公众号二维码占位"></div>   #####替换公众号二维码########
-          <div class="caption">WeChat Official Account</div>
+          <div class="qrcode-item">
+            <div class="qrcode" aria-label="浙大滨江研究院"></div>  
+            <div class="caption">浙大滨江研究院</div>
+          </div>
+          <div class="qrcode-item">
+            <div class="qrcode" aria-label="君通未来"></div>   
+            <div class="caption">君通未来</div>
+          </div>
         </div>
       </div>
     </div>
@@ -282,9 +290,9 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>   ######法律声明跳转########
+        <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>     ######隐私政策跳转########
+        <a href="/privacy.html">Privacy Policy</a>    
       </div>
     </div>
   </footer>

@@ -63,7 +63,7 @@
     }
     .hero-content { 
       text-align: center; 
-      color:white;
+      color: white;
       position: absolute;
       top: 50%; /* 垂直居中：背景图片的中间位置 */
       left: calc((100vw - 1200px) / 2 + 20px + 10px + 15px); /* 与logo水平对齐 */
@@ -249,6 +249,11 @@
       object-fit: cover;
       flex-shrink: 0;
     }
+
+    /* Meng Han照片位置调整 - 显示头部和上半身 */
+    .meng-han-avatar {
+      object-position: center 25% !important; /* 水平居中，显示图片上方25%位置，保留头部和上半身 */
+    }
     
     .team-info {
       flex: 1;
@@ -368,6 +373,11 @@
         width: 100px;
         height: 100px;
       }
+
+      /* 移动端Meng Han照片也显示头部和上半身 */
+      .meng-han-avatar {
+        object-position: center 25% !important;
+      }
       
       .content-category-tabs {
         flex-wrap: wrap;
@@ -398,7 +408,7 @@
   <section class="hero">
     <div class="hero-content">
       <h1>Team</h1>
-      <p>Teamwork, working hard together</p>
+      <p>Teamwork，working hard together</p>
     </div>
   </section>
 
@@ -458,11 +468,11 @@
         <div class="footer-qrcode">
           <div class="qrcode-item">
             <div class="qrcode" aria-label="浙大滨江研究院"></div>   #####替换公众号二维码########
-            <div class="caption">WeChat Official Account</div>
+            <div class="caption">浙大滨江研究院</div>
           </div>
           <div class="qrcode-item">
-            <div class="qrcode" aria-label="君通未来"></div>   #####替换第二个二维码########
-            <div class="caption">Contact Us</div>
+            <div class="qrcode" aria-label="君通未来"></div>  
+            <div class="caption">君通未来</div>
           </div>
         </div>
       </div>
@@ -477,9 +487,9 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>   ######法律声明跳转########
+        <a href="/legal.html">Legal Statement</a>   
         <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>     ######隐私政策跳转########
+        <a href="/privacy.html">Privacy Policy</a>     
       </div>
     </div>
   </footer>
@@ -721,7 +731,7 @@
       return `
         <div class="team-card" role="link" tabindex="0" onclick="window.location.href='${detailUrl}'" onkeydown="if(event.key==='Enter'){window.location.href='${detailUrl}'}">
           <div class="team-card-content">
-            <img src="${member.avatar}" alt="${member.name}" class="team-avatar" onerror="this.src='主页图片/人员.png'">
+            <img src="${member.avatar}" alt="${member.name}" class="team-avatar ${member.name === 'Meng Han' ? 'meng-han-avatar' : ''}" onerror="this.src='主页图片/人员.png'">
             <div class="team-info">
               <h3 class="team-name">${member.name}</h3>
               <p class="team-position">${member.position}</p>
