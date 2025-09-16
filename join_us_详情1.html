@@ -6,7 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    body {margin:0; font-family:Arial, sans-serif;}
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    main {
+      flex: 1;
+    }
 
     /* ===== 顶部导航 ===== */
     header {
@@ -50,26 +64,106 @@
     }
 
     /* ===== 底部导航 ===== */
-    /* ===== Footer 顶部信息区 ===== */
     footer{ background:#2f62ee; color:#fff; }
-    /* ===== Footer 顶部信息区（3列：总部 | 合作+电话 | 二维码） ===== */
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:26px 20px 10px; }
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 14px; }
-
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+    
+    /* Logo和标语区域 */
+    .footer-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+    .footer-logo {
+      height: 28px;
+      width: auto;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-logo-link {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 4px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .footer-logo-link:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    }
+    
+    .footer-logo-link:hover .footer-logo {
+      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
+    }
+    
+    .footer-logo-link:active {
+      transform: translateY(0) scale(1.02);
+    }
+    .footer-slogan {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+    }
+    
+    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px; /* 左：合作/电话 右：两个二维码 */
+      grid-template-columns: 1fr 320px;
       gap:28px;
-      align-items: start;
+      align-items: flex-start;
       padding-bottom:18px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
+    
+    /* 左侧联系信息布局 */
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    
+    .contact-left {
+      flex: 1;
+    }
+    
+    .contact-left p {
+      margin: 0;
+      padding: 0.25rem 0;
+      opacity: 0.95;
+      line-height: 1.4;
+    }
+    
+    .contact-right {
+      flex: 0 0 200px;
+      text-align: left;
+      margin-left: 40px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    .contact-right p {
+      margin: 0;
+      padding: 0.25rem 0;
+      opacity: 0.95;
+      line-height: 1.4;
+    }
+    
+    /* 右侧二维码区域 */
+    .footer-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-
-    /* 中间列：合作在上，电话在下 */
-    .footer-contact{ display:grid; row-gap: 14px; }
-
-    /* 右侧二维码区域：两个二维码并排 */
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -89,30 +183,37 @@
     }
     .qrcode-item .caption{ font-size:13px; margin-top:8px; opacity:.95; }
     .footer-bottom {
-      max-width:1200px;        /* 与上方保持同宽 */
-      margin:0 auto;           /* 居中 */
-      padding:12px 20px 18px;
-      display:flex;
-      justify-content:space-between; /* 左右对齐 */
-      align-items:center;
-      flex-wrap:wrap;
-      border-top:1px solid rgba(255,255,255,.45); /* 上边界线，与上方分隔 */
+      max-width:1200px; margin:0 auto; padding:12px 20px 18px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
     }
-
     .footer-bottom .legal-left,
-    .footer-bottom .legal-right {
-      display:flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:6px;                 /* 间隔 */
-    }
-
+    .footer-bottom .legal-right { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
     .sep { margin:0 8px; opacity:.7; }
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
 
-    /* 小屏改为一列 */
     @media (max-width: 900px){
+      .footer-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
       .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      
+      /* 移动端联系信息调整 */
+      .contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .contact-right {
+        margin-left: 0;
+        text-align: left;
+      }
+      
+      .footer-right {
+        justify-content: center;
+        align-items: center;
+      }
       .footer-qrcode{ 
         justify-self: center; 
         flex-direction: column;
@@ -305,7 +406,7 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="/">
+      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
       </a>
       <ul>
@@ -318,6 +419,7 @@
     </nav>
   </header>
 
+  <main>
   <!-- ===== 横幅区（背景图 + 标题） ===== -->
   <section class="hero">
     <div class="hero-content">
@@ -446,28 +548,66 @@
       </div>
     </div>
   </div>
+  </main>
 
   <!-- ===== 底部导航 ===== -->
   <footer>
     <div class="footer-wrap">
-      <h3 class="footer-title">Contact Us</h3>
+      <!-- Logo和标语区域 -->
+      <div class="footer-header">
+        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
+          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
+        </a>
+        <span class="footer-slogan">｜助力人类基础脑力劳动可信替代</span>
+      </div>
+      
+      <h3 class="footer-title">联系我们</h3>
     
       <div class="footer-grid">
-        <!-- 左：合作 + 电话（上下两行） -->
-        <div class="footer-col footer-contact">
-          <p>Cooperation：xxxxxxxx</p>
-          <p>Phone：xxxxxxxx</p>
+        <!-- 左：地址信息 -->
+        <div class="footer-contact">
+          <!-- 第一行：总部 + 合作邮箱 -->
+          <div class="contact-row">
+            <div class="contact-left">
+              <p><strong>总部：</strong>杭州市滨江区聚才路239号火炬创新中心2号楼17层</p>
+            </div>
+            <div class="contact-right">
+              <p><strong>合作：</strong>info@gentel.com</p>
+            </div>
+          </div>
+          
+          <!-- 第二行：分部 + 电话 -->
+          <div class="contact-row">
+            <div class="contact-left">
+              <p><strong>分部：</strong>上海市徐汇区龙耀路18号X3幢201</p>
+            </div>
+            <div class="contact-right">
+              <p><strong>电话：</strong>400-600-2030</p>
+            </div>
+          </div>
+          
+          <!-- 第三行：广州分部 -->
+          <div class="contact-row">
+            <div class="contact-left">
+              <p style="margin-left: 60px;">广州市海珠区琶洲大道68号华新中心18楼</p>
+            </div>
+            <div class="contact-right">
+              <!-- 空白占位 -->
+            </div>
+          </div>
         </div>
     
-        <!-- 右：两个二维码并排 -->
-        <div class="footer-qrcode">
-          <div class="qrcode-item">
-            <div class="qrcode" aria-label="浙大滨江研究院"></div>   #####替换公众号二维码########
-            <div class="caption">WeChat Official Account</div>
-          </div>
-          <div class="qrcode-item">
-            <div class="qrcode" aria-label="君通未来"></div>   #####替换第二个二维码########
-            <div class="caption">Contact Us</div>
+        <!-- 右：二维码 -->
+        <div class="footer-right">
+          <div class="footer-qrcode">
+            <div class="qrcode-item">
+              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
+              <div class="caption">浙大滨江研究院</div>
+            </div>
+            <div class="qrcode-item">
+              <div class="qrcode" aria-label="君通未来"></div>   
+              <div class="caption">君同未来</div>
+            </div>
           </div>
         </div>
       </div>
@@ -482,9 +622,9 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>   ######法律声明跳转########
+        <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>     ######隐私政策跳转########
+        <a href="/privacy.html">Privacy Policy</a>     
       </div>
     </div>
   </footer>

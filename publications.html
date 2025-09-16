@@ -6,10 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    body {margin:0; font-family:Arial, sans-serif;}
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    main {
+      flex: 1;
+    }
 
-    /* ===== 顶部导航 ===== */
-    header {
+     /* ===== 顶部导航 ===== */
+     header {
       background:#fff;
       box-shadow:0 2px 6px rgba(0,0,0,0.1);
     }
@@ -49,27 +63,176 @@
       transform: scaleX(1);
     }
 
-    /* ===== 底部导航 ===== */
-    /* ===== Footer 顶部信息区 ===== */
-    footer{ background:#2f62ee; color:#fff; }
-    /* ===== Footer 顶部信息区（3列：总部 | 合作+电话 | 二维码） ===== */
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:26px 20px 10px; }
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 14px; }
+    /* ========== Mega 下拉基础（含“无形桥”与位移修复） ========== */
+    header nav { position: relative; }            /* 参照定位 */
+  
+    .has-mega { position: relative; }
+  
+    /* 防断层无形桥 */
+    .has-mega::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:100%;
+      height:12px;               /* 6–14px 可调 */
+    }
+  
+    /* 面板：初始向上 4px（不制造下方空隙） */
+    .has-mega .mega{
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%) translateY(-4px);
+      width: min(980px, 92vw);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.12);
+      padding: 18px 20px;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity .18s ease, transform .18s ease, visibility .18s;
+      z-index: 50;
+    }
+  
+    /* 显示：恢复到 Y=0，不再往下移 */
+    .has-mega:hover .mega,
+    .has-mega:focus-within .mega,
+    .has-mega.is-open .mega{
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  
+    /*（老的两列网格 mega：如果你保留旧结构时会用到）*/
+    .mega-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 40px;
+    }
+    .mega-col ul{ list-style: none; margin: 6px 0 14px; padding: 0; }
+    .mega-col li + li{ margin-top: 6px; }
+    .mega-title{ font-size: 16px; font-weight: 800; margin: 0 0 8px; color: #111827; }
+    .mega-sub{ font-size: 14px; font-weight: 700; margin: 10px 0 6px; color: #374151; }
+    .mega a{ display: inline-block; text-decoration: none; color: #374151; padding: 2px 0; }
+    .mega a:hover{ color:#2563eb; }
+  
+    /* 小屏：老的网格 mega 处理 */
+    @media (max-width: 900px){
+      .has-mega .mega{
+        left: 0; right: 0;
+        transform: none;
+        width: 100vw;
+        border-radius: 0;
+        box-shadow: 0 12px 30px rgba(0,0,0,.08);
+      }
+      .mega-grid{ grid-template-columns: 1fr; gap: 18px; }
+      .has-mega::after{ display:none; }
+    }
 
+    /* ===== 底部导航 ===== */
+    footer{ background:#2f62ee; color:#fff; }
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+    
+    /* Logo和标语区域 */
+    .footer-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+    .footer-logo {
+      height: 28px;
+      width: auto;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-logo-link {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 4px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .footer-logo-link:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    }
+    
+    .footer-logo-link:hover .footer-logo {
+      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
+    }
+    
+    .footer-logo-link:active {
+      transform: translateY(0) scale(1.02);
+    }
+    .footer-slogan {
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+    }
+    
+    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px; /* 左：合作/电话 右：两个二维码 */
+      grid-template-columns: 1fr 320px; /* 左：地址信息 右：二维码 */
       gap:28px;
-      align-items: start;
+      align-items: flex-start;
       padding-bottom:18px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
+    
+    /* 左侧联系信息布局 */
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    
+    .contact-left {
+      flex: 1;
+    }
+    
+    .contact-left p {
+      margin: 0;
+      padding: 0.25rem 0;
+      opacity: 0.95;
+      line-height: 1.4;
+    }
+    
+    .contact-right {
+      flex: 0 0 200px; /* 固定宽度确保对齐 */
+      text-align: left; /* 改为左对齐，让"合作："和"电话："开头对齐 */
+      margin-left: 40px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    .contact-right p {
+      margin: 0;
+      padding: 0.25rem 0;
+      opacity: 0.95;
+      line-height: 1.4;
+    }
+    
+    /* 右侧二维码区域 */
+    .footer-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-
-    /* 中间列：合作在上，电话在下 */
     .footer-contact{ display:grid; row-gap: 14px; }
-
-    /* 右侧二维码区域：两个二维码并排 */
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -89,36 +252,44 @@
     }
     .qrcode-item .caption{ font-size:13px; margin-top:8px; opacity:.95; }
     .footer-bottom {
-      max-width:1200px;        /* 与上方保持同宽 */
-      margin:0 auto;           /* 居中 */
-      padding:12px 20px 18px;
-      display:flex;
-      justify-content:space-between; /* 左右对齐 */
-      align-items:center;
-      flex-wrap:wrap;
-      border-top:1px solid rgba(255,255,255,.45); /* 上边界线，与上方分隔 */
+      max-width:1200px; margin:0 auto; padding:12px 20px 18px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
     }
-
     .footer-bottom .legal-left,
-    .footer-bottom .legal-right {
-      display:flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:6px;                 /* 间隔 */
-    }
-
+    .footer-bottom .legal-right { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
     .sep { margin:0 8px; opacity:.7; }
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
-
-    /* 小屏改为一列 */
+  
     @media (max-width: 900px){
+      .footer-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
       .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      
+      /* 移动端联系信息调整 */
+      .contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .contact-right {
+        margin-left: 0;
+        text-align: left;
+      }
+      
+      .footer-right {
+        justify-content: center;
+        align-items: center;
+      }
       .footer-qrcode{ 
         justify-self: center; 
         flex-direction: column;
         gap: 16px;
       }
     }
+  
 
     /* ===== 横幅区域 ===== */
     .hero {
@@ -220,23 +391,7 @@
       margin-right: 8px;
       vertical-align: middle;
     }
-    
-    .apply-filters {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      width: 100%;
-      margin-top: 10px;
-      transition: background-color 0.3s;
-    }
-    
-    .apply-filters:hover {
-      background-color: #2980b9;
-    }
+
     
     /* 主内容区 */
     .main-content {
@@ -263,6 +418,7 @@
     /* 文献列表 */
     .publications-list {
       margin-bottom: 30px;
+      width: 1150px;
     }
     
     .publication-item {
@@ -273,6 +429,8 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       border-left: 4px solid #3498db;
       transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;               /* 使文字与右侧图片并排 */
+      align-items: flex-start;
     }
     
     .publication-item:hover {
@@ -344,6 +502,16 @@
     
     .pub-links i {
       margin-right: 5px;
+    }
+
+    /* 右侧缩略图 */
+    .pub-content { flex: 1; padding-right: 16px; }
+    .pub-thumb {
+      width: 220px;               /* 右侧图片宽度 */
+      height: 130px;              /* 右侧图片高度 */
+      border-radius: 8px;
+      object-fit: cover;          /* 裁剪以避免变形 */
+      flex-shrink: 0;             /* 防止被挤压 */
     }
     
     /* 分页控件 */
@@ -433,6 +601,11 @@
         padding: 6px 10px;
         font-size: 13px;
       }
+
+      /* 移动端卡片：图片换到下方占满宽度 */
+      .publication-item { flex-direction: column; }
+      .pub-content { padding-right: 0; }
+      .pub-thumb { width: 100%; height: 180px; margin-top: 10px; }
     }
   </style>
 </head>
@@ -441,7 +614,7 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="/">
+      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
       </a>
       <ul>
@@ -512,9 +685,9 @@
               </div>
       
       <!-- 文献列表 -->
-      <div id="publications-list" class="publications-list">
-        <!-- 文献内容将通过JavaScript动态生成 -->
-          </div>
+<div id="publications-list" class="publications-list">
+  <!-- 文献内容将通过JavaScript动态生成 -->
+</div>
           
       <!-- 分页控件 -->
       <div class="pagination">
@@ -530,7 +703,8 @@
               </div>
           </div>
         </div>
-        
+   
+
   <script>
     // 配置参数
     const ITEMS_PER_PAGE = 3; // 每页显示3个文献
@@ -548,7 +722,8 @@
         Article_link: "https://arxiv.org/abs/2508.10991",
         pdf: "",
         Project_link: "",
-        category: "Adversarial Attack and Defense"
+        category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "SproutBench: A Benchmark for Safe and Ethical Large Language Models for Youth",
@@ -559,7 +734,8 @@
         Article_link: "https://arxiv.org/abs/2508.11009",
         pdf: "",
         Project_link: "",
-        category: "Adversarial Attack and Defense"
+        category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "HGMF: A Hierarchical Gaussian Mixture Framework for Scalable Tool Invocation within the Model Context Protocol",
@@ -570,7 +746,8 @@
         Article_link: "https://arxiv.org/abs/2508.07602",
         pdf: "",
         Project_link: "",
-        category: "Model evaluation and optimization"
+        category: "Model evaluation and optimization",
+        image: "主页图片/Slice 100.png"
       },
       // 第2页
       {
@@ -582,7 +759,8 @@
         Article_link: "https://arxiv.org/abs/2508.10029",
         pdf: "",
         Project_link: "",
-        category: "Adversarial Attack and Defense"
+        category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "CoDe-NeRF: Neural Rendering via Dynamic Coefficient Decomposition",
@@ -593,7 +771,8 @@
         Article_link: "",
         pdf: "",
         Project_link: "https://arxiv.org/abs/2508.06632",
-        category: "Interdisciplinary research"
+        category: "Interdisciplinary research",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "UW-3DGS: Underwater 3D Reconstruction with Physics-Aware Gaussian Splatting",
@@ -604,7 +783,8 @@
         Article_link: "https://arxiv.org/abs/2508.06169",
         pdf: "",
         Project_link: "",
-        category: "Interdisciplinary research"
+        category: "Interdisciplinary research",
+        image: "主页图片/Slice 100.png"
       },
       // 第3页
       {
@@ -616,7 +796,8 @@
         Article_link: "https://ieeexplore.ieee.org/abstract/document/11098842",
         pdf: "",
         Project_link: "",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "NCDI-Diffusion: Neural Contextual and Directional Inversion for Novel View Synthesis through Diffusion Models",
@@ -627,7 +808,8 @@
         Article_link: "https://ieeexplore.ieee.org/abstract/document/10889871",
         pdf: "#",
         Project_link: "",
-        category: "Interdisciplinary research"
+        category: "Interdisciplinary research",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "IDE: A Multi-Agent-Driven Iterative Framework for Dynamic Evaluation of LLMs",
@@ -638,7 +820,8 @@
         Article_link: "https://ieeexplore.ieee.org/abstract/document/10890123",
         pdf: "",
         Project_link: "",
-        category: "Multi-Agent Systems"
+        category: "Multi-Agent Systems",
+        image: "主页图片/Slice 100.png"
       },
       // 第4页
       {
@@ -650,7 +833,8 @@
         Article_link: "https://ieeexplore.ieee.org/abstract/document/10888729",
         pdf: "",
         Project_link: "",
-        category: "Adversarial Attack and Defense"
+        category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "Gentel-safe: A unified benchmark and shielding framework for defending against prompt injection attacks",
@@ -661,7 +845,8 @@
         Article_link: "https://arxiv.org/abs/2409.19521",
         pdf: "",
         Project_link: "",
-        category: "Adversarial Attack and Defense"
+        category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "Towards robust and secure embodied ai: A survey on vulnerabilities and attacks",
@@ -672,7 +857,8 @@
         Article_link: "https://arxiv.org/abs/2502.13175",
         pdf: "",
         Project_link: "",
-        category: "Adversarial Attack and Defense"
+        category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png"
       },
       // 第5页
       {
@@ -684,7 +870,8 @@
         Article_link: "https://aclanthology.org/2025.acl-long.1455/",
         pdf: "",
         Project_link: "https://github.com/JingxuanZhang77/MEraser",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "InSty: A Robust Multi-Level Cross-Granularity Fingerprint Embedding Algorithm for Multi-Turn Dialogue in Large Language Models",
@@ -695,7 +882,8 @@
         Article_link: "https://www.sciengine.com/SSI/doi/10.1360/SSI-2025-0022",
         pdf: "",
         Project_link: "",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "CTCC: A Robust and Stealthy Fingerprinting Framework for Large Language Models via Cross-Turn Contextual Correlation Backdoor",
@@ -706,7 +894,8 @@
         Article_link: "",
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/CTCC",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       // 第6页
       {
@@ -718,7 +907,8 @@
         Article_link: "https://arxiv.org/abs/2509.03058",
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/EverTracer",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "Unlocking the Effectiveness of LoRA-FP for Seamless Transfer Implantation of Fingerprints in Downstream Models",
@@ -729,7 +919,8 @@
         Article_link: "https://arxiv.org/abs/2509.00820",
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/LoRA-FP",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "Fingerprint Vector: Enabling Scalable and Efficient Model Fingerprint Transfer via Vector Addition",
@@ -740,7 +931,8 @@
         Article_link: "https://arxiv.org/abs/2409.08846",
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/Fingerprint-Vector",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       // 第7页
       {
@@ -752,7 +944,8 @@
         Article_link: "https://arxiv.org/abs/2508.11548",
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/awesome-llm-copyright-protection",
-        category: "System-level security"
+        category: "System-level security",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "PREE: Towards Harmless and Adaptive Fingerprint Editing in Large Language Models via Knowledge Prefix Enhancement",
@@ -763,7 +956,8 @@
         Article_link: "https://arxiv.org/abs/2509.00918",
         pdf: "",
         Project_link: "",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "RAP-SM: Robust Adversarial Prompt via Shadow Models for Copyright Verification of Large Language Models",
@@ -774,7 +968,8 @@
         Article_link: "https://arxiv.org/abs/2505.06304",
         pdf: "",
         Project_link: "",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       // 第8页
       {
@@ -786,7 +981,8 @@
         Article_link: "http://dx.doi.org/10.1049/bme2/5687970",
         pdf: "",
         Project_link: "",
-        category: "Content traceability and detection"
+        category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png"
       },
       {
         title: "#",
@@ -1002,6 +1198,10 @@
         return;
       }
       
+      const FALLBACK_THUMBS = [
+        '主页图片/Slice 100.png',
+        '主页图片/Slice 102@2x.png',
+      ];
       currentPubs.forEach(pub => {
         const pubItem = document.createElement('div');
         pubItem.className = 'publication-item';
@@ -1018,15 +1218,21 @@
           linksHtml += `<a href="${pub.Project_link}" target="_blank"><i class="fas fa-flask"></i> Project</a>`;
         }
         
+        const globalIndex = allPublications.indexOf(pub);
+        const fallbackSrc = FALLBACK_THUMBS[(globalIndex >= 0 ? globalIndex : 0) % FALLBACK_THUMBS.length];
+        const imgSrc = pub.image && pub.image !== '' ? pub.image : fallbackSrc;
         pubItem.innerHTML = `
-          <h3 class="pub-title"><a href="${pub.Article_link || '#'}" target="_blank">${pub.title}</a></h3>
-          <p class="pub-authors">${pub.authors}</p>
-          <p class="pub-field">${pub.field}</p>
-          <p class="pub-meta">${pub.Publish}</p>
-          <p class="pub-coop"><strong></strong> ${pub.Cooperating_unit}</p>
-          <div class="pub-links">
-            ${linksHtml}
+          <div class="pub-content">
+            <h3 class="pub-title"><a href="${pub.Article_link || '#'}" target="_blank">${pub.title}</a></h3>
+            <p class="pub-authors">${pub.authors}</p>
+            <p class="pub-field">${pub.field}</p>
+            <p class="pub-meta">${pub.Publish}</p>
+            <p class="pub-coop"><strong></strong> ${pub.Cooperating_unit}</p>
+            <div class="pub-links">
+              ${linksHtml}
+            </div>
           </div>
+          <img class="pub-thumb" src="${imgSrc}" alt="thumbnail">
         `;
         
         container.appendChild(pubItem);
@@ -1174,31 +1380,68 @@
   <!-- ===== 底部导航 ===== -->
   <footer>
     <div class="footer-wrap">
-      <h3 class="footer-title">Constact Us</h3>
+      <!-- Logo和标语区域 -->
+      <div class="footer-header">
+        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
+          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
+        </a>
+        <span class="footer-slogan">｜助力人类基础脑力劳动可信替代</span>
+      </div>
+      
+      <h3 class="footer-title">联系我们</h3>
     
       <div class="footer-grid">
-        <!-- 左：合作 + 电话（上下两行） -->
-        <div class="footer-col footer-contact">
-          <p>Cooperation：xxxxxxxxxxxxxxxxxxxx</p>
-          <p>Phone：xxxxxxxxxxxxxxxxxxxx</p>
+        <!-- 左：地址信息 -->
+        <div class="footer-contact">
+          <!-- 第一行：总部 + 合作邮箱 -->
+          <div class="contact-row">
+            <div class="contact-left">
+              <p><strong>总部：</strong>杭州市滨江区聚才路239号火炬创新中心2号楼17层</p>
+            </div>
+            <div class="contact-right">
+              <p><strong>合作：</strong>info@gentel.com</p>
+            </div>
+          </div>
+          
+          <!-- 第二行：分部 + 电话 -->
+          <div class="contact-row">
+            <div class="contact-left">
+              <p><strong>分部：</strong>上海市徐汇区龙耀路18号X3幢201</p>
+            </div>
+            <div class="contact-right">
+              <p><strong>电话：</strong>400-600-2030</p>
+            </div>
+          </div>
+          
+          <!-- 第三行：广州分部 -->
+          <div class="contact-row">
+            <div class="contact-left">
+              <p style="margin-left: 60px;">广州市海珠区琶洲大道68号华新中心18楼</p>
+            </div>
+            <div class="contact-right">
+              <!-- 空白占位 -->
+            </div>
+          </div>
         </div>
     
-        <!-- 右：两个二维码并排 -->
-        <div class="footer-qrcode">
-          <div class="qrcode-item">
-            <div class="qrcode" aria-label="浙大滨江研究院"></div>   
-            <div class="caption">浙大滨江研究院</div>
-          </div>
-          <div class="qrcode-item">
-            <div class="qrcode" aria-label="君通未来"></div>  
-            <div class="caption">君同未来</div>
+        <!-- 右：二维码 -->
+        <div class="footer-right">
+          <div class="footer-qrcode">
+            <div class="qrcode-item">
+              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
+              <div class="caption">浙大滨江研究院</div>
+            </div>
+            <div class="qrcode-item">
+              <div class="qrcode" aria-label="君通未来"></div>   
+              <div class="caption">君同未来</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="legal-left">
-        <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
+        <span>© HangZhou Juntong Future Technology Co., Ltd. Copyright</span>
         <span class="sep">|</span>
         <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
@@ -1206,12 +1449,12 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>  
+        <a href="/legal.html">Legal Statement</a>   
         <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>   
+        <a href="/privacy.html">Privacy Policy</a>     
+      </div>
     </div>
   </footer>
 
 </body>
 </html>
-
