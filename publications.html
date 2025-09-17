@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+    /* ===== 基础布局 ===== */
     html, body {
       margin: 0;
       padding: 0;
@@ -22,8 +23,8 @@
       flex: 1;
     }
 
-     /* ===== 顶部导航 ===== */
-     header {
+    /* ===== 顶部导航 ===== */
+    header {
       background:#fff;
       box-shadow:0 2px 6px rgba(0,0,0,0.1);
     }
@@ -61,74 +62,6 @@
     
     header nav a:hover::after {
       transform: scaleX(1);
-    }
-
-    /* ========== Mega 下拉基础（含“无形桥”与位移修复） ========== */
-    header nav { position: relative; }            /* 参照定位 */
-  
-    .has-mega { position: relative; }
-  
-    /* 防断层无形桥 */
-    .has-mega::after{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      top:100%;
-      height:12px;               /* 6–14px 可调 */
-    }
-  
-    /* 面板：初始向上 4px（不制造下方空隙） */
-    .has-mega .mega{
-      position: absolute;
-      left: 50%;
-      top: 100%;
-      transform: translateX(-50%) translateY(-4px);
-      width: min(980px, 92vw);
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.12);
-      padding: 18px 20px;
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
-      transition: opacity .18s ease, transform .18s ease, visibility .18s;
-      z-index: 50;
-    }
-  
-    /* 显示：恢复到 Y=0，不再往下移 */
-    .has-mega:hover .mega,
-    .has-mega:focus-within .mega,
-    .has-mega.is-open .mega{
-      opacity: 1;
-      pointer-events: auto;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-  
-    /*（老的两列网格 mega：如果你保留旧结构时会用到）*/
-    .mega-grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px 40px;
-    }
-    .mega-col ul{ list-style: none; margin: 6px 0 14px; padding: 0; }
-    .mega-col li + li{ margin-top: 6px; }
-    .mega-title{ font-size: 16px; font-weight: 800; margin: 0 0 8px; color: #111827; }
-    .mega-sub{ font-size: 14px; font-weight: 700; margin: 10px 0 6px; color: #374151; }
-    .mega a{ display: inline-block; text-decoration: none; color: #374151; padding: 2px 0; }
-    .mega a:hover{ color:#2563eb; }
-  
-    /* 小屏：老的网格 mega 处理 */
-    @media (max-width: 900px){
-      .has-mega .mega{
-        left: 0; right: 0;
-        transform: none;
-        width: 100vw;
-        border-radius: 0;
-        box-shadow: 0 12px 30px rgba(0,0,0,.08);
-      }
-      .mega-grid{ grid-template-columns: 1fr; gap: 18px; }
-      .has-mega::after{ display:none; }
     }
 
     /* ===== 底部导航 ===== */
@@ -178,7 +111,7 @@
     .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px; /* 左：地址信息 右：二维码 */
+      grid-template-columns: 1fr 320px;
       gap:28px;
       align-items: flex-start;
       padding-bottom:18px;
@@ -210,8 +143,8 @@
     }
     
     .contact-right {
-      flex: 0 0 200px; /* 固定宽度确保对齐 */
-      text-align: left; /* 改为左对齐，让"合作："和"电话："开头对齐 */
+      flex: 0 0 200px;
+      text-align: left;
       margin-left: 40px;
       display: flex;
       align-items: center;
@@ -232,7 +165,6 @@
       align-items: flex-start;
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-    .footer-contact{ display:grid; row-gap: 14px; }
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -259,7 +191,7 @@
     .footer-bottom .legal-right { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
     .sep { margin:0 8px; opacity:.7; }
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
-  
+
     @media (max-width: 900px){
       .footer-header {
         flex-direction: column;
@@ -289,14 +221,31 @@
         gap: 16px;
       }
     }
-  
 
-    /* ===== 横幅区域 ===== */
-    .hero {
+    /* ===== 页面内容样式示例 ===== */
+    .page-content {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .page-content h1 {
+      font-size: 36px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .page-content p {
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+     /* ===== 横幅区域 ===== */
+     .hero {
       height: 420px;
       background-image: url('主页图片/Slice 104@2x.png');
       background-repeat: no-repeat;
-      background-position: center top;
+      background-position: center center;
       background-size: cover;
       position: relative;
       display: flex;
@@ -319,48 +268,61 @@
      .container {
       max-width: 1200px;
       margin: 30px auto;
-      padding: 0 20px;
+      padding: 0px 20px;
       display: flex;
+      align-items: flex-start; /* 左右列按内容高度，各自独立 */
       gap: 30px;
     }
     
     /* 侧边栏 */
     .sidebar {
-      width: 250px;
+      width: 250px; /* 放大整体宽度以容纳更大文字 */
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* 让三个面板在竖直方向均匀分布 */
+      background: transparent; /* 去掉最外围底色 */
+      border: none; /* 去掉最外围边框 */
+      border-radius: 0;
+      padding: 0; /* 由内部面板自己留白 */
+      box-shadow: none; /* 去掉外层阴影 */
     }
     
     .search-box {
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
     
     .search-box input {
       width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
+      padding: 12px 14px;
+      border: 2px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 16px;
       box-sizing: border-box;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
     
     .search-box input:focus {
       border-color: #3498db;
       outline: none;
+      box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
     }
     
     .filter-section {
       background-color: #fff;
-      border-radius: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      padding: 15px 20px;
-      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 2px solid #e5e7eb;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      padding: 22px 22px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
     }
     
     .filter-title {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
-      margin: 0 0 15px 0;
+      margin: 0 0 16px 0;
       padding-bottom: 8px;
       border-bottom: 1px solid #f0f0f0;
       color: #2c3e50;
@@ -372,8 +334,9 @@
     
     .filter-group label {
       display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.6;
       cursor: pointer;
       transition: color 0.2s;
     }
@@ -385,11 +348,15 @@
     .filter-group input[type="checkbox"] {
       margin-right: 8px;
       vertical-align: middle;
+      transform: scale(1.15);
+      transform-origin: left center;
     }
     
     .filter-group input[type="radio"] {
       margin-right: 8px;
       vertical-align: middle;
+      transform: scale(1.15);
+      transform-origin: left center;
     }
 
     
@@ -627,8 +594,9 @@
     </nav>
   </header>
 
-  <!-- ===== 横幅区（背景图 + 标题） ===== -->
-  <section class="hero">
+  <main>
+   <!-- ===== 横幅区（背景图 + 标题） ===== -->
+   <section class="hero">
     <div class="hero-content">
       <h1>Publications</h1>
       <p>Our publications and achievements</p>
@@ -707,7 +675,7 @@
 
   <script>
     // 配置参数
-    const ITEMS_PER_PAGE = 3; // 每页显示3个文献
+    const ITEMS_PER_PAGE = 8; // 每页显示5个文献
     const TOTAL_PAGES = 10;   // 总共10页
     
     // 完整的30篇文献数据（10页 × 3篇/页）
@@ -1237,6 +1205,9 @@
         
         container.appendChild(pubItem);
       });
+
+      // 渲染完成后调整左侧搜索栏高度与前5条文献等高
+      setTimeout(adjustSidebarHeight, 0);
     }
     
     // 渲染分页控件
@@ -1276,6 +1247,7 @@
           currentPage--;
           renderPublications(currentPage);
           renderPagination();
+          adjustSidebarHeight();
         }
       };
       
@@ -1285,8 +1257,29 @@
           currentPage++;
           renderPublications(currentPage);
           renderPagination();
+          adjustSidebarHeight();
         }
       };
+    }
+
+    // 使左侧搜索部分高度与右侧前5条文献总高度齐平
+    function adjustSidebarHeight() {
+      const sidebar = document.querySelector('.sidebar');
+      const list = document.getElementById('publications-list');
+      if (!sidebar || !list) return;
+      const items = Array.from(list.querySelectorAll('.publication-item'));
+      if (items.length === 0) {
+        sidebar.style.height = 'auto';
+        return;
+      }
+      const consider = items.slice(0, 5);
+      let total = 0;
+      consider.forEach((el, idx) => {
+        const styles = window.getComputedStyle(el);
+        const mb = parseFloat(styles.marginBottom) || 0;
+        total += el.offsetHeight + (idx < consider.length - 1 ? mb : 0);
+      });
+      sidebar.style.height = total + 'px';
     }
 
     // 应用筛选和搜索
@@ -1343,6 +1336,7 @@
       filteredPublications = allPublications;
       renderPublications(currentPage);
       renderPagination();
+      adjustSidebarHeight();
       
       // 搜索功能
       const searchInput = document.querySelector('.search-box input');
@@ -1375,7 +1369,14 @@
       
      
     });
+
+    // 窗口尺寸变化时，重新匹配高度
+    window.addEventListener('resize', () => {
+      adjustSidebarHeight();
+    });
   </script>
+
+  </main>
 
   <!-- ===== 底部导航 ===== -->
   <footer>
@@ -1441,7 +1442,7 @@
     </div>
     <div class="footer-bottom">
       <div class="legal-left">
-        <span>© HangZhou Juntong Future Technology Co., Ltd. Copyright</span>
+        <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
         <span class="sep">|</span>
         <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
@@ -1449,12 +1450,17 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>   
+        <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>     
+        <a href="/privacy.html">Privacy Policy</a>    
       </div>
     </div>
   </footer>
 
+  <!-- JS 示例 -->
+  <script>
+    // 这里可以添加页面特定的JavaScript代码
+    console.log('Gentel Research Website Template Loaded');
+  </script>
 </body>
 </html>
