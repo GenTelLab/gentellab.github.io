@@ -23,8 +23,8 @@
       flex: 1;
     }
 
-    /* ===== 顶部导航 ===== */
-    header {
+       /* ===== 顶部导航 ===== */
+       header {
       background:#fff;
       box-shadow:0 2px 6px rgba(0,0,0,0.1);
     }
@@ -64,96 +64,42 @@
       transform: scaleX(1);
     }
 
-    /* ===== 底部导航 ===== */
-    footer{ background:#2f62ee; color:#fff; }
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+   /* ===== 底部导航 ===== */
+   footer{ background:#2f62ee; color:#fff; }
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:16px 20px 8px; }
     
-    /* Logo和标语区域 */
-    .footer-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
-    .footer-logo {
-      height: 28px;
-      width: auto;
-      transition: all 0.3s ease;
-    }
     
-    .footer-logo-link {
-      display: inline-block;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 4px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .footer-logo-link:hover {
-      transform: translateY(-2px) scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
-    }
-    
-    .footer-logo-link:hover .footer-logo {
-      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
-    }
-    
-    .footer-logo-link:active {
-      transform: translateY(0) scale(1.02);
-    }
-    .footer-slogan {
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-    }
-    
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:28px;
+      grid-template-columns: 1fr 320px; /* 左：联系信息 右：二维码 */
+      gap:20px;
       align-items: flex-start;
-      padding-bottom:18px;
+      padding-bottom:12px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
     
     /* 左侧联系信息布局 */
     .footer-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-right {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
     
-    .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    
-    .contact-left {
-      flex: 1;
-    }
-    
+    .contact-item p,
     .contact-left p {
       margin: 0;
-      padding: 0.25rem 0;
-      opacity: 0.95;
-      line-height: 1.4;
-    }
-    
-    .contact-right {
-      flex: 0 0 200px;
-      text-align: left;
-      margin-left: 40px;
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-    
-    .contact-right p {
-      margin: 0;
-      padding: 0.25rem 0;
       opacity: 0.95;
       line-height: 1.4;
     }
@@ -178,7 +124,7 @@
       align-items: center;
     }
     .qrcode-item .qrcode{
-      width:120px; height:120px; border-radius:8px;
+      width:90px; height:90px; border-radius:8px;
       background:rgba(255,255,255,.65);
       display:block;
     }
@@ -193,22 +139,12 @@
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
 
     @media (max-width: 900px){
-      .footer-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      .footer-grid{ grid-template-columns: 1fr; gap:12px; }
       
       /* 移动端联系信息调整 */
-      .contact-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .contact-right {
-        margin-left: 0;
-        text-align: left;
+      .footer-contact {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
       
       .footer-right {
@@ -394,7 +330,7 @@
       padding: 20px;
       margin-bottom: 15px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      border-left: 4px solid #3498db;
+      border-left: 0;
       transition: transform 0.2s, box-shadow 0.2s;
       display: flex;               /* 使文字与右侧图片并排 */
       align-items: flex-start;
@@ -584,12 +520,12 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
+      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
-      </a>
+      <!-- </a> -->
       <ul>
         <li><a href="index.html">Home</a></li>    
-        <li><a href="研究方向.html">Research Directions</a></li>          
+        <li><a href="研究方向.html">Research</a></li>        
         <li><a href="publications.html">Publications</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="join_us.html">Join Us</a></li>
@@ -640,11 +576,10 @@
           <div class="filter-section">
         <h3 class="filter-title">Year of publication</h3>
         <div class="filter-group">
-          <label><input type="radio" name="year" checked> All years</label>
-          <label><input type="radio" name="year"> Year 2026</label>
-          <label><input type="radio" name="year"> Year 2025</label>
-          <label><input type="radio" name="year"> Year 2024</label>
-          <label><input type="radio" name="year"> Year 2023 and before</label>
+          <label><input type="checkbox" checked> Year 2026</label>
+          <label><input type="checkbox" checked> Year 2025</label>
+          <label><input type="checkbox" checked> Year 2024</label>
+          <label><input type="checkbox" checked> Year 2023 and before</label>
               </div>
               </div>
               </div>
@@ -694,6 +629,7 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/MCP-Guard.png"
       },
       {
@@ -706,6 +642,7 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/SproutBench.png"
       },
       {
@@ -718,6 +655,7 @@
         pdf: "",
         Project_link: "",
         category: "Model evaluation and optimization",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/HGMF.png"
       },
       // 第2页
@@ -731,7 +669,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        overall_pipeline: "publications图片/jailbreak.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Jailbreak.png"
       },
       {
         title: "CoDe-NeRF: Neural Rendering via Dynamic Coefficient Decomposition",
@@ -743,6 +682,7 @@
         pdf: "",
         Project_link: "https://arxiv.org/abs/2508.06632",
         category: "Interdisciplinary research",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/CoDe-NeRF.png"
       },
       {
@@ -755,6 +695,7 @@
         pdf: "",
         Project_link: "",
         category: "Interdisciplinary research",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/UW-3DGS.png"
       },
       // 第3页
@@ -768,7 +709,8 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
-        overall_pipeline: "publications图片/IDC-Net.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/IDCNet.png"
       },
       {
         title: "NCDI-Diffusion: Neural Contextual and Directional Inversion for Novel View Synthesis through Diffusion Models",
@@ -780,6 +722,7 @@
         pdf: "#",
         Project_link: "",
         category: "Interdisciplinary research",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/NCDI-Diffusion.png"
       },
       {
@@ -792,6 +735,7 @@
         pdf: "",
         Project_link: "",
         category: "Multi-Agent Systems",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/IDE.png"
       },
       // 第4页
@@ -805,6 +749,7 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/Detect.png"
       },
       {
@@ -817,6 +762,7 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/Gentel-safe.png"
       },
       {
@@ -829,6 +775,7 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/towards.png"
       },
       // 第5页
@@ -842,6 +789,7 @@
         pdf: "",
         Project_link: "https://github.com/JingxuanZhang77/MEraser",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/MEraser.png"
       },
       {
@@ -854,6 +802,7 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/InSty.png"
       },
       {
@@ -866,6 +815,7 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/CTCC",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/CTCC.png"
       },
       // 第6页
@@ -879,6 +829,7 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/EverTracer",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/EverTracer.png"
       },
       {
@@ -891,6 +842,7 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/LoRA-FP",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/LoRA-FP.png"
       },
       {
@@ -903,6 +855,7 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/Fingerprint-Vector",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/Fingerprint-Vector.png"
       },
       // 第7页
@@ -916,6 +869,7 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/awesome-llm-copyright-protection",
         category: "System-level security",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/Copyright-Protection.png"
       },
       {
@@ -928,6 +882,7 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/PREE.png"
       },
       {
@@ -940,6 +895,7 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/RAP-SM.png"
       },
       // 第8页
@@ -953,6 +909,7 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
+        image: "主页图片/Slice 100.png",
         overall_pipeline: "publications图片/Deepfake.png"
       }
     ];
@@ -978,11 +935,13 @@
         fieldFilters.push(checkbox.nextSibling.textContent.trim());
       });
       
-      // 获取年份筛选
-      const yearFilter = document.querySelector('.filter-section:nth-child(4) input[type="radio"]:checked');
-      const selectedYear = yearFilter ? yearFilter.nextSibling.textContent.trim() : 'All years';
+      // 获取年份筛选（多选）
+      const yearFilters = [];
+      document.querySelectorAll('.filter-section:nth-child(4) input[type="checkbox"]:checked').forEach(checkbox => {
+        yearFilters.push(checkbox.nextSibling.textContent.trim());
+      });
       
-      return { searchTerm, docTypeFilters, fieldFilters, selectedYear };
+      return { searchTerm, docTypeFilters, fieldFilters, yearFilters };
     }
     
     // 按首字母顺序匹配搜索
@@ -1007,7 +966,7 @@
     
     // 筛选文献
     function filterPublications() {
-      const { searchTerm, docTypeFilters, fieldFilters, selectedYear } = getFilterConditions();
+      const { searchTerm, docTypeFilters, fieldFilters, yearFilters } = getFilterConditions();
       
       filteredPublications = allPublications.filter(pub => {
         // 搜索条件 - 按首字母顺序匹配标题
@@ -1030,13 +989,17 @@
           }
         }
         
-        // 年份筛选
-        if (selectedYear !== 'All years') {
+        // 年份筛选（多选，命中任一即通过）
+        if (yearFilters && yearFilters.length > 0) {
           const pubYear = getPublicationYear(pub);
-          if (selectedYear === 'Year 2023' && pubYear !== 2023) return false;
-          if (selectedYear === 'Year 2022' && pubYear !== 2022) return false;
-          if (selectedYear === 'Year 2021' && pubYear !== 2021) return false;
-          if (selectedYear === 'Year 2020 and before' && pubYear > 2020) return false;
+          const matched = yearFilters.some(label => {
+            if (label === 'Year 2026') return pubYear === 2026;
+            if (label === 'Year 2025') return pubYear === 2025;
+            if (label === 'Year 2024') return pubYear === 2024;
+            if (label === 'Year 2023 and before') return pubYear <= 2023;
+            return true;
+          });
+          if (!matched) return false;
         }
         
         return true;
@@ -1060,8 +1023,14 @@
     
     // 获取发表年份
     function getPublicationYear(pub) {
-      const yearMatch = pub.Publish.match(/(\d{4})/);
-      return yearMatch ? parseInt(yearMatch[1]) : 2023;
+      const text = pub.Publish || '';
+      // 优先匹配标准年份 20xx
+      const normalYear = text.match(/\b(20\d{2})\b/);
+      if (normalYear) return parseInt(normalYear[1]);
+      // 兼容 arXiv:2508.x 类格式，取前两位推断 20xx 年
+      const arxivLike = text.match(/arXiv\s*:\s*(\d{2})\d{2}/i);
+      if (arxivLike) return 2000 + parseInt(arxivLike[1]);
+      return 2023;
     }
     
     // 渲染文献列表
@@ -1090,7 +1059,7 @@
         // 构建链接部分
         let linksHtml = '';
         if (pub.Article_link && pub.Article_link !== '#') {
-          linksHtml += `<a href="${pub.Article_link}" target="_blank"><i class="fas fa-external-link-alt"></i> Article</a>`;
+          linksHtml += `<a href="${pub.Article_link}" target="_blank"><i class="fas fa-external-link-alt"></i> pdf</a>`;
         }
         if (pub.pdf && pub.pdf !== '#') {
           linksHtml += `<a href="${pub.pdf}" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>`;
@@ -1197,12 +1166,15 @@
 
     // 应用筛选和搜索
     function applyFilters() {
-      // 检查是否有任何筛选条件被激活
-      const { searchTerm, docTypeFilters, fieldFilters, selectedYear } = getFilterConditions();
-      const hasActiveFilters = searchTerm || 
-        docTypeFilters.length < 4 || // 如果有未选中的文档类型
-        fieldFilters.length < 5 ||   // 如果有未选中的研究领域
-        selectedYear !== 'All years'; // 如果选择了特定年份
+      // 检查是否有任何筛选条件被激活（动态统计各组总选项数）
+      const { searchTerm, docTypeFilters, fieldFilters, yearFilters } = getFilterConditions();
+      const totalDocTypes = document.querySelectorAll('.filter-section:nth-child(2) input[type="checkbox"]').length;
+      const totalFields = document.querySelectorAll('.filter-section:nth-child(3) input[type="checkbox"]').length;
+      const totalYears = document.querySelectorAll('.filter-section:nth-child(4) input[type="checkbox"]').length;
+      const hasActiveFilters = Boolean(searchTerm) ||
+        docTypeFilters.length < totalDocTypes ||
+        fieldFilters.length < totalFields ||
+        yearFilters.length < totalYears;
       
       if (hasActiveFilters) {
         // 有筛选条件时，应用筛选
@@ -1229,12 +1201,6 @@
       document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = true;
       });
-      
-      // 重置年份选择为"All years"
-      const allYearsRadio = document.querySelector('input[type="radio"]');
-      if (allYearsRadio) {
-        allYearsRadio.checked = true;
-      }
       
       // 重置筛选结果，显示所有文献
       filteredPublications = allPublications;
@@ -1266,7 +1232,7 @@
       });
       
       // 为所有筛选选项添加实时筛选
-      document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(input => {
         input.addEventListener('change', () => {
           applyFilters();
         });
@@ -1292,91 +1258,53 @@
   </main>
 
   <!-- ===== 底部导航 ===== -->
-  <footer>
-    <div class="footer-wrap">
-      <!-- Logo和标语区域 -->
-      <div class="footer-header">
-        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
-          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
-        </a>
-        <span class="footer-slogan">｜助力人类基础脑力劳动可信替代</span>
-      </div>
-      
-      <h3 class="footer-title">联系我们</h3>
-    
-      <div class="footer-grid">
-        <!-- 左：地址信息 -->
-        <div class="footer-contact">
-          <!-- 第一行：总部 + 合作邮箱 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>总部：</strong>杭州市滨江区聚才路239号火炬创新中心2号楼17层</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>合作：</strong>info@gentel.com</p>
-            </div>
+<footer>
+  <div class="footer-wrap">
+  
+    <div class="footer-grid">
+      <!-- 左：联系信息 -->
+      <div class="footer-contact">
+        <div class="contact-left">
+          <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
+        </div>
+        <div class="contact-right">
+          <div class="contact-item">
+            <p><strong>Email：</strong>info@gentel.com</p>
           </div>
-          
-          <!-- 第二行：分部 + 电话 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>分部：</strong>上海市徐汇区龙耀路18号X3幢201</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>电话：</strong>400-600-2030</p>
-            </div>
-          </div>
-          
-          <!-- 第三行：广州分部 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p style="margin-left: 60px;">广州市海珠区琶洲大道68号华新中心18楼</p>
-            </div>
-            <div class="contact-right">
-              <!-- 空白占位 -->
-            </div>
+          <div class="contact-item">
+            <p><strong>Phone：</strong>400-600-2030</p>
           </div>
         </div>
-    
-        <!-- 右：二维码 -->
-        <div class="footer-right">
-          <div class="footer-qrcode">
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
-              <div class="caption">浙大滨江研究院</div>
-            </div>
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="君通未来"></div>   
-              <div class="caption">君同未来</div>
-            </div>
+      </div>
+  
+      <!-- 右：二维码 -->
+      <div class="footer-right">
+        <div class="footer-qrcode">
+          <div class="qrcode-item">
+            <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
+            <div class="caption">Binjiang Institute of Zhejiang University</div>
+          </div>
+          <div class="qrcode-item">
+            <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
+            <div class="caption">Gentel</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="legal-left">
-        <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
+  </div>
+  <div class="footer-bottom">
+        <div class="legal-left">
+      <span>© Hangzhou Gentel Technology Co., Ltd</span>
+      <span class="sep">|</span>
+      <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
-        <span>浙ICP备2021034072号</span>
+      <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
+      <span>浙公网安备33010802013572号</span>
+        </div>
+        <div class="legal-right">
+      <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
-        <span>浙公网安备33010802013572号</span>
-      </div>
-      <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>  
-        <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>    
-      </div>
+      <a href="/privacy.html">Privacy Policy</a>     
+        </div>
     </div>
-  </footer>
-
-  <!-- JS 示例 -->
-  <script>
-    // 这里可以添加页面特定的JavaScript代码
-    console.log('Gentel Research Website Template Loaded');
-  </script>
-</body>
-</html>
-
-
-
+    </footer>
