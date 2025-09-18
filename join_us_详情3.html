@@ -65,94 +65,40 @@
 
     /* ===== 底部导航 ===== */
     footer{ background:#2f62ee; color:#fff; }
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:16px 20px 8px; }
     
-    /* Logo和标语区域 */
-    .footer-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
-    .footer-logo {
-      height: 28px;
-      width: auto;
-      transition: all 0.3s ease;
-    }
     
-    .footer-logo-link {
-      display: inline-block;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 4px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .footer-logo-link:hover {
-      transform: translateY(-2px) scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
-    }
-    
-    .footer-logo-link:hover .footer-logo {
-      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
-    }
-    
-    .footer-logo-link:active {
-      transform: translateY(0) scale(1.02);
-    }
-    .footer-slogan {
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-    }
-    
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
       grid-template-columns: 1fr 320px;
-      gap:28px;
+      gap:20px;
       align-items: flex-start;
-      padding-bottom:18px;
+      padding-bottom:12px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
     
     /* 左侧联系信息布局 */
     .footer-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-right {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
     
-    .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    
-    .contact-left {
-      flex: 1;
-    }
-    
+    .contact-item p,
     .contact-left p {
       margin: 0;
-      padding: 0.25rem 0;
-      opacity: 0.95;
-      line-height: 1.4;
-    }
-    
-    .contact-right {
-      flex: 0 0 200px;
-      text-align: left;
-      margin-left: 40px;
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-    
-    .contact-right p {
-      margin: 0;
-      padding: 0.25rem 0;
       opacity: 0.95;
       line-height: 1.4;
     }
@@ -164,7 +110,6 @@
       align-items: flex-start;
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-    .footer-contact{ display:grid; row-gap: 14px; }
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -178,7 +123,7 @@
       align-items: center;
     }
     .qrcode-item .qrcode{
-      width:120px; height:120px; border-radius:8px;
+      width:90px; height:90px; border-radius:8px;
       background:rgba(255,255,255,.65);
       display:block;
     }
@@ -193,22 +138,12 @@
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
 
     @media (max-width: 900px){
-      .footer-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      .footer-grid{ grid-template-columns: 1fr; gap:12px; }
       
       /* 移动端联系信息调整 */
-      .contact-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .contact-right {
-        margin-left: 0;
-        text-align: left;
+      .footer-contact {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
       
       .footer-right {
@@ -338,47 +273,6 @@
       border-left: 4px solid #2563eb;
     }
 
-    /* ===== 语言切换按钮 ===== */
-    .language-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .lang-btn {
-      padding: 8px 16px;
-      border: none;
-      background: transparent;
-      color: #6b7280;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .lang-btn:hover {
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .lang-btn.active {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    /* ===== 语言内容切换 ===== */
-    .lang-content {
-      transition: opacity 0.3s ease;
-    }
-
-    .lang-content.hidden {
-      display: none;
-    }
 
     /* 响应式设计 */
     @media (max-width: 768px) {
@@ -394,11 +288,6 @@
         font-size: 18px;
       }
 
-      .language-switcher {
-        position: static;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
     }
   </style>
 </head>
@@ -407,9 +296,9 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
+      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
-      </a>
+      <!-- </a> -->
       <ul>
         <li><a href="index.html">Home</a></li>    
         <li><a href="研究方向.html">Research</a></li>          
@@ -427,74 +316,13 @@
       <h1>标题标题标题</h1>
       <p>*****************</p>
     </div>
-    <!-- 语言切换按钮 -->
-    <div class="language-switcher">
-      <button class="lang-btn active" data-lang="zh">中文</button>
-      <button class="lang-btn" data-lang="en">English</button>
-    </div>
   </section>
 
   <!-- ===== 职位详情内容 ===== -->
   <div class="job-detail-container">
-    <a href="join_us.html" class="back-link lang-content" data-lang="zh">返回</a>
-    <a href="join_us.html" class="back-link lang-content hidden" data-lang="en">Back</a>
+    <a href="join_us.html" class="back-link">Back</a>
     
-    <!-- 中文内容 -->
-    <div class="job-detail-content lang-content" data-lang="zh">
-      <h1 class="job-title">研究科学家实习（博士生）招聘公告</h1>
-      
-      <div class="job-section">
-        <h3>招聘岗位</h3>
-        <ul>
-          <li><span class="highlight-text">岗位名称：</span>研究科学家实习（博士生）</li>
-          <li><span class="highlight-text">招聘人数：</span>若干名</li>
-          <li><span class="highlight-text">研究方向：</span>医疗图像处理、医疗信息科学、具身智能、计算机视觉、大模型攻防、神经辐射场、大模型指纹、模型协议安全等。</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3>职位描述</h3>
-        <ul>
-          <li>参加每周组会，汇报科研进展并提交周报。</li>
-          <li>完成分配科研任务，包括论文审稿及相关工作。</li>
-          <li>撰写科研论文，并投稿高水平会议或期刊。</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3>任职要求</h3>
-        <ul>
-          <li><span class="highlight-text">专业背景：</span>计算机科学与技术、软件工程等相关专业。</li>
-          <li><span class="highlight-text">技术能力：</span>熟悉PyTorch等机器学习框架。</li>
-          <li><span class="highlight-text">科研热情：</span>对科研有浓厚兴趣，愿意投入时间。</li>
-          <li><span class="highlight-text">学历要求：</span>在读博士生，实习时长不少于半年。</li>
-          <li><span class="highlight-text">研究方向（满足任一即可）：</span>
-            <ul style="margin-top: 10px;">
-              <li><strong>大模型攻防：</strong>了解大模型越狱及其防御。</li>
-              <li><strong>神经辐射场：</strong>能阅读并理解Neural Radiance Fields相关代码。</li>
-              <li><strong>大模型指纹：</strong>具备大模型微调经验。</li>
-              <li><strong>具身智能：</strong>有对抗攻击、模型后门、视觉大模型或大语言模型研究经验。</li>
-              <li><strong>模型协议安全：</strong>熟悉大模型通信协议的安全分析与防护机制。</li>
-              <li><strong>医疗信息与医疗图像处理：</strong>有医疗图像处理（如分割、分类、重建）或医疗信息分析（如电子病历处理、隐私保护）相关经验。</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div class="job-section contact-info">
-        <h3>待遇与发展</h3>
-        <ul>
-          <li><span class="highlight-text">实习证明：</span>实习超过半年，提供实习证明及推荐信。</li>
-          <li><span class="highlight-text">成长机会：</span>与顶尖团队合作，探索前沿领域；优秀者优先推荐顶尖院校深造，并协助发表CCF-A/B类或SCI高水平论文。</li>
-          <li><span class="highlight-text">绩效奖励：</span>根据贡献发放奖励。</li>
-          <li><span class="highlight-text">其他福利：</span>灵活在线实习，提供优质科研指导和国际交流机会。</li>
-        </ul>
-        <p style="margin-top: 20px; font-style: italic;">我们期待您的加入，一起探索科研的无限可能！如有疑问，欢迎随时咨询。</p>
-      </div>
-    </div>
-
-    <!-- 英文内容 -->
-    <div class="job-detail-content lang-content hidden" data-lang="en">
+    <div class="job-detail-content">
       <h1 class="job-title">Research Scientist Internship (PhD Students)</h1>
       
       <div class="job-section">
@@ -551,46 +379,19 @@
   <!-- ===== 底部导航 ===== -->
   <footer>
     <div class="footer-wrap">
-      <!-- Logo和标语区域 -->
-      <div class="footer-header">
-        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
-          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
-        </a>
-        <span class="footer-slogan">｜Supporting the Trustworthy Substitution of Human Basic Cognitive Labor</span>
-      </div>
-      
-      <h3 class="footer-title">Contact Us</h3>
     
       <div class="footer-grid">
-        <!-- 左：地址信息 -->
+        <!-- 左：联系信息 -->
         <div class="footer-contact">
-          <!-- 第一行：总部 + 合作邮箱 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Headquarter:Torch Innovation Center,No.239 Jucai Road,Binjiang District,Hangzhou</strong></p>
-            </div>
-            <div class="contact-right">
-              <p><strong>Cooperation：</strong>info@gentel.com</p>
-            </div>
+          <div class="contact-left">
+            <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
           </div>
-          
-          <!-- 第二行：分部 + 电话 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Division：</strong>No.18 Longyao Road,Xuhui District,Shanghai</p>
+          <div class="contact-right">
+            <div class="contact-item">
+              <p><strong>Email：</strong>info@gentel.com</p>
             </div>
-            <div class="contact-right">
+            <div class="contact-item">
               <p><strong>Phone：</strong>400-600-2030</p>
-            </div>
-          </div>
-          
-          <!-- 第三行：广州分部 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p style="margin-left: 78px;">No.68 Pazhou Avenue,Haizhu District,Guangzhou</p>
-            </div>
-            <div class="contact-right">
-              <!-- 空白占位 -->
             </div>
           </div>
         </div>
@@ -598,21 +399,21 @@
         <!-- 右：二维码 -->
         <div class="footer-right">
           <div class="footer-qrcode">
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
-              <div class="caption">Binjiang Institute of Zhejiang University</div>
-            </div>
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="君通未来"></div>   
-              <div class="caption">Gentel</div>
-            </div>
+          <div class="qrcode-item">
+            <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
+            <div class="caption">Binjiang Institute of Zhejiang University</div>
+          </div>
+          <div class="qrcode-item">
+            <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
+            <div class="caption">Gentel</div>
+          </div>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="legal-left">
-        <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
+        <span>© Hangzhou Gentel Technology Co., Ltd</span>
         <span class="sep">|</span>
         <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
@@ -620,7 +421,7 @@
         <span>浙公网安备33010802013572号</span>
       </div>
       <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>   
+        <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
         <a href="/privacy.html">Privacy Policy</a>     
       </div>
@@ -628,65 +429,7 @@
   </footer>
 
   <script>
-    // 语言切换功能
-    document.addEventListener('DOMContentLoaded', function() {
-      const langBtns = document.querySelectorAll('.lang-btn');
-      const langContents = document.querySelectorAll('.lang-content');
-      
-      // 从localStorage获取保存的语言偏好，默认为中文
-      let currentLang = localStorage.getItem('preferred-language') || 'zh';
-      
-      // 从URL参数获取语言设置
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('lang')) {
-        currentLang = urlParams.get('lang');
-      }
-      
-      // 初始化显示
-      switchLanguage(currentLang);
-      
-      // 为语言切换按钮添加事件监听
-      langBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const targetLang = this.dataset.lang;
-          switchLanguage(targetLang);
-          
-          // 保存语言偏好到localStorage
-          localStorage.setItem('preferred-language', targetLang);
-          
-          // 更新URL参数（可选）
-          const url = new URL(window.location);
-          url.searchParams.set('lang', targetLang);
-          window.history.replaceState({}, '', url);
-        });
-      });
-      
-      // 语言切换函数
-      function switchLanguage(lang) {
-        // 更新按钮状态
-        langBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        
-        // 切换内容显示
-        langContents.forEach(content => {
-          if (content.dataset.lang === lang) {
-            content.classList.remove('hidden');
-          } else {
-            content.classList.add('hidden');
-          }
-        });
-        
-        // 更新页面标题
-        if (lang === 'en') {
-          document.title = 'PhD Research Scientist Internship - Gentel Research';
-        } else {
-          document.title = '博士生研究科学家实习 - Gentel Research';
-        }
-        
-        currentLang = lang;
-      }
-    });
+    // 页面脚本（如有需要可在此添加）
   </script>
 
 </body>
