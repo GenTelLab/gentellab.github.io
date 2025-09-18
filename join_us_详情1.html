@@ -65,94 +65,40 @@
 
     /* ===== 底部导航 ===== */
     footer{ background:#2f62ee; color:#fff; }
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:16px 20px 8px; }
     
-    /* Logo和标语区域 */
-    .footer-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
-    .footer-logo {
-      height: 28px;
-      width: auto;
-      transition: all 0.3s ease;
-    }
     
-    .footer-logo-link {
-      display: inline-block;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 4px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .footer-logo-link:hover {
-      transform: translateY(-2px) scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
-    }
-    
-    .footer-logo-link:hover .footer-logo {
-      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
-    }
-    
-    .footer-logo-link:active {
-      transform: translateY(0) scale(1.02);
-    }
-    .footer-slogan {
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-    }
-    
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
       grid-template-columns: 1fr 320px;
-      gap:28px;
+      gap:20px;
       align-items: flex-start;
-      padding-bottom:18px;
+      padding-bottom:12px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
     
     /* 左侧联系信息布局 */
     .footer-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-right {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
     
-    .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    
-    .contact-left {
-      flex: 1;
-    }
-    
+    .contact-item p,
     .contact-left p {
       margin: 0;
-      padding: 0.25rem 0;
-      opacity: 0.95;
-      line-height: 1.4;
-    }
-    
-    .contact-right {
-      flex: 0 0 200px;
-      text-align: left;
-      margin-left: 40px;
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-    
-    .contact-right p {
-      margin: 0;
-      padding: 0.25rem 0;
       opacity: 0.95;
       line-height: 1.4;
     }
@@ -177,7 +123,7 @@
       align-items: center;
     }
     .qrcode-item .qrcode{
-      width:120px; height:120px; border-radius:8px;
+      width:90px; height:90px; border-radius:8px;
       background:rgba(255,255,255,.65);
       display:block;
     }
@@ -192,22 +138,12 @@
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
 
     @media (max-width: 900px){
-      .footer-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      .footer-grid{ grid-template-columns: 1fr; gap:12px; }
       
       /* 移动端联系信息调整 */
-      .contact-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .contact-right {
-        margin-left: 0;
-        text-align: left;
+      .footer-contact {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
       
       .footer-right {
@@ -337,47 +273,7 @@
       border-left: 4px solid #2563eb;
     }
 
-    /* ===== 语言切换按钮 ===== */
-    .language-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
 
-    .lang-btn {
-      padding: 8px 16px;
-      border: none;
-      background: transparent;
-      color: #6b7280;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .lang-btn:hover {
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .lang-btn.active {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    /* ===== 语言内容切换 ===== */
-    .lang-content {
-      transition: opacity 0.3s ease;
-    }
-
-    .lang-content.hidden {
-      display: none;
-    }
 
     /* 响应式设计 */
     @media (max-width: 768px) {
@@ -406,9 +302,9 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
+      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
-      </a>
+      <!-- </a> -->
       <ul>
         <li><a href="index.html">Home</a></li>    
         <li><a href="研究方向.html">Research</a></li>          
@@ -426,75 +322,13 @@
       <h1>标题标题标题</h1>
       <p>*****************</p>
     </div>
-    <!-- 语言切换按钮 -->
-    <div class="language-switcher">
-      <button class="lang-btn active" data-lang="zh">中文</button>
-      <button class="lang-btn" data-lang="en">English</button>
-    </div>
   </section>
 
   <!-- ===== 职位详情内容 ===== -->
   <div class="job-detail-container">
-    <a href="join_us.html" class="back-link lang-content" data-lang="zh">返回</a>
-    <a href="join_us.html" class="back-link lang-content hidden" data-lang="en">Back</a>
+    <a href="join_us.html" class="back-link">Back</a>
     
-    <!-- 中文内容 -->
-    <div class="job-detail-content lang-content" data-lang="zh">
-      <h1 class="job-title">浙江大学滨江研究院博士后研究员招聘公告</h1>
-      
-      <div class="job-section">
-        <p>浙江大学滨江研究院面向海内外优秀青年学者招聘博士后研究员，致力于推动计算机科学领域的创新研究。我们欢迎具有扎实学术基础和创新潜力的优秀人才加入，共同探索前沿技术。招聘详情如下：</p>
-      </div>
-
-      <div class="job-section">
-        <h3>招聘岗位</h3>
-        <ul>
-          <li><span class="highlight-text">岗位名称：</span>博士后研究员</li>
-          <li><span class="highlight-text">招聘人数：</span>若干名</li>
-          <li><span class="highlight-text">研究方向：</span>计算机视觉、深度学习、多模态大模型、自然语言处理、医疗等相关领域。</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3>应聘条件</h3>
-        <ul>
-          <li>具有博士学位，或已提交博士论文答辩（预计近期获得博士学位）。</li>
-          <li>在相关领域至少有一篇一区（Q1）期刊或会议论文发表记录。</li>
-          <li>具有强烈的科研兴趣和良好的团队合作精神，英语水平良好。</li>
-          <li>博士毕业3年内，年龄一般不超过35周岁，身体健康。</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3>工作职责与出站要求</h3>
-        <ul>
-          <li>参与学院重点研究项目，进行独立或合作科研工作。</li>
-          <li><span class="highlight-text">出站要求：</span>在站期间发表2-3篇高水平学术论文，或获得专利授权，或主持/参与一项国家级/省级基金项目。</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3>待遇与福利</h3>
-        <ul>
-          <li><span class="highlight-text">年薪：</span>待遇丰厚，年薪30-50万元，具体面议（根据个人能力和经验，提供具有竞争力的薪酬包，包括基本工资、绩效奖金）。</li>
-          <li><span class="highlight-text">住房与补贴：</span>杭州政府补贴：符合杭州市人才政策可申请100万元购房补贴；E类人才可获政府人才保障。</li>
-          <li><span class="highlight-text">其他福利：</span>享受浙江大学博士后相关待遇，包括医疗保险、社会保险、住房公积金，子女教育支持，提供良好的科研环境，实验平台和国际交流机会。</li>
-        </ul>
-      </div>
-
-      <div class="job-section contact-info">
-        <h3>申请方式</h3>
-        <ul>
-          <li>请将个人简历（包括教育背景、研究经历、发表论文列表等）、代表性学术成果（PDF格式）发送至招聘邮箱：<span class="highlight-text">recruit@zju-if.com</span>。</li>
-          <li><span class="highlight-text">邮件主题：</span>博士后申请-姓名-研究方向。</li>
-          <li><span class="highlight-text">申请截止日期：</span>滚动招聘，常年有效，直至岗位满额。</li>
-        </ul>
-        <p style="margin-top: 20px; font-style: italic;">浙江大学期待您的加入，一起共创计算机科学的美好未来！如有疑问，欢迎随时咨询。</p>
-      </div>
-    </div>
-
-    <!-- 英文内容 -->
-    <div class="job-detail-content lang-content hidden" data-lang="en">
+    <div class="job-detail-content">
       <h1 class="job-title">Postdoctoral Researcher Position at Zhejiang University Binjiang Institute</h1>
       
       <div class="job-section">
@@ -553,46 +387,19 @@
   <!-- ===== 底部导航 ===== -->
   <footer>
     <div class="footer-wrap">
-      <!-- Logo和标语区域 -->
-      <div class="footer-header">
-        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
-          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
-        </a>
-        <span class="footer-slogan">｜Supporting the Trustworthy Substitution of Human Basic Cognitive Labor</span>
-      </div>
-      
-      <h3 class="footer-title">Contact Us</h3>
     
       <div class="footer-grid">
-        <!-- 左：地址信息 -->
+        <!-- 左：联系信息 -->
         <div class="footer-contact">
-          <!-- 第一行：总部 + 合作邮箱 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Headquarter：</strong>Torch Innovation Center,No.239 Jucai Road,Binjiang District,Hangzhou</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>Cooperation：</strong>info@gentel.com</p>
-            </div>
+          <div class="contact-left">
+            <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
           </div>
-          
-          <!-- 第二行：分部 + 电话 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Division：</strong>No.18 Longyao Road,Xuhui District,Shanghai</p>
+          <div class="contact-right">
+            <div class="contact-item">
+              <p><strong>Email：</strong>info@gentel.com</p>
             </div>
-            <div class="contact-right">
+            <div class="contact-item">
               <p><strong>Phone：</strong>400-600-2030</p>
-            </div>
-          </div>
-          
-          <!-- 第三行：广州分部 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p style="margin-left: 78px;">No.68 Pazhou Avenue,Haizhu District,Guangzhou</p>
-            </div>
-            <div class="contact-right">
-              <!-- 空白占位 -->
             </div>
           </div>
         </div>
@@ -600,14 +407,14 @@
         <!-- 右：二维码 -->
         <div class="footer-right">
           <div class="footer-qrcode">
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
-              <div class="caption">Binjiang Institute of Zhejiang University</div>
-            </div>
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="君通未来"></div>   
-              <div class="caption">Gentel</div>
-            </div>
+          <div class="qrcode-item">
+            <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
+            <div class="caption">Binjiang Institute of Zhejiang University</div>
+          </div>
+          <div class="qrcode-item">
+            <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
+            <div class="caption">Gentel</div>
+          </div>
           </div>
         </div>
       </div>
@@ -630,65 +437,7 @@
   </footer>
 
   <script>
-    // 语言切换功能
-    document.addEventListener('DOMContentLoaded', function() {
-      const langBtns = document.querySelectorAll('.lang-btn');
-      const langContents = document.querySelectorAll('.lang-content');
-      
-      // 从localStorage获取保存的语言偏好，默认为中文
-      let currentLang = localStorage.getItem('preferred-language') || 'zh';
-      
-      // 从URL参数获取语言设置
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('lang')) {
-        currentLang = urlParams.get('lang');
-      }
-      
-      // 初始化显示
-      switchLanguage(currentLang);
-      
-      // 为语言切换按钮添加事件监听
-      langBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const targetLang = this.dataset.lang;
-          switchLanguage(targetLang);
-          
-          // 保存语言偏好到localStorage
-          localStorage.setItem('preferred-language', targetLang);
-          
-          // 更新URL参数（可选）
-          const url = new URL(window.location);
-          url.searchParams.set('lang', targetLang);
-          window.history.replaceState({}, '', url);
-        });
-      });
-      
-      // 语言切换函数
-      function switchLanguage(lang) {
-        // 更新按钮状态
-        langBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        
-        // 切换内容显示
-        langContents.forEach(content => {
-          if (content.dataset.lang === lang) {
-            content.classList.remove('hidden');
-          } else {
-            content.classList.add('hidden');
-          }
-        });
-        
-        // 更新页面标题
-        if (lang === 'en') {
-          document.title = 'Postdoctoral Position - Gentel Research';
-        } else {
-          document.title = '博士后招聘 - Gentel Research';
-        }
-        
-        currentLang = lang;
-      }
-    });
+    // 页面脚本（如有需要可在此添加）
   </script>
 
 </body>
