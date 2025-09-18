@@ -6,21 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-    }
-    
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    main {
-      flex: 1;
-    }
+    body {margin:0; font-family:Arial, sans-serif;}
 
     /* ===== 顶部导航 ===== */
     header {
@@ -68,7 +54,7 @@
       height: 420px;
       background-image: url('主页图片/Slice 100.png');
       background-repeat: no-repeat;
-      background-position: center center;
+      background-position: center -200px;
       background-size: cover;
       position: relative;
       display: flex;
@@ -106,94 +92,40 @@
 
     /* ===== 底部导航 ===== */
     footer{ background:#2f62ee; color:#fff; }
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:16px 20px 8px; }
     
-    /* Logo和标语区域 */
-    .footer-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
-    .footer-logo {
-      height: 28px;
-      width: auto;
-      transition: all 0.3s ease;
-    }
     
-    .footer-logo-link {
-      display: inline-block;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 4px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .footer-logo-link:hover {
-      transform: translateY(-2px) scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
-    }
-    
-    .footer-logo-link:hover .footer-logo {
-      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
-    }
-    
-    .footer-logo-link:active {
-      transform: translateY(0) scale(1.02);
-    }
-    .footer-slogan {
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-    }
-    
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px; /* 左：地址信息 右：二维码 */
-      gap:28px;
+      grid-template-columns: 1fr 320px; /* 左：联系信息 右：二维码 */
+      gap:20px;
       align-items: flex-start;
-      padding-bottom:18px;
+      padding-bottom:12px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
     
     /* 左侧联系信息布局 */
     .footer-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-right {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
     
-    .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    
-    .contact-left {
-      flex: 1;
-    }
-    
+    .contact-item p,
     .contact-left p {
       margin: 0;
-      padding: 0.25rem 0;
-      opacity: 0.95;
-      line-height: 1.4;
-    }
-    
-    .contact-right {
-      flex: 0 0 200px; /* 固定宽度确保对齐 */
-      text-align: left; /* 改为左对齐，让“合作：”和“电话：”开头对齐 */
-      margin-left: 40px;
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-    
-    .contact-right p {
-      margin: 0;
-      padding: 0.25rem 0;
       opacity: 0.95;
       line-height: 1.4;
     }
@@ -205,7 +137,6 @@
       align-items: flex-start;
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-    .footer-contact{ display:grid; row-gap: 14px; }
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -219,7 +150,7 @@
       align-items: center;
     }
     .qrcode-item .qrcode{
-      width:120px; height:120px; border-radius:8px;
+      width:90px; height:90px; border-radius:8px;
       background:rgba(255,255,255,.65);
       display:block;
     }
@@ -232,24 +163,14 @@
     .footer-bottom .legal-right { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
     .sep { margin:0 8px; opacity:.7; }
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
-  
+
     @media (max-width: 900px){
-      .footer-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      .footer-grid{ grid-template-columns: 1fr; gap:12px; }
       
       /* 移动端联系信息调整 */
-      .contact-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .contact-right {
-        margin-left: 0;
-        text-align: left;
+      .footer-contact {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
       
       .footer-right {
@@ -263,56 +184,6 @@
       }
     }
 
-    /* ===== 语言切换按钮 ===== */
-    .language-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .lang-btn {
-      padding: 8px 16px;
-      border: none;
-      background: transparent;
-      color: #6b7280;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .lang-btn:hover {
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .lang-btn.active {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    /* ===== 语言内容切换 ===== */
-    .lang-content {
-      transition: opacity 0.3s ease;
-    }
-
-    .lang-content.hidden {
-      display: none;
-    }
-
-    /* 响应式语言切换 */
-    @media (max-width: 768px) {
-      .language-switcher {
-        position: static;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
-    }
 
     /* ===== 研究领域层级结构树 ===== */
     .research-tree {
@@ -466,9 +337,9 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
+      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
-      </a>
+      <!-- </a> -->
       <ul>
         <li><a href="index.html">Home</a></li>    
         <li><a href="研究方向.html">Research</a></li>          
@@ -479,318 +350,147 @@
     </nav>
   </header>
 
-  <main>
   <!-- ===== 横幅区（背景图 + 标题） ===== -->
   <section class="hero">
     <div class="hero-content">
       <h1>Research Directions</h1>
       <p>Exploring cutting-edge AI technologies and applications for the future</p>
     </div>
-    <!-- 语言切换按钮 -->
-    <div class="language-switcher">
-      <button class="lang-btn active" data-lang="zh">中文</button>
-      <button class="lang-btn" data-lang="en">English</button>
-    </div>
   </section>
 
   <!-- ===== 研究领域层级结构 ===== -->
   <section class="research-tree">
-    <!-- 中文内容 -->
-    <div class="lang-content" data-lang="zh">
-      <h2>研究领域</h2>
-      
-      <div class="tree-container">
-      <!-- 大模型安全与风险分支 -->
+    <h2>Research Areas Structure</h2>
+    
+    <div class="tree-container">
+      <!-- Large Model Security & Risk Branch -->
       <div class="tree-branch">
-        <div class="branch-title">大模型安全与风险</div>
+        <div class="branch-title">Large Model Security & Risk</div>
         <div class="sub-branches">
           
           <div class="sub-branch">
-            <div class="sub-branch-title">对抗攻击与防御</div>
+            <div class="sub-branch-title">Adversarial Attacks & Defense</div>
             <div class="research-items">
-              <a href="/research/adversarial-attack" class="research-item">大模型对抗攻击与防御</a>
-              <a href="/research/multi-agent-security" class="research-item">多智能体攻防与安全</a>
-              <a href="/research/multimodal-security" class="research-item">多模态安全</a>
+              <a href="research_1.html" class="research-item">Large Model Adversarial Attack & Defense</a>
+              <a href="/research/multi-agent-security" class="research-item">Multi-Agent Attack & Defense Security</a>
+              <a href="/research/multimodal-security" class="research-item">Multimodal Security</a>
             </div>
           </div>
           
           <div class="sub-branch">
-            <div class="sub-branch-title">内容溯源与检测</div>
+            <div class="sub-branch-title">Content Tracing & Detection</div>
             <div class="research-items">
-              <a href="/research/watermark-fingerprint" class="research-item">大模型水印与指纹技术</a>
-              <a href="/research/aigc-detection" class="research-item">AIGC检测</a>
-              <a href="/research/audio-security" class="research-item">音频攻防</a>
+              <a href="research_1.html" class="research-item">Large Model Watermarking & Fingerprinting</a>
+              <a href="/research/aigc-detection" class="research-item">AIGC Detection</a>
+              <a href="/research/audio-security" class="research-item">Audio Attack & Defense</a>
             </div>
           </div>
           
           <div class="sub-branch">
-            <div class="sub-branch-title">系统级安全</div>
+            <div class="sub-branch-title">System-Level Security</div>
             <div class="research-items">
-              <a href="/research/system-security" class="research-item">系统级安全研究</a>
-              <a href="/research/privacy-protection" class="research-item">隐私保护技术</a>
+              <a href="/research/system-security" class="research-item">System-Level Security Research</a>
+              <a href="/research/privacy-protection" class="research-item">Privacy Protection Technology</a>
             </div>
           </div>
           
         </div>
       </div>
       
-      <!-- 大模型应用与技术分支 -->
+      <!-- Large Model Applications & Technology Branch -->
       <div class="tree-branch">
-        <div class="branch-title">大模型应用与技术</div>
+        <div class="branch-title">Large Model Applications & Technology</div>
         <div class="sub-branches">
           
           <div class="sub-branch">
-            <div class="sub-branch-title">多智能体系统</div>
+            <div class="sub-branch-title">Multi-Agent Systems</div>
             <div class="research-items">
-              <a href="/research/multi-agent-collaboration" class="research-item">多智能体协作与通信协议</a>
-              <a href="/research/context-protocol" class="research-item">模型上下文协议</a>
-              <a href="/research/agent-optimization" class="research-item">智能体决策优化</a>
+              <a href="research_3.html" class="research-item">Multi-Agent Collaboration & Communication Protocols</a>
+              <a href="/research/context-protocol" class="research-item">Model Context Protocols</a>
+              <a href="research_3.html" class="research-item">Agent Decision Optimization</a>
             </div>
           </div>
           
           <div class="sub-branch">
-            <div class="sub-branch-title">模型评估与优化</div>
+            <div class="sub-branch-title">Model Evaluation & Optimization</div>
             <div class="research-items">
-              <a href="/research/model-benchmark" class="research-item">大模型基准测试</a>
-              <a href="/research/llm-reinforcement" class="research-item">LLM/VLM强化学习</a>
-              <a href="/research/model-optimization" class="research-item">模型性能优化</a>
+              <a href="/research/model-benchmark" class="research-item">Large Model Benchmarking</a>
+              <a href="research_2.html" class="research-item">LLM/VLM Reinforcement Learning</a>
+              <a href="/research/model-optimization" class="research-item">Model Performance Optimization</a>
             </div>
           </div>
           
           <div class="sub-branch">
-            <div class="sub-branch-title">交叉学科研究</div>
+            <div class="sub-branch-title">Interdisciplinary Research</div>
             <div class="research-items">
-              <a href="/research/3d-vision" class="research-item">三维计算机视觉</a>
-              <a href="/research/survey" class="research-item">综述研究</a>
-              <a href="/research/cross-domain" class="research-item">跨领域应用</a>
+              <a href="/research/3d-vision" class="research-item">3D Computer Vision</a>
+              <a href="/research/survey" class="research-item">Survey Research</a>
+              <a href="/research/cross-domain" class="research-item">Cross-Domain Applications</a>
             </div>
           </div>
           
         </div>
       </div>
       
-      </div>
-    </div>
-
-    <!-- 英文内容 -->
-    <div class="lang-content hidden" data-lang="en">
-      <h2>Research Areas Structure</h2>
-      
-      <div class="tree-container">
-        <!-- Large Model Security & Risk Branch -->
-        <div class="tree-branch">
-          <div class="branch-title">Large Model Security & Risk</div>
-          <div class="sub-branches">
-            
-            <div class="sub-branch">
-              <div class="sub-branch-title">Adversarial Attacks & Defense</div>
-              <div class="research-items">
-                <a href="/research/adversarial-attack" class="research-item">Large Model Adversarial Attack & Defense</a>
-                <a href="/research/multi-agent-security" class="research-item">Multi-Agent Attack & Defense Security</a>
-                <a href="/research/multimodal-security" class="research-item">Multimodal Security</a>
-              </div>
-            </div>
-            
-            <div class="sub-branch">
-              <div class="sub-branch-title">Content Tracing & Detection</div>
-              <div class="research-items">
-                <a href="/research/watermark-fingerprint" class="research-item">Large Model Watermarking & Fingerprinting</a>
-                <a href="/research/aigc-detection" class="research-item">AIGC Detection</a>
-                <a href="/research/audio-security" class="research-item">Audio Attack & Defense</a>
-              </div>
-            </div>
-            
-            <div class="sub-branch">
-              <div class="sub-branch-title">System-Level Security</div>
-              <div class="research-items">
-                <a href="/research/system-security" class="research-item">System-Level Security Research</a>
-                <a href="/research/privacy-protection" class="research-item">Privacy Protection Technology</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-        <!-- Large Model Applications & Technology Branch -->
-        <div class="tree-branch">
-          <div class="branch-title">Large Model Applications & Technology</div>
-          <div class="sub-branches">
-            
-            <div class="sub-branch">
-              <div class="sub-branch-title">Multi-Agent Systems</div>
-              <div class="research-items">
-                <a href="/research/multi-agent-collaboration" class="research-item">Multi-Agent Collaboration & Communication Protocols</a>
-                <a href="/research/context-protocol" class="research-item">Model Context Protocols</a>
-                <a href="/research/agent-optimization" class="research-item">Agent Decision Optimization</a>
-              </div>
-            </div>
-            
-            <div class="sub-branch">
-              <div class="sub-branch-title">Model Evaluation & Optimization</div>
-              <div class="research-items">
-                <a href="/research/model-benchmark" class="research-item">Large Model Benchmarking</a>
-                <a href="/research/llm-reinforcement" class="research-item">LLM/VLM Reinforcement Learning</a>
-                <a href="/research/model-optimization" class="research-item">Model Performance Optimization</a>
-              </div>
-            </div>
-            
-            <div class="sub-branch">
-              <div class="sub-branch-title">Interdisciplinary Research</div>
-              <div class="research-items">
-                <a href="/research/3d-vision" class="research-item">3D Computer Vision</a>
-                <a href="/research/survey" class="research-item">Survey Research</a>
-                <a href="/research/cross-domain" class="research-item">Cross-Domain Applications</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-      </div>
     </div>
   </section>
-  </main>
 
   <!-- ===== 底部导航 ===== -->
-  <footer>
-    <div class="footer-wrap">
-      <!-- Logo和标语区域 -->
-      <div class="footer-header">
-        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
-          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
-        </a>
-        <span class="footer-slogan">｜Supporting the Trustworthy Substitution of Human Basic Cognitive Labor</span>
-      </div>
-      
-      <h3 class="footer-title">Contact Us</h3>
-    
-      <div class="footer-grid">
-        <!-- 左：地址信息 -->
-        <div class="footer-contact">
-          <!-- 第一行：总部 + 合作邮箱 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Headquarter：</strong>Torch Innovation Center,No.239 Jucai Road,Binjiang District,Hangzhou</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>Cooperation：</strong>info@gentel.com</p>
-            </div>
+<footer>
+  <div class="footer-wrap">
+  
+    <div class="footer-grid">
+      <!-- 左：联系信息 -->
+      <div class="footer-contact">
+        <div class="contact-left">
+          <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
+        </div>
+        <div class="contact-right">
+          <div class="contact-item">
+            <p><strong>Email：</strong>info@gentel.com</p>
           </div>
-          
-          <!-- 第二行：分部 + 电话 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Division：</strong>No.18 Longyao Road,Xuhui District,Shanghai</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>Phone：</strong>400-600-2030</p>
-            </div>
-          </div>
-          
-          <!-- 第三行：广州分部 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p style="margin-left: 78px;">No.68 Pazhou Avenue,Haizhu District,Guangzhou</p>
-            </div>
-            <div class="contact-right">
-              <!-- 空白占位 -->
-            </div>
+          <div class="contact-item">
+            <p><strong>Phone：</strong>400-600-2030</p>
           </div>
         </div>
-    
-        <!-- 右：二维码 -->
-        <div class="footer-right">
-          <div class="footer-qrcode">
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
-              <div class="caption">BinjiangInstitute of Zhejiang University</div>
-            </div>
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="君通未来"></div>   
-              <div class="caption">Gentel</div>
-            </div>
+      </div>
+  
+      <!-- 右：二维码 -->
+      <div class="footer-right">
+        <div class="footer-qrcode">
+          <div class="qrcode-item">
+            <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
+            <div class="caption">Binjiang Institute of Zhejiang University</div>
+          </div>
+          <div class="qrcode-item">
+            <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
+            <div class="caption">Gentel</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="legal-left">
-        <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
+  </div>
+  <div class="footer-bottom">
+        <div class="legal-left">
+      <span>© Hangzhou Gentel Technology Co., Ltd</span>
+      <span class="sep">|</span>
+      <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
-        <span>浙ICP备2021034072号</span>
+      <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
+      <span>浙公网安备33010802013572号</span>
+        </div>
+        <div class="legal-right">
+      <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
-        <span>浙公网安备33010802013572号</span>
-      </div>
-      <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>  
-        <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>    
-      </div>
+      <a href="/privacy.html">Privacy Policy</a>     
+        </div>
     </div>
-  </footer>
+    </footer>
 
   <script>
-    // 语言切换功能
-    document.addEventListener('DOMContentLoaded', function() {
-      const langBtns = document.querySelectorAll('.lang-btn');
-      const langContents = document.querySelectorAll('.lang-content');
-      
-      // 从localStorage获取保存的语言偏好，默认为中文
-      let currentLang = localStorage.getItem('preferred-language') || 'zh';
-      
-      // 从URL参数获取语言设置
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('lang')) {
-        currentLang = urlParams.get('lang');
-      }
-      
-      // 初始化显示
-      switchLanguage(currentLang);
-      
-      // 为语言切换按钮添加事件监听
-      langBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const targetLang = this.dataset.lang;
-          switchLanguage(targetLang);
-          
-          // 保存语言偏好到localStorage
-          localStorage.setItem('preferred-language', targetLang);
-          
-          // 更新URL参数（可选）
-          const url = new URL(window.location);
-          url.searchParams.set('lang', targetLang);
-          window.history.replaceState({}, '', url);
-        });
-      });
-      
-      // 语言切换函数
-      function switchLanguage(lang) {
-        // 更新按钮状态
-        langBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        
-        // 切换内容显示
-        langContents.forEach(content => {
-          if (content.dataset.lang === lang) {
-            content.classList.remove('hidden');
-          } else {
-            content.classList.add('hidden');
-          }
-        });
-        
-        // 更新页面标题
-        if (lang === 'en') {
-          document.title = 'Research Areas - Gentel Research';
-        } else {
-          document.title = '研究方向 - Gentel Research';
-        }
-        
-        currentLang = lang;
-      }
-    });
+    // 页面脚本（如有需要可在此添加）
   </script>
 
 </body>
 </html>
+
