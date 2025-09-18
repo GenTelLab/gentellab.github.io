@@ -474,11 +474,14 @@
     /* 右侧缩略图 */
     .pub-content { flex: 1; padding-right: 16px; }
     .pub-thumb {
-      width: 220px;               /* 右侧图片宽度 */
-      height: 130px;              /* 右侧图片高度 */
+      width: 260px;               /* 右侧图片宽度 */
+      height: auto;               /* 自适应高度，避免裁剪 */
+      max-height: 200px;          /* 控制最大高度以保持卡片美观 */
       border-radius: 8px;
-      object-fit: cover;          /* 裁剪以避免变形 */
+      object-fit: contain;        /* 显示完整图片，不裁剪 */
+      background: #fff;           /* contain 时留白为白色 */
       flex-shrink: 0;             /* 防止被挤压 */
+      align-self: center;         /* 与文字区垂直居中对齐 */
     }
     
     /* 分页控件 */
@@ -572,7 +575,7 @@
       /* 移动端卡片：图片换到下方占满宽度 */
       .publication-item { flex-direction: column; }
       .pub-content { padding-right: 0; }
-      .pub-thumb { width: 100%; height: 180px; margin-top: 10px; }
+      .pub-thumb { width: 100%; height: auto; max-height: 260px; margin-top: 10px; object-fit: contain; }
     }
   </style>
 </head>
@@ -586,7 +589,7 @@
       </a>
       <ul>
         <li><a href="index.html">Home</a></li>    
-        <li><a href="研究方向.html">Research</a></li>          
+        <li><a href="研究方向.html">Research Directions</a></li>          
         <li><a href="publications.html">Publications</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="join_us.html">Join Us</a></li>
@@ -691,7 +694,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/MCP-Guard.png"
       },
       {
         title: "SproutBench: A Benchmark for Safe and Ethical Large Language Models for Youth",
@@ -703,7 +707,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/SproutBench.png"
       },
       {
         title: "HGMF: A Hierarchical Gaussian Mixture Framework for Scalable Tool Invocation within the Model Context Protocol",
@@ -715,7 +720,8 @@
         pdf: "",
         Project_link: "",
         category: "Model evaluation and optimization",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/HGMF.png"
       },
       // 第2页
       {
@@ -728,7 +734,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Jailbreak.png"
       },
       {
         title: "CoDe-NeRF: Neural Rendering via Dynamic Coefficient Decomposition",
@@ -740,7 +747,8 @@
         pdf: "",
         Project_link: "https://arxiv.org/abs/2508.06632",
         category: "Interdisciplinary research",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/CoDe-NeRF.png"
       },
       {
         title: "UW-3DGS: Underwater 3D Reconstruction with Physics-Aware Gaussian Splatting",
@@ -752,7 +760,8 @@
         pdf: "",
         Project_link: "",
         category: "Interdisciplinary research",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/UW-3DGS.png"
       },
       // 第3页
       {
@@ -765,7 +774,8 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/IDCNet.png"
       },
       {
         title: "NCDI-Diffusion: Neural Contextual and Directional Inversion for Novel View Synthesis through Diffusion Models",
@@ -777,7 +787,8 @@
         pdf: "#",
         Project_link: "",
         category: "Interdisciplinary research",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/NCDI-Diffusion.png"
       },
       {
         title: "IDE: A Multi-Agent-Driven Iterative Framework for Dynamic Evaluation of LLMs",
@@ -789,12 +800,13 @@
         pdf: "",
         Project_link: "",
         category: "Multi-Agent Systems",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/IDE.png"
       },
       // 第4页
       {
         title: "Distill To Detect: Amplifying Anomalies in Backdoor Models through Knowledge Distillation",
-        authors: "Chang Hu; Xuyang Teng; Wenpeng Xing; Han Chen; Chenhao Ye; Meng Han.",
+        authors: "Chang Hu; Xuyang Teng; Wenpeng Xing; Han Chen; Chenhao Ye; Meng Han.",
         field: "The model is trustworthy.",
         Publish: "ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
         Cooperating_unit: "Zhejiang University Binhai Research Institute, GenTel.io, Hangzhou Electronic Science and Technology University",
@@ -802,7 +814,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Detect.png"
       },
       {
         title: "Gentel-safe: A unified benchmark and shielding framework for defending against prompt injection attacks",
@@ -814,7 +827,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Gentel-safe.png"
       },
       {
         title: "Towards robust and secure embodied ai: A survey on vulnerabilities and attacks",
@@ -826,7 +840,8 @@
         pdf: "",
         Project_link: "",
         category: "Adversarial Attack and Defense",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/towards.png"
       },
       // 第5页
       {
@@ -839,7 +854,8 @@
         pdf: "",
         Project_link: "https://github.com/JingxuanZhang77/MEraser",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/MEraser.png"
       },
       {
         title: "InSty: A Robust Multi-Level Cross-Granularity Fingerprint Embedding Algorithm for Multi-Turn Dialogue in Large Language Models",
@@ -851,7 +867,8 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/InSty.png"
       },
       {
         title: "CTCC: A Robust and Stealthy Fingerprinting Framework for Large Language Models via Cross-Turn Contextual Correlation Backdoor",
@@ -863,7 +880,8 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/CTCC",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/CTCC.png"
       },
       // 第6页
       {
@@ -876,7 +894,8 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/EverTracer",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/EverTracer.png"
       },
       {
         title: "Unlocking the Effectiveness of LoRA-FP for Seamless Transfer Implantation of Fingerprints in Downstream Models",
@@ -888,7 +907,8 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/LoRA-FP",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/LoRA-FP.png"
       },
       {
         title: "Fingerprint Vector: Enabling Scalable and Efficient Model Fingerprint Transfer via Vector Addition",
@@ -900,7 +920,8 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/Fingerprint-Vector",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Fingerprint-Vector.png"
       },
       // 第7页
       {
@@ -913,7 +934,8 @@
         pdf: "",
         Project_link: "https://github.com/Xuzhenhua55/awesome-llm-copyright-protection",
         category: "System-level security",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Copyright-Protection.png"
       },
       {
         title: "PREE: Towards Harmless and Adaptive Fingerprint Editing in Large Language Models via Knowledge Prefix Enhancement",
@@ -925,7 +947,8 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/PREE.png"
       },
       {
         title: "RAP-SM: Robust Adversarial Prompt via Shadow Models for Copyright Verification of Large Language Models",
@@ -937,7 +960,8 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/RAP-SM.png"
       },
       // 第8页
       {
@@ -950,97 +974,8 @@
         pdf: "",
         Project_link: "",
         category: "Content traceability and detection",
-        image: "主页图片/Slice 100.png"
-      },
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "",
-        category: "#"
-      },
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "",
-        category: "#"
-      },
-      // 第9页
-      {
-        title: "#",
-        authors: "##",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "",
-        category: "#"
-      },
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "",
-        category: "#"
-      },
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "#",
-        category: "#"
-      },
-      // 第10页
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "#",
-        category: "#"
-      },
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "#",
-        category: "#"
-      },
-      {
-        title: "#",
-        authors: "#",
-        field: "#",
-        Publish: "#",
-        Cooperating_unit: "#",
-        Article_link: "#",
-        pdf: "#",
-        Project_link: "#",
-        category: "#"
+        image: "主页图片/Slice 100.png",
+        overall_pipeline: "publications图片/Deepfake.png"
       }
     ];
     
@@ -1188,7 +1123,7 @@
         
         const globalIndex = allPublications.indexOf(pub);
         const fallbackSrc = FALLBACK_THUMBS[(globalIndex >= 0 ? globalIndex : 0) % FALLBACK_THUMBS.length];
-        const imgSrc = pub.image && pub.image !== '' ? pub.image : fallbackSrc;
+        const imgSrc = pub.overall_pipeline && pub.overall_pipeline !== '' ? pub.overall_pipeline : fallbackSrc;
         pubItem.innerHTML = `
           <div class="pub-content">
             <h3 class="pub-title"><a href="${pub.Article_link || '#'}" target="_blank">${pub.title}</a></h3>
@@ -1386,10 +1321,10 @@
         <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
           <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
         </a>
-        <span class="footer-slogan">｜Supporting the Trustworthy Substitution of Human Basic Cognitive Labor</span>
+        <span class="footer-slogan">｜助力人类基础脑力劳动可信替代</span>
       </div>
       
-      <h3 class="footer-title">Contact Us</h3>
+      <h3 class="footer-title">联系我们</h3>
     
       <div class="footer-grid">
         <!-- 左：地址信息 -->
@@ -1397,27 +1332,27 @@
           <!-- 第一行：总部 + 合作邮箱 -->
           <div class="contact-row">
             <div class="contact-left">
-              <p><strong>Headquarter：</strong>Torch Innovation Center,No.239 Jucai Road,Binjiang District,Hangzhou</p>
+              <p><strong>总部：</strong>杭州市滨江区聚才路239号火炬创新中心2号楼17层</p>
             </div>
             <div class="contact-right">
-              <p><strong>Cooperation：</strong>info@gentel.com</p>
+              <p><strong>合作：</strong>info@gentel.com</p>
             </div>
           </div>
           
           <!-- 第二行：分部 + 电话 -->
           <div class="contact-row">
             <div class="contact-left">
-              <p><strong>Division：</strong>No.18 Longyao Road,Xuhui District,Shanghai</p>
+              <p><strong>分部：</strong>上海市徐汇区龙耀路18号X3幢201</p>
             </div>
             <div class="contact-right">
-              <p><strong>Phone：</strong>400-600-2030</p>
+              <p><strong>电话：</strong>400-600-2030</p>
             </div>
           </div>
           
           <!-- 第三行：广州分部 -->
           <div class="contact-row">
             <div class="contact-left">
-              <p style="margin-left: 78px;">No.68 Pazhou Avenue,Haizhu District,Guangzhou</p>
+              <p style="margin-left: 60px;">广州市海珠区琶洲大道68号华新中心18楼</p>
             </div>
             <div class="contact-right">
               <!-- 空白占位 -->
@@ -1430,11 +1365,11 @@
           <div class="footer-qrcode">
             <div class="qrcode-item">
               <div class="qrcode" aria-label="浙大滨江研究院"></div>  
-              <div class="caption">Binjiang Institute of Zhejiang University</div>
+              <div class="caption">浙大滨江研究院</div>
             </div>
             <div class="qrcode-item">
               <div class="qrcode" aria-label="君通未来"></div>   
-              <div class="caption">Gentel</div>
+              <div class="caption">君同未来</div>
             </div>
           </div>
         </div>
@@ -1464,7 +1399,3 @@
   </script>
 </body>
 </html>
-
-
-
-
