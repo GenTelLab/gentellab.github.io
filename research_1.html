@@ -6,21 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-    }
-    
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    main {
-      flex: 1;
-    }
+    body {margin:0; font-family:Arial, sans-serif;}
 
     /* ===== 顶部导航 ===== */
     header {
@@ -103,94 +89,40 @@
 
     /* ===== 底部导航 ===== */
     footer{ background:#2f62ee; color:#fff; }
-    .footer-wrap { max-width:1200px; margin:0 auto; padding:22px 20px 8px; }
+    .footer-wrap { max-width:1200px; margin:0 auto; padding:16px 20px 8px; }
     
-    /* Logo和标语区域 */
-    .footer-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      gap: 12px;
-    }
-    .footer-logo {
-      height: 28px;
-      width: auto;
-      transition: all 0.3s ease;
-    }
     
-    .footer-logo-link {
-      display: inline-block;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 4px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .footer-logo-link:hover {
-      transform: translateY(-2px) scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
-    }
-    
-    .footer-logo-link:hover .footer-logo {
-      filter: brightness(1.1) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
-    }
-    
-    .footer-logo-link:active {
-      transform: translateY(0) scale(1.02);
-    }
-    .footer-slogan {
-      font-size: 15px;
-      font-weight: 500;
-      color: #fff;
-    }
-    
-    .footer-title { font-size:18px; font-weight:700; margin:0 0 12px; }
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:28px;
+      grid-template-columns: 1fr 320px; /* 左：联系信息 右：二维码 */
+      gap:20px;
       align-items: flex-start;
-      padding-bottom:18px;
+      padding-bottom:12px;
       border-bottom:1px solid rgba(255,255,255,.45);
     }
     
     /* 左侧联系信息布局 */
     .footer-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-right {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
     
-    .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    
-    .contact-left {
-      flex: 1;
-    }
-    
+    .contact-item p,
     .contact-left p {
       margin: 0;
-      padding: 0.25rem 0;
-      opacity: 0.95;
-      line-height: 1.4;
-    }
-    
-    .contact-right {
-      flex: 0 0 200px;
-      text-align: left;
-      margin-left: 40px;
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-    
-    .contact-right p {
-      margin: 0;
-      padding: 0.25rem 0;
       opacity: 0.95;
       line-height: 1.4;
     }
@@ -202,7 +134,6 @@
       align-items: flex-start;
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-    .footer-contact{ display:grid; row-gap: 14px; }
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -216,7 +147,7 @@
       align-items: center;
     }
     .qrcode-item .qrcode{
-      width:120px; height:120px; border-radius:8px;
+      width:90px; height:90px; border-radius:8px;
       background:rgba(255,255,255,.65);
       display:block;
     }
@@ -231,22 +162,12 @@
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
 
     @media (max-width: 900px){
-      .footer-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      .footer-grid{ grid-template-columns: 1fr; gap:18px; }
+      .footer-grid{ grid-template-columns: 1fr; gap:12px; }
       
       /* 移动端联系信息调整 */
-      .contact-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .contact-right {
-        margin-left: 0;
-        text-align: left;
+      .footer-contact {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
       
       .footer-right {
@@ -266,9 +187,9 @@
   <!-- ===== 全局导航 ===== -->
   <header>
     <nav>
-      <a href="https://gentel.com/zh/home" target="_blank" rel="noopener">
+      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
         <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
-      </a>
+      <!-- </a> -->
       <ul>
         <li><a href="index.html">Home</a></li>    
         <li><a href="研究方向.html">Research</a></li>          
@@ -287,89 +208,63 @@
     </div>
   </section>
 
+  <!-- ===== 页面主体内容 ===== -->
   <main>
     <h2>Model Fingerprinting for Copyright Protection</h2>
     <p>As large language models (LLMs) become increasingly widespread, protecting their intellectual property has emerged as a critical concern. Unlike text watermarking, which only traces generated outputs, model fingerprinting secures the model itself by embedding or extracting unique, verifiable signatures. These fingerprints enable ownership attribution and misuse detection, even if the model is leaked or redistributed. Our research explores two complementary approaches: intrinsic fingerprinting, which derives signatures from inherent model properties, and invasive fingerprinting, which embeds externally defined signals into model weights or behaviors. By evaluating these methods across dimensions such as robustness, stealthiness, and reliability, we aim to provide systematic solutions for verifying model provenance and strengthening copyright protection in the era of LLMs.</p>
   </main>
 
   <!-- ===== 底部导航 ===== -->
-  <footer>
-    <div class="footer-wrap">
-      <!-- Logo和标语区域 -->
-      <div class="footer-header">
-        <a href="https://gentel.com/zh/home" target="_blank" rel="noopener" class="footer-logo-link">
-          <img src="主页图片/logo.png" alt="君同未来" class="footer-logo">
-        </a>
-        <span class="footer-slogan">｜Supporting the Trustworthy Substitution of Human Basic Cognitive Labor</span>
-      </div>
-      
-      <h3 class="footer-title">Contact Us</h3>
-    
-      <div class="footer-grid">
-        <!-- 左：地址信息 -->
-        <div class="footer-contact">
-          <!-- 第一行：总部 + 合作邮箱 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Headquarter：</strong>Torch Innovation Center,No.239 Jucai Road,Binjiang District,Hangzhou</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>Cooperation：</strong>info@gentel.com</p>
-            </div>
+<footer>
+  <div class="footer-wrap">
+  
+    <div class="footer-grid">
+      <!-- 左：联系信息 -->
+      <div class="footer-contact">
+        <div class="contact-left">
+          <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
+        </div>
+        <div class="contact-right">
+          <div class="contact-item">
+            <p><strong>Email：</strong>info@gentel.com</p>
           </div>
-          
-          <!-- 第二行：分部 + 电话 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p><strong>Division：</strong>No.18 Longyao Road,Xuhui District,Shanghai</p>
-            </div>
-            <div class="contact-right">
-              <p><strong>Phone：</strong>400-600-2030</p>
-            </div>
-          </div>
-          
-          <!-- 第三行：广州分部 -->
-          <div class="contact-row">
-            <div class="contact-left">
-              <p style="margin-left: 78px;">No.68 Pazhou Avenue,Haizhu District,Guangzhou</p>
-            </div>
-            <div class="contact-right">
-              <!-- 空白占位 -->
-            </div>
+          <div class="contact-item">
+            <p><strong>Phone：</strong>400-600-2030</p>
           </div>
         </div>
-    
-        <!-- 右：二维码 -->
-        <div class="footer-right">
-          <div class="footer-qrcode">
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="浙大滨江研究院"></div>  
-              <div class="caption">Binjiang Institute of Zhejiang University</div>
-            </div>
-            <div class="qrcode-item">
-              <div class="qrcode" aria-label="君通未来"></div>   
-              <div class="caption">Gentel</div>
-            </div>
+      </div>
+  
+      <!-- 右：二维码 -->
+      <div class="footer-right">
+        <div class="footer-qrcode">
+          <div class="qrcode-item">
+            <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
+            <div class="caption">Binjiang Institute of Zhejiang University</div>
+          </div>
+          <div class="qrcode-item">
+            <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
+            <div class="caption">Gentel</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="legal-left">
-        <span>© Hangzhou Gentel Technology Co., Ltd</span>
+  </div>
+  <div class="footer-bottom">
+        <div class="legal-left">
+      <span>© Hangzhou Gentel Technology Co., Ltd</span>
+      <span class="sep">|</span>
+      <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
-        <span>浙ICP备2021034072号</span>
+      <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
+      <span>浙公网安备33010802013572号</span>
+        </div>
+        <div class="legal-right">
+      <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
-        <span>浙公网安备33010802013572号</span>
-      </div>
-      <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>  
-        <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>    
-      </div>
+      <a href="/privacy.html">Privacy Policy</a>     
+        </div>
     </div>
-  </footer>
+    </footer>
 
 </body>
 </html>
