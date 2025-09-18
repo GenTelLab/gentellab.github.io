@@ -428,7 +428,7 @@
       <button class="content-category-tab active" data-category="Faculty">Faculty</button>
       <button class="content-category-tab" data-category="Student">Student</button>
       <button class="content-category-tab" data-category="Alumni">Alumni</button>
-      <button class="content-category-tab" data-category="Coordinator">Coordinator</button>
+      <button class="content-category-tab" data-category="Collaborator">Collaborator</button>
     </div>
     
     <!-- Faculty内容 -->
@@ -461,12 +461,12 @@
       </div>
     </div>
     
-    <!-- Coordinator内容 -->
-    <div class="category-content" id="Coordinator-content">
-      <div class="team-grid" id="Coordinator-grid">
-        <!-- Coordinator卡片将通过JavaScript动态生成 -->
+    <!-- Collaborator内容 -->
+    <div class="category-content" id="Collaborator-content">
+      <div class="team-grid" id="Collaborator-grid">
+        <!-- Collaborator卡片将通过JavaScript动态生成 -->
       </div>
-      <div class="pagination" id="Coordinator-pagination">
+      <div class="pagination" id="Collaborator-pagination">
         <!-- 分页将通过JavaScript动态生成 -->
       </div>
     </div>
@@ -531,7 +531,7 @@
       Collaborator: [
         {
           id: 1,
-          name: 'Jianfeng Dong',
+          name: 'Dong Wang',
           position: 'Research Professor at Zhejiang Gongshang University',
           department: '',
           email: ' dongjf24@gmail.com',
@@ -539,7 +539,7 @@
         },
         {
           id: 2,
-          name: 'Jiahui Yu,
+          name: 'Wen Li',
           position: 'Researher at Binjiang Institute of Zhejiang University',
           department: '',
           email: '',
@@ -844,7 +844,7 @@
 
     // 当前页面状态
     let currentPage = {
-      Coordinator: 1,
+      Collaborator: 1,
       Faculty: 1,
       Student: 1,
       Alumni: 1
@@ -986,13 +986,13 @@
     // 获取URL参数中的页面状态
     function getPageStates() {
       const params = new URLSearchParams(window.location.search);
-      const coordinatorPage = parseInt(params.get('coordinatorPage')) || 1;
+      const collaboratorPage = parseInt(params.get('collaboratorPage')) || 1;
       const facultyPage = parseInt(params.get('facultyPage')) || 1;
       const studentPage = parseInt(params.get('studentPage')) || 1;
       const alumniPage = parseInt(params.get('alumniPage')) || 1;
       
       return {
-        Coordinator: coordinatorPage,
+        Collaborator: collaboratorPage,
         Faculty: facultyPage,
         Student: studentPage,
         Alumni: alumniPage
@@ -1039,7 +1039,7 @@
       renderTeamContent('Faculty');
       renderTeamContent('Student');
       renderTeamContent('Alumni');
-      renderTeamContent('Coordinator');
+      renderTeamContent('Collaborator');
       
       // 获取页面状态并应用
       const pageStates = getPageStates();
