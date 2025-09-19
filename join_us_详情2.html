@@ -21,6 +21,21 @@
     main {
       flex: 1;
     }
+    
+    .content-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.7;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .content-section h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
 
     /* ===== 顶部导航 ===== */
     header {
@@ -70,7 +85,7 @@
     
     .footer-grid{
       display:grid;
-      grid-template-columns: 1fr 320px;
+      grid-template-columns: 1fr 320px; /* 左：联系信息 右：二维码 */
       gap:20px;
       align-items: flex-start;
       padding-bottom:12px;
@@ -110,7 +125,6 @@
       align-items: flex-start;
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
-    .footer-contact{ display:grid; row-gap: 14px; }
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -160,10 +174,10 @@
 
     /* ===== 横幅区域 ===== */
     .hero {
-      height: 540px;
-      background-image: url('主页图片/join_us@2x.png');
+      height: 420px;
+      background-image: url('主页图片/Slice 102@2x.png');
       background-repeat: no-repeat;
-      background-position: center top;
+      background-position: center -50px;
       background-size: cover;
       position: relative;
       display: flex;
@@ -181,120 +195,6 @@
     }
     .hero-content h1 {margin:0; font-size:32px; line-height: 1;}
     .hero-content p {margin:8px 0 0;}
-
-    /* ===== 详情页面内容 ===== */
-    .job-detail-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #2563eb;
-      text-decoration: none;
-      font-size: 16px;
-      margin-bottom: 30px;
-      transition: color 0.3s ease;
-    }
-
-    .back-link:hover {
-      color: #1d4ed8;
-    }
-
-    .back-link::before {
-      content: '‹';
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .job-detail-content {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 40px;
-    }
-
-    .job-title {
-      font-size: 28px;
-      font-weight: bold;
-      color: #1f2937;
-      margin: 0 0 30px 0;
-      text-align: center;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 20px;
-    }
-
-    .job-section {
-      margin-bottom: 30px;
-    }
-
-    .job-section h3 {
-      font-size: 20px;
-      font-weight: bold;
-      color: #374151;
-      margin: 0 0 15px 0;
-      border-left: 4px solid #2563eb;
-      padding-left: 15px;
-    }
-
-    .job-section p {
-      color: #6b7280;
-      line-height: 1.6;
-      margin: 0 0 10px 0;
-    }
-
-    .job-section ul {
-      color: #6b7280;
-      line-height: 1.6;
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    .job-section li {
-      margin-bottom: 8px;
-    }
-
-    .highlight-text {
-      color: #2563eb;
-      font-weight: 600;
-    }
-
-    .contact-info {
-      background: #f9fafb;
-      border-radius: 8px;
-      padding: 20px;
-      border-left: 4px solid #2563eb;
-    }
-
-    .contact-info h3 {
-      color: #374151;
-      border-left: 4px solid #2563eb;
-    }
-
-
-    /* 响应式设计 */
-    @media (max-width: 768px) {
-      .job-detail-content {
-        padding: 30px 20px;
-      }
-
-      .job-title {
-        font-size: 24px;
-      }
-
-      .job-section h3 {
-        font-size: 18px;
-      }
-
-      .language-switcher {
-        position: static;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
-    }
   </style>
 </head>
 <body>
@@ -324,119 +224,64 @@
     </div>
   </section>
 
-  <!-- ===== 职位详情内容 ===== -->
-  <div class="job-detail-container">
-    <a href="join_us.html" class="back-link">Back</a>
-    
-    <div class="job-detail-content">
-      <h1 class="job-title">Online Research Internship Position</h1>
-      
-      <div class="job-section">
-        <h3>Position Information</h3>
-        <ul>
-          <li><span class="highlight-text">Position:</span> Online Research Intern</li>
-          <li><span class="highlight-text">Number of Positions:</span> Multiple</li>
-          <li><span class="highlight-text">Research Areas:</span> Medical Image Processing, Medical Information Science, Embodied Intelligence, Computer Vision, Large Model Attack & Defense, Neural Radiance Fields, Large Model Fingerprinting, Model Protocol Security, etc.</li>
-        </ul>
-      </div>
+  <!-- ===== 页面主体内容区域 ===== -->
+  <div class="content-section">
+    <h1></h1>
+    <p></p>
+  </div>
+  </main>
 
-      <div class="job-section">
-        <h3>Job Description</h3>
-        <ul>
-          <li>Attend weekly group meetings, report research progress and submit weekly reports.</li>
-          <li>Complete assigned research tasks, including paper reviews and related work.</li>
-          <li>Write research papers and submit to high-level conferences or journals.</li>
-        </ul>
+  <!-- ===== 底部导航 ===== -->
+<footer>
+  <div class="footer-wrap">
+  
+    <div class="footer-grid">
+      <!-- 左：联系信息 -->
+      <div class="footer-contact">
+        <div class="contact-left">
+          <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
+        </div>
+        <div class="contact-right">
+          <div class="contact-item">
+            <p><strong>Email：</strong>info@gentel.com</p>
+          </div>
+          <div class="contact-item">
+            <p><strong>Phone：</strong>400-600-2030</p>
+          </div>
+        </div>
       </div>
-
-      <div class="job-section">
-        <h3>Requirements</h3>
-        <ul>
-          <li><span class="highlight-text">Academic Background:</span> Computer Science and Technology, Software Engineering, or related fields.</li>
-          <li><span class="highlight-text">Technical Skills:</span> Familiar with machine learning frameworks such as PyTorch.</li>
-          <li><span class="highlight-text">Research Enthusiasm:</span> Strong interest in research and willingness to invest time.</li>
-          <li><span class="highlight-text">Education:</span> Senior undergraduate or graduate students, internship duration of at least 6 months.</li>
-          <li><span class="highlight-text">Research Areas (meet any one):</span>
-            <ul style="margin-top: 10px;">
-              <li><strong>Large Model Attack & Defense:</strong> Understanding of large model jailbreaking and defense.</li>
-              <li><strong>Neural Radiance Fields:</strong> Ability to read and understand Neural Radiance Fields related code.</li>
-              <li><strong>Large Model Fingerprinting:</strong> Experience in large model fine-tuning.</li>
-              <li><strong>Embodied Intelligence:</strong> Experience in adversarial attacks, model backdoors, vision large models, or large language models.</li>
-              <li><strong>Model Protocol Security:</strong> Familiar with security analysis and protection mechanisms of large model communication protocols.</li>
-              <li><strong>Medical Information & Image Processing:</strong> Experience in medical image processing (segmentation, classification, reconstruction) or medical information analysis (electronic health records, privacy protection).</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div class="job-section contact-info">
-        <h3>Benefits & Development</h3>
-        <ul>
-          <li><span class="highlight-text">Internship Certificate:</span> Internship certificate and recommendation letter provided for internships over 6 months.</li>
-          <li><span class="highlight-text">Growth Opportunities:</span> Collaborate with top teams, explore cutting-edge fields; outstanding candidates will be prioritized for top graduate programs and assisted in publishing CCF-A/B or high-level SCI papers.</li>
-          <li><span class="highlight-text">Performance Rewards:</span> Rewards based on contributions.</li>
-          <li><span class="highlight-text">Other Benefits:</span> Flexible online internship, excellent research guidance and international exchange opportunities.</li>
-        </ul>
-        <p style="margin-top: 20px; font-style: italic;">We look forward to your participation in exploring the infinite possibilities of research! For any questions, please feel free to contact us.</p>
+  
+      <!-- 右：二维码 -->
+      <div class="footer-right">
+        <div class="footer-qrcode">
+          <div class="qrcode-item">
+            <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
+            <div class="caption">Binjiang Institute of Zhejiang University</div>
+          </div>
+          <div class="qrcode-item">
+            <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
+            <div class="caption">Gentel</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- ===== 底部导航 ===== -->
-  <footer>
-    <div class="footer-wrap">
-    
-      <div class="footer-grid">
-        <!-- 左：联系信息 -->
-        <div class="footer-contact">
-          <div class="contact-left">
-            <p><strong>Address：</strong>Torch Innovation Center,Binjiang District,Hangzhou</p>
-          </div>
-          <div class="contact-right">
-            <div class="contact-item">
-              <p><strong>Email：</strong>info@gentel.com</p>
-            </div>
-            <div class="contact-item">
-              <p><strong>Phone：</strong>400-600-2030</p>
-            </div>
-          </div>
-        </div>
-    
-        <!-- 右：二维码 -->
-        <div class="footer-right">
-          <div class="footer-qrcode">
-            <div class="qrcode-item">
-              <img src="主页图片/浙大.png" alt="浙大滨江研究院" class="qrcode">  
-              <div class="caption">Binjiang Institute of Zhejiang University</div>
-            </div>
-            <div class="qrcode-item">
-              <img src="主页图片/gentel二维码.png" alt="君通未来" class="qrcode">   
-              <div class="caption">Gentel</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="legal-left">
-        <span>© Hangzhou Gentel Technology Co., Ltd</span>
-        <!-- <span class="sep">|</span>
-        <span>浙ICP备2021034072号</span>
+  <div class="footer-bottom">
+        <div class="legal-left">
+      <span>© Hangzhou Gentel Technology Co., Ltd</span>
+      <span class="sep">|</span>
+      <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
-        <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
-        <span>浙公网安备33010802013572号</span> -->
-      </div>
-      <div class="legal-right">
-        <a href="/legal.html">Legal Statement</a>   
+      <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
+      <span>浙公网安备33010802013572号</span>
+        </div>
+        <div class="legal-right">
+      <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-        <a href="/privacy.html">Privacy Policy</a>     
-      </div>
+      <a href="/privacy.html">Privacy Policy</a>     
+        </div>
     </div>
-  </footer>
-
-  <script>
-    // 页面脚本（如有需要可在此添加）
-  </script>
+    </footer>
 
 </body>
 </html>
