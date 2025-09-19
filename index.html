@@ -218,100 +218,135 @@
     }
   
     /* 研究方向卡片区域 */
-    .section.research { padding: 36px 20px; }
-    .research .card-row{
-      max-width: 1200px; margin: 20px auto;
-      display: grid; gap: 28px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* 研究区域容器 */
+    .section.research {
+      padding: 46px 20px;
+      text-align: center;
     }
-    .research .card{
-      display: flex; flex-direction: column;
-      background: #fff; border-radius: 16px; overflow: hidden;
-      text-decoration: none;
-      box-shadow: 0 10px 24px rgba(0,0,0,.08);
-      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .section.research h2 {
+      font-size: 36px;
+      margin: 0 0 20px;
+    }
+
+    /* 网格行容器 - 控制每行3列 */
+    .research .card-row {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* 卡片基础样式 */
+    .research .card {
       position: relative;
+      display: block;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 245px;
     }
-    .research .card:hover{ 
-      transform: translateY(-8px) scale(1.02); 
-      box-shadow: 0 25px 50px rgba(0,0,0,.15); 
+
+    .research .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     }
-    .research .card:focus-visible{ outline: 2px solid #2563eb; outline-offset: 3px; }
-    
-    /* 添加悬停时的边框光效 */
-    .research .card::before {
+
+    /* 图片区域 */
+    .research .card-img {
+      aspect-ratio: 16/9;
+      background: #f3f4f6;
+    }
+
+    .research .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .research .card:hover .card-img img {
+      transform: scale(1.05);
+    }
+
+    /* 白色背景遮罩层 —— 悬停时展开 */
+    .research .card-caption::before {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      border-radius: 16px;
-      padding: 2px;
-      background: linear-gradient(45deg, #2563eb, #3b82f6, #60a5fa, #2563eb);
-      background-size: 300% 300%;
-      opacity: 0;
-      transition: opacity .3s ease;
+      height: 30px;
+      background: white;
+      border-top: 1px solid #f1f3f5;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: -1;
     }
-    
-    .research .card:hover::before {
-      opacity: 1;
-      animation: gradient-border 2s ease infinite;
+
+    .research .card:hover .card-caption,
+    .research .card:hover .card-caption::before {
+      transform: translateY(-67px) scale(1.01);
     }
-    
-    @keyframes gradient-border {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    .research .card:hover .card-caption::before {
+      height: 50px;
     }
-    .research .card-img{ aspect-ratio: 16/9; background:#f3f4f6; }
-    .research .card-img img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .research .card-caption{
-      text-align:center; padding:16px 12px;
-      font-weight:700; color:#525861; background:#fff; border-top: 1px solid #f1f3f5;
-      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    
+
+    /* 标题：始终可见 */
     .research .card-title {
-      transition: color .4s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 16px;
-      margin-bottom: 0;
+      font-weight: 700;
+      color: #525861;
+      margin: 12px 0 8px 0;
+      line-height: 1.4;
     }
-    
+
+    /* 描述：默认隐藏 */
     .research .card-description {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
       font-size: 14px;
       font-weight: 400;
-      line-height: 1.6;
       color: #6b7280;
-      margin-top: 0;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
-      text-align: left;
+      line-height: 1.6;
+      margin: 0;
       padding: 0 4px;
-      transform: translateY(-10px);
+      text-align: left;
+      background: white;
+
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease-out;
     }
-    
-    .research .card:hover .card-caption {
-      transform: translateY(-2px);
-      padding-bottom: 24px;
-    }
-    
-    .research .card:hover .card-title {
-      color: #2563eb;
-      margin-bottom: 8px;
-    }
-    
+
     .research .card:hover .card-description {
       opacity: 1;
-      max-height: 120px;
-      margin-top: 12px;
       transform: translateY(0);
     }
+
+    /* === 动态光条：反映悬停时间 === */
+    .research .card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+      z-index: 11;
+      border-radius: 0 0 16px 16px;
+      /* 关键：不设 transition，由 JS 控制实时变化 */
+    }
+    
+  
   
     /* ===== 科研成果（2列×2行） ===== */
     .section.pub { padding: 36px 20px; }
@@ -591,7 +626,7 @@
   <section class="hero">
     <!-- 轮播背景容器 -->
     <div class="hero-carousel">
-      <div class="hero-slide active" style="background-position: top 30% center;"></div>
+      <div class="hero-slide active"></div>
       <div class="hero-slide"></div>
     </div>
     <!-- 标题内容保持不变 -->
@@ -603,11 +638,11 @@
   
   <!-- ===== 背景图下方正文 ===== -->
   <section class="section research">
-     <h2 style="text-align:center; font-size:36px; margin:0 0 20px;">RESEARCH SPOTLIGHTS</h2>
+     <h2> RESEARCH SPOTLIGHTS</h2>
   
     <div class="card-row">
       <!-- 卡片1：文本水印与模型指纹 -->
-      <a class="card" href="research_1.html">
+      <a class="card" href="https://xuzhenhua55.github.io/awesome-llm-copyright-protection/index.html">
         <div class="card-img">
           <img src="主页图片/Slice 101@2x.png" alt="文本水印与模型指纹">
         </div>
@@ -655,7 +690,7 @@
     <div class="pub-row">
   
       <!-- 卡片 1 -->
-      <article class="card"> 
+      <article class="card" data-href="https://arxiv.org/abs/2506.12551" tabindex="0" role="link" aria-label="查看 MEraser 详情"> 
         
         <h3 class="title">MEraser: An Effective Fingerprint Erasure Approach for Large Language Models</h3>
         <div class="meta">ACL2025Main</div>
@@ -663,7 +698,7 @@
       </article>
   
       <!-- 卡片 2 -->
-      <article class="card">
+      <article class="card" data-href="https://www.sciengine.com/SSI/doi/10.1360/SSI-2025-0022" tabindex="0" role="link" aria-label="查看 InSty 详情">
        
         <h3 class="title">InSty: A Robust Multi-Level Cross-Granularity Fingerprint Embedding Algorithm for Multi-Turn Dialogue in Large Language Models</h3>
         <div class="meta">ACL2025Main</div>
@@ -671,7 +706,7 @@
       </article>
   
       <!-- 卡片 3 -->
-      <article class="card">
+      <article class="card" data-href="https://arxiv.org/html/2509.09703v1" tabindex="0" role="link" aria-label="查看 CTCC 详情">
         
         <h3 class="title">CTCC: A Robust and Stealthy Fingerprinting Framework for Large Language Models via Cross-Turn Contextual Correlation Backdoor</h3>
         <div class="meta">ACL2025Main</div>
@@ -679,7 +714,7 @@
       </article>
   
       <!-- 卡片 4 -->
-      <article class="card">
+      <article class="card" data-href="https://arxiv.org/abs/2509.00820" tabindex="0" role="link" aria-label="查看 LoRA-FP 详情">
         
         <h3 class="title">Unlocking the Effectiveness of LoRA-FP for Seamless Transfer Implantation of Fingerprints in Downstream Models</h3>
         <div class="meta">ACL2025Main</div>
@@ -735,11 +770,11 @@
   <div class="footer-bottom">
         <div class="legal-left">
       <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
-      <!-- <span class="sep">|</span> -->
-      <!-- <span>浙ICP备2021034072号</span>
+      <span class="sep">|</span>
+      <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
       <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
-      <span>浙公网安备33010802013572号</span> -->
+      <span>浙公网安备33010802013572号</span>
         </div>
         <div class="legal-right">
       <a href="/legal.html">Legal Statement</a>  
@@ -751,7 +786,21 @@
 
   <!-- JS -->
   <script>
-    // PDF链接跳转功能已通过HTML中的<a>标签实现，无需额外JavaScript
+    // 整卡跳转（不影响右下角 PDF 的单独点击）
+    document.querySelectorAll('.pub .card[data-href]').forEach(card => {
+      card.addEventListener('click', e => {
+        // 如果点到的是 PDF 链接，则不拦截
+        if (e.target.closest('.pdf')) return;
+        window.location.href = card.dataset.href;
+      });
+      // 键盘可达性：Enter/Space 触发
+      card.addEventListener('keydown', e => {
+        if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.pdf')) {
+          e.preventDefault();
+          window.location.href = card.dataset.href;
+        }
+      });
+    });
 
     // 横幅背景自动轮播功能
     document.addEventListener('DOMContentLoaded', function() {
@@ -774,5 +823,54 @@
     });
      
   </script>
+
+<script>
+  // 设置最大悬停时间（决定光条满宽所需时间）
+  const MAX_DURATION = 2000; // 4秒充满
+  
+  document.querySelectorAll('.research .card').forEach(card => {
+    let startTime = null;
+    let timer = null;
+  
+    card.addEventListener('mouseenter', () => {
+      startTime = Date.now();
+  
+      // 启动定时器，每 60ms 更新一次光条宽度
+      timer = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / MAX_DURATION, 1); // 限制在 [0,1]
+        card.style.setProperty('--hover-progress', `${progress * 100}%`);
+      }, 60);
+    });
+  
+    card.addEventListener('mouseleave', () => {
+      if (timer) clearInterval(timer);
+  
+      const totalTime = Date.now() - startTime;
+      console.log(`卡片悬停时间: ${totalTime}ms (${(totalTime/1000).toFixed(1)}s)`);
+  
+      // 可选：发送埋点数据
+      // analytics.track('card_hover_duration', { duration: totalTime });
+  
+      // 恢复光条
+      setTimeout(() => {
+        card.style.setProperty('--hover-progress', `0%`);
+      }, 100);
+    });
+  
+    // 初始设置
+    card.style.setProperty('--hover-progress', '0%');
+  });
+  
+  // 应用 CSS 中使用变量控制宽度
+  document.head.insertAdjacentHTML('beforeend', `
+    <style>
+      .research .card::after {
+        width: var(--hover-progress);
+      }
+    </style>
+  `);
+  </script>
+  
 </body>
 </html>
