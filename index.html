@@ -655,7 +655,7 @@
     <div class="pub-row">
   
       <!-- 卡片 1 -->
-      <article class="card" data-href="https://arxiv.org/abs/2506.12551" tabindex="0" role="link" aria-label="查看 MEraser 详情"> 
+      <article class="card"> 
         
         <h3 class="title">MEraser: An Effective Fingerprint Erasure Approach for Large Language Models</h3>
         <div class="meta">ACL2025Main</div>
@@ -663,7 +663,7 @@
       </article>
   
       <!-- 卡片 2 -->
-      <article class="card" data-href="https://www.sciengine.com/SSI/doi/10.1360/SSI-2025-0022" tabindex="0" role="link" aria-label="查看 InSty 详情">
+      <article class="card">
        
         <h3 class="title">InSty: A Robust Multi-Level Cross-Granularity Fingerprint Embedding Algorithm for Multi-Turn Dialogue in Large Language Models</h3>
         <div class="meta">ACL2025Main</div>
@@ -671,7 +671,7 @@
       </article>
   
       <!-- 卡片 3 -->
-      <article class="card" data-href="https://arxiv.org/html/2509.09703v1" tabindex="0" role="link" aria-label="查看 CTCC 详情">
+      <article class="card">
         
         <h3 class="title">CTCC: A Robust and Stealthy Fingerprinting Framework for Large Language Models via Cross-Turn Contextual Correlation Backdoor</h3>
         <div class="meta">ACL2025Main</div>
@@ -679,7 +679,7 @@
       </article>
   
       <!-- 卡片 4 -->
-      <article class="card" data-href="https://arxiv.org/abs/2509.00820" tabindex="0" role="link" aria-label="查看 LoRA-FP 详情">
+      <article class="card">
         
         <h3 class="title">Unlocking the Effectiveness of LoRA-FP for Seamless Transfer Implantation of Fingerprints in Downstream Models</h3>
         <div class="meta">ACL2025Main</div>
@@ -751,21 +751,7 @@
 
   <!-- JS -->
   <script>
-    // 整卡跳转（不影响右下角 PDF 的单独点击）
-    document.querySelectorAll('.pub .card[data-href]').forEach(card => {
-      card.addEventListener('click', e => {
-        // 如果点到的是 PDF 链接，则不拦截
-        if (e.target.closest('.pdf')) return;
-        window.location.href = card.dataset.href;
-      });
-      // 键盘可达性：Enter/Space 触发
-      card.addEventListener('keydown', e => {
-        if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.pdf')) {
-          e.preventDefault();
-          window.location.href = card.dataset.href;
-        }
-      });
-    });
+    // PDF链接跳转功能已通过HTML中的<a>标签实现，无需额外JavaScript
 
     // 横幅背景自动轮播功能
     document.addEventListener('DOMContentLoaded', function() {
