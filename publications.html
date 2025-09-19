@@ -222,6 +222,9 @@
       border-radius: 0;
       padding: 0; /* 由内部面板自己留白 */
       box-shadow: none; /* 去掉外层阴影 */
+      position: sticky; /* 使左侧栏在视口内固定相对位置 */
+      top: 0; /* 紧贴容器顶部，跟第一页一致 */
+      align-self: flex-start; /* 避免受等高影响 */
     }
     
     .search-box {
@@ -334,6 +337,7 @@
       transition: transform 0.2s, box-shadow 0.2s;
       display: flex;               /* 使文字与右侧图片并排 */
       align-items: flex-start;
+      overflow: hidden;            /* 固定高度后隐藏溢出，保持卡片统一尺寸 */
     }
     
     .publication-item:hover,
@@ -617,6 +621,7 @@
     // 配置参数
     const ITEMS_PER_PAGE = 5; // 每页显示5个文献
     const TOTAL_PAGES = 10;   // 总共10页
+    let STANDARD_CARD_HEIGHT = null; // 首次渲染的标准卡片高度，后续分页保持一致
     
     // 完整的30篇文献数据（10页 × 3篇/页）
     const allPublications = [
@@ -1090,8 +1095,11 @@
         container.appendChild(pubItem);
       });
 
-      // 渲染完成后调整左侧搜索栏高度与前5条文献等高
-      setTimeout(adjustSidebarHeight, 0);
+      // 渲染完成后先进行卡片等高，再调整左侧搜索栏高度
+      setTimeout(() => {
+        equalizeCardHeights();
+        adjustSidebarHeight();
+      }, 0);
     }
     
     // 渲染分页控件
@@ -1141,37 +1149,73 @@
           currentPage++;
           renderPublications(currentPage);
           renderPagination();
+          equalizeCardHeights();
           adjustSidebarHeight();
         }
       };
     }
 
-    // 同步左侧栏高度，并为右侧文献区在不足5条时设置最小高度，保持分页/底部位置稳定
-    function adjustSidebarHeight() {
-      const sidebar = document.querySelector('.sidebar');
+    // 让当前页所有卡片等高，避免换页高度跳动；首页高度作为标准高度
+    function equalizeCardHeights() {
       const list = document.getElementById('publications-list');
-      if (!sidebar || !list) return;
+      if (!list) return;
+      const items = Array.from(list.querySelectorAll('.publication-item'));
+      if (items.length === 0) return;
+      // 先清除高度以获得自然高度
+      items.forEach(el => {
+        el.style.height = 'auto';
+      });
+      // 计算最大高度
+      let maxH = 0;
+      items.forEach(el => {
+        maxH = Math.max(maxH, el.offsetHeight);
+      });
+      // 如果标准高度尚未确定，则以首个页面渲染后的最大高度作为标准
+      if (STANDARD_CARD_HEIGHT == null) {
+        STANDARD_CARD_HEIGHT = maxH;
+      }
+      const useHeight = STANDARD_CARD_HEIGHT || maxH;
+      // 统一设置为标准高度
+      items.forEach(el => {
+        el.style.height = useHeight + 'px';
+      });
+    }
+
+    // 为右侧文献区在不足5条时设置最小高度，保持分页/底部位置稳定（不再调整左侧栏高度）
+    function adjustSidebarHeight() {
+      const list = document.getElementById('publications-list');
+      if (!list) return;
       const items = Array.from(list.querySelectorAll('.publication-item'));
       if (items.length === 0) {
-        sidebar.style.height = 'auto';
         list.style.minHeight = '0px';
         return;
       }
-      // 计算前5条的真实总高度
-      const consider = items.slice(0, 5);
       let total = 0;
-      consider.forEach((el, idx) => {
-        const styles = window.getComputedStyle(el);
-        const mb = parseFloat(styles.marginBottom) || 0;
-        total += el.offsetHeight + (idx < consider.length - 1 ? mb : 0);
-      });
-      // 若不足5条，使用当前卡片的平均高度估算5条的高度，确保布局与5条时一致
-      if (items.length < 5) {
-        const avg = total / items.length;
-        total = avg * 5;
+      if (STANDARD_CARD_HEIGHT != null) {
+        // 使用标准高度，保证与第一页一致
+        const styles = items[0] ? window.getComputedStyle(items[0]) : null;
+        const mb = styles ? (parseFloat(styles.marginBottom) || 0) : 0;
+        const cardWithMargin = STANDARD_CARD_HEIGHT + mb;
+        const count = Math.min(5, items.length);
+        total = cardWithMargin * count - mb; // 累积前 count 个卡片高度
+        if (items.length < 5) {
+          total = cardWithMargin * 5 - mb; // 不足5条也按5条计算
+        }
+      } else {
+        // 回退：计算前5条的真实总高度
+        const consider = items.slice(0, 5);
+        consider.forEach((el, idx) => {
+          const styles = window.getComputedStyle(el);
+          const mb = parseFloat(styles.marginBottom) || 0;
+          total += el.offsetHeight + (idx < consider.length - 1 ? mb : 0);
+        });
+        // 若不足5条，使用当前卡片的平均高度估算5条的高度
+        if (items.length < 5 && consider.length > 0) {
+          const avg = total / consider.length;
+          total = avg * 5;
+        }
       }
-      // 设置左侧栏高度与右侧区最小高度
-      sidebar.style.height = total + 'px';
+      // 设置右侧区最小高度
       list.style.minHeight = Math.ceil(total) + 'px';
     }
 
@@ -1226,6 +1270,9 @@
       filteredPublications = allPublications;
       renderPublications(currentPage);
       renderPagination();
+      equalizeCardHeights();
+      adjustSidebarHeight();
+      equalizeCardHeights();
       adjustSidebarHeight();
       
       // 搜索功能
@@ -1262,6 +1309,7 @@
 
     // 窗口尺寸变化时，重新匹配高度
     window.addEventListener('resize', () => {
+      equalizeCardHeights();
       adjustSidebarHeight();
     });
   </script>
