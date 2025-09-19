@@ -1144,7 +1144,7 @@
       };
     }
 
-    // 使左侧搜索部分高度与右侧前5条文献总高度齐平
+    // 同步左侧栏高度，并为右侧文献区在不足5条时设置最小高度，保持分页/底部位置稳定
     function adjustSidebarHeight() {
       const sidebar = document.querySelector('.sidebar');
       const list = document.getElementById('publications-list');
@@ -1152,8 +1152,10 @@
       const items = Array.from(list.querySelectorAll('.publication-item'));
       if (items.length === 0) {
         sidebar.style.height = 'auto';
+        list.style.minHeight = '0px';
         return;
       }
+      // 计算前5条的真实总高度
       const consider = items.slice(0, 5);
       let total = 0;
       consider.forEach((el, idx) => {
@@ -1161,7 +1163,14 @@
         const mb = parseFloat(styles.marginBottom) || 0;
         total += el.offsetHeight + (idx < consider.length - 1 ? mb : 0);
       });
+      // 若不足5条，使用当前卡片的平均高度估算5条的高度，确保布局与5条时一致
+      if (items.length < 5) {
+        const avg = total / items.length;
+        total = avg * 5;
+      }
+      // 设置左侧栏高度与右侧区最小高度
       sidebar.style.height = total + 'px';
+      list.style.minHeight = Math.ceil(total) + 'px';
     }
 
     // 应用筛选和搜索
