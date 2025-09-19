@@ -336,9 +336,11 @@
       align-items: flex-start;
     }
     
-    .publication-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    .publication-item:hover,
+    .publication-item:active,
+    .publication-item:focus {
+      transform: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     
     .pub-title {
