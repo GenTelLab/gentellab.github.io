@@ -5,77 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Group Gallery - Gentel Research</title>
   <style>
-    /* 全局样式 */
+    /* 全局样式 */body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; min-height: 100vh; font-family: Arial, sans-serif; background-color: #f8f9fa; color: #333; }
+    
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-    }
-
-    /* 导航栏 */
-    .navbar {
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
       display: flex;
-      justify-content: space-between;
-      align-items: center; /* 垂直居中 */
-      height: 60px;         /* 控制导航栏高度 */
-      padding: 0 10px;
+      flex-direction: column;
+    }
+    
+    main {
+      flex: 1;
+    }
+  
+    /* ===== 顶部导航 ===== */
+    header {
+      background:#fff;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    header nav {
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1200px; margin:0 auto; padding:12px 20px;
+    }
+    header nav ul {
+      display:flex; list-style:none; gap:20px; margin:0; padding:0;
+    }
+    header nav a {
+      text-decoration:none; color:#333;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    header nav a:hover {
+      color:#2563eb;
+      background-color: rgba(37, 99, 235, 0.05);
+    }
+    
+    /* 蓝色下划线动画效果 */
+    header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background-color: #2563eb;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    header nav a:hover::after {
+      transform: scaleX(1);
     }
 
-    .logo-link {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #2c3e50;
+    /* ========== Mega 下拉基础（含“无形桥”与位移修复） ========== */
+    header nav { position: relative; }            /* 参照定位 */
+  
+    .has-mega { position: relative; }
+  
+    /* 防断层无形桥 */
+    .has-mega::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:100%;
+      height:12px;               /* 6–14px 可调 */
     }
-
-    /* 导航菜单样式 */
-    .nav-menu {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 0; /* 已由 a 标签 padding 控制间距 */
+  
+    /* 面板：初始向上 4px（不制造下方空隙） */
+    .has-mega .mega{
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%) translateY(-4px);
+      width: min(980px, 92vw);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.12);
+      padding: 18px 20px;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity .18s ease, transform .18s ease, visibility .18s;
+      z-index: 50;
     }
-
-    .nav-menu li {
-      margin: 0;
+  
+    /* 显示：恢复到 Y=0，不再往下移 */
+    .has-mega:hover .mega,
+    .has-mega:focus-within .mega,
+    .has-mega.is-open .mega{
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
-
-    .nav-menu a {
-      display: block;
-      padding: 16px 18px;
-      text-decoration: none;
-      color: #2c3e50;
-      font-weight: 500;
-      transition: color 0.3s;
+  
+    /*（老的两列网格 mega：如果你保留旧结构时会用到）*/
+    .mega-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 40px;
     }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-      color: #007acc;
-      border-bottom: 3px solid #007acc;
+    .mega-col ul{ list-style: none; margin: 6px 0 14px; padding: 0; }
+    .mega-col li + li{ margin-top: 6px; }
+    .mega-title{ font-size: 16px; font-weight: 800; margin: 0 0 8px; color: #111827; }
+    .mega-sub{ font-size: 14px; font-weight: 700; margin: 10px 0 6px; color: #374151; }
+    .mega a{ display: inline-block; text-decoration: none; color: #374151; padding: 2px 0; }
+    .mega a:hover{ color:#2563eb; }
+  
+    /* 小屏：老的网格 mega 处理 */
+    @media (max-width: 900px){
+      .has-mega .mega{
+        left: 0; right: 0;
+        transform: none;
+        width: 100vw;
+        border-radius: 0;
+        box-shadow: 0 12px 30px rgba(0,0,0,.08);
+      }
+      .mega-grid{ grid-template-columns: 1fr; gap: 18px; }
+      .has-mega::after{ display:none; }
     }
-
 
     /* 页面标题 */
     .page-header {
       text-align: center;
       padding: 60px 20px 30px;
-      background: linear-gradient(135deg, #007acc, #005a8f);
+      background: #2f62ee;
       color: white;
     }
     .page-header h1 {
@@ -93,7 +147,7 @@
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
       position: sticky;
-      top: 50px;
+      top: 0px;
       z-index: 900;
       overflow-x: auto;
       white-space: nowrap;
@@ -118,100 +172,162 @@
       padding: 20px;
     }
 
-    /* 时间轴样式 */
-    .timeline {
-      position: relative;
-      max-width: 1000px;
-      margin: 40px auto;
-    }
+      /* ===== 时间轴：双列交替方形气泡 + 图片阵列 ===== */
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
 
-    /* 垂直线 */
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 4px;
-      background: #007acc;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+      /* 垂直线 —— 居中贯穿 */
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background: #007acc;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 0;
+      }
 
-    .timeline-item {
-      padding: 20px 0;
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      margin-bottom: 30px;
+      /* 时间轴项 */
+      .timeline-item {
+        padding: 30px 0;
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
 
-      /* 关键：为锚点设置额外的上边距，防止被导航遮挡 */
-      scroll-margin-top: 80px;
-    }
+        /* 防止锚点被顶部导航遮挡 */
+        scroll-margin-top: 80px;
+      }
 
-    /* 左右交替布局 */
-    .timeline-item:nth-child(even) {
-      justify-content: flex-end;
-    }
+      /* ===== 方形气泡卡片 ===== */
+      .timeline-content {
+        width: calc(100% - 10px);
+        max-width: 900px;           /* 稍宽一些，容纳更大图阵列 */
+        background: white;
+        padding: 16px;              /* 关键！原来是 200px → 错误极大，现已修正 */
+        border-radius: 8px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
 
-    .timeline-content {
-      width: 45%;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      position: relative;
-    }
+      /* 标题样式 */
+      .section-title {
+        font-size: 1.5em;
+        color: #1f2937;
+        margin: 0 0 12px;
+        font-weight: 700;
+        border-bottom: 2px solid #007acc;
+        padding-bottom: 6px;
+        display: inline-block;
+      }
 
-    .timeline-item:nth-child(even) .timeline-content {
-      text-align: right;
-    }
+      /* 左右交替布局 */
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-right: 0;
+        margin-left: auto;
+        text-align: left;
+      }
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 0;
+        margin-right: auto;
+        text-align: right;
+      }
 
-    /* 时间点圆圈 */
-    .timeline-content::before {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #007acc;
-      border: 4px solid white;
-      top: 25px;
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px #007acc;
-    }
+      /* 连接圆点（位于主线与卡片之间） */
 
-    .timeline-item:nth-child(odd) .timeline-content::before {
-      left: -110px;
-    }
-    .timeline-item:nth-child(even) .timeline-content::before {
-      right: -110px;
-    }
 
-    .section-title {
-      font-size: 1.6em;
-      color: #2c3e50;
-      margin: 0 0 15px;
-    }
+      .timeline-content::before {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: #007acc;
+        border: 3px solid white;
+        border-radius: 4px; /* 方形点，轻微倒角 */
+        box-shadow: 0 0 0 4px #007acc;
+        top: 36px;
+        z-index: 2;
+      }
 
-    /* 图片网格 */
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin-top: 15px;
-    }
-    .image-item img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .image-item img:hover {
-      transform: scale(1.05);
-    }
+      /* 奇数项：圆点在右侧（指向中心线） */
+
+
+      .timeline-item:nth-child(odd) .timeline-content::before {
+        right: 30px;
+      }
+
+      /* 偶数项：圆点在左侧（指向中心线） */
+
+
+      .timeline-item:nth-child(even) .timeline-content::before {
+        left: 30px;
+      }
+
+      /* ===== 图片阵列网格 ===== */
+      /* ===== 图片阵列网格：三列均分，紧密填充 ===== */
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 三等分 */
+        gap: 10px;                            /* 小间隙，更紧凑 */
+        margin-top: 14px;
+        width: 100%;
+      }
+
+      .image-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+        aspect-ratio: 1 / 1;                 /* 正方形容器 */
+        background: #f3f4f6;                /* 背景色防止纯白背景突兀 */
+      }
+
+      .image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;                   /* 完全覆盖，无留白 */
+        transition: transform 0.35s ease;
+        cursor: pointer;
+      }
+
+      .image-item img:hover {
+        transform: scale(1.14);              /* 明显悬停放大 */
+      }
+      @media (max-width: 768px) {
+        .image-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px;
+        }
+        .timeline-content {
+          padding: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .image-grid {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .timeline-content {
+          padding: 10px;
+        }
+        .section-title {
+          font-size: 1.4em;
+        }
+      }
+
+
+
+
 
     /* 灯箱模态框 */
     .lightbox {
@@ -220,11 +336,14 @@
       z-index: 10000;
       left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.9);
+      width: 100vw;
+      height: 100vh;
+      background: white(0,0,0,0.5); /* 柔和半透明 */
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
       text-align: center;
       padding: 50px 20px;
+      box-sizing: border-box;
     }
     .lightbox img {
       max-width: 90%;
@@ -234,15 +353,46 @@
       border: 3px solid #fff;
       border-radius: 8px;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease;
+    }
+    .lightbox img:hover {
+      transform: scale(1.05);
     }
     .lightbox .close {
-      position: absolute;
-      top: 30px;
-      right: 30px;
+      position: fixed;
+      top: clamp(20px, 4vh, 40px);
+      right: clamp(20px, 4vw, 40px);
       font-size: 50px;
-      color: #fff;
+      color: white;
       cursor: pointer;
+      background: rgba(0, 0, 0, 0.3);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 10001;
       line-height: 1;
+      opacity: 0.9;
+      transition: all 0.2s ease;
+    }
+
+    .lightbox .close:hover {
+      transform: scale(1.1);
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .lightbox .close {
+        width: 50px;
+        height: 50px;
+        font-size: 40px;
+        right: 16px;
+        top: 16px;
+      }
     }
 
      /* ===== 底部导航 ===== */
@@ -340,48 +490,65 @@
       }
     }
 
-    /* 响应式调整 */
-    @media (max-width: 768px) {
-      .timeline::after {
-        left: 30px;
-      }
-      .timeline-content {
-        width: calc(100% - 70px);
-      }
-      .timeline-item:nth-child(odd)::before,
-      .timeline-item:nth-child(even)::before {
-        left: -80px !important;
-      }
-      .timeline-item {
-        justify-content: flex-start !important;
-      }
-      .year-nav {
-        font-size: 1em;
-      }
-    }
+/* 移动端：改为垂直时间轴，气泡居中 */
+@media (max-width: 768px) {
+  .timeline::after {
+    left: 30px; /* 把主线移到左侧 */
+    transform: none;
+  }
+
+  .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    width: calc(100% - 70px);
+    max-width: none;
+    text-align: left !important;
+  }
+
+  .timeline-item {
+    justify-content: flex-start;
+  }
+
+  /* 内容靠右移 */
+  .timeline-content {
+    margin-left: 70px;
+  }
+
+  /* 圆点统一放在左边靠近主线 */
+  .timeline-content::before {
+    left: -50px;
+    right: auto;
+    top: 40px;
+  }
+
+  /* 调整间距 */
+  .timeline-item {
+    padding: 20px 0;
+  }
+  .image-grid {
+    gap: 10px;
+  }
+}
+
   </style>
 </head>
 <body>
 
-  <!-- 导航栏 -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <!-- 左侧 Logo -->
-      <a href="index.html" class="logo-link">
-        <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px;">
-      </a>
-
-      <!-- 右侧导航菜单 -->
-      <ul class="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="研究方向.html">Research</a></li>
+  <!-- ===== 全局导航 ===== -->
+  <header>
+    <nav>
+      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
+        <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
+      <!-- </a> -->
+      <ul>
+        <li><a href="index.html">Home</a></li>    
+        <li><a href="研究方向.html">Research</a></li>          
         <li><a href="publications.html">Publications</a></li>
         <li><a href="team.html">Team</a></li>
-        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="join_us.html">Join Us</a></li>
       </ul>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <!-- 页面标题 -->
   <header class="page-header">
@@ -390,10 +557,9 @@
 
   <!-- 年份索引 -->
   <div class="year-nav" id="year-nav">
-    <a href="#year-2022">2022</a>
-    <a href="#year-2023">2023</a>
-    <a href="#year-2024">2024</a>
     <a href="#year-2025">2025</a>
+    <a href="#To Be More">To Be More</a>
+
   </div>
 
   <!-- 主体内容 -->
@@ -401,57 +567,32 @@
     <div class="timeline">
 
       <!-- 2022 -->
-      <div id="year-2022" class="timeline-item">
+      <div id="year-2025" class="timeline-item">
         <div class="timeline-content">
-          <h2 class="section-title">2022 · 初创启航</h2>
+          <h2 class="section-title">2025</h2>
           <div class="image-grid">
             <div class="image-item"><img src="gallery_photo/1.png" alt="初创团队"></div>
             <div class="image-item"><img src="gallery_photo/2.png" alt="学术研讨"></div>
-            <div class="image-item"><img src="gallery_photo/3.png" alt="项目立项"></div>
-            <div class="image-item"><img src="gallery_photo/4.png" alt="实验室搭建"></div>
-            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
-            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
-            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/4.png" alt="项目立项"></div>
+            <div class="image-item"><img src="gallery_photo/5.png" alt="实验室搭建"></div>
+            <div class="image-item"><img src="gallery_photo/6.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/8.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/9.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/10.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/11.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/12.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/13.png" alt="会议报告"></div>
           
           </div>
         </div>
       </div>
 
       <!-- 2023 -->
-      <div id="year-2023" class="timeline-item">
+      <div id="To Be More" class="timeline-item">
         <div class="timeline-content">
-          <h2 class="section-title">2023 · 技术突破</h2>
+          <h2 class="section-title">To Be More</h2>
           <div class="image-grid">
-            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
-            <div class="image-item"><img src="gallery_photo/6.png" alt="产品原型"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="客户交流"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="团建活动"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2024 -->
-      <div id="year-2024" class="timeline-item">
-        <div class="timeline-content">
-          <h2 class="section-title">2024 · 快速成长</h2>
-          <div class="image-grid">
-            <div class="image-item"><img src="gallery_photo/1.png" alt="融资仪式"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="乔迁揭牌"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="新办公室"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="战略会议"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2025 -->
-      <div id="year-2025" class="timeline-item">
-        <div class="timeline-content">
-          <h2 class="section-title">2025 · 再创新高</h2>
-          <div class="image-grid">
-            <div class="image-item"><img src="gallery_photo/1.png" alt="全国拓展"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="生态合作"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="国际交流"></div>
-            <div class="image-item"><img src="gallery_photo/1.png" alt="未来展望"></div>
+            
           </div>
         </div>
       </div>
