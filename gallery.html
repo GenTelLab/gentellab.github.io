@@ -1,122 +1,251 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <title>研究方向 - Gentel Research</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Group Gallery - Gentel Research</title>
   <style>
-    html, body {
+    /* 全局样式 */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
     }
-    
-    body {
+
+    /* 导航栏 */
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
-      flex-direction: column;
-    }
-    
-    main {
-      flex: 1;
-    }
-    
-    .content-section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.7;
-      font-size: 16px;
-      color: #333;
-    }
-    
-    .content-section h2 {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 20px;
+      justify-content: space-between;
+      align-items: center; /* 垂直居中 */
+      height: 60px;         /* 控制导航栏高度 */
+      padding: 0 10px;
     }
 
-    /* ===== 顶部导航 ===== */
-    header {
-      background:#fff;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    header nav {
-      display:flex; justify-content:space-between; align-items:center;
-      max-width:1200px; margin:0 auto; padding:12px 20px;
-    }
-    header nav ul {
-      display:flex; list-style:none; gap:20px; margin:0; padding:0;
-    }
-    header nav a {
-      text-decoration:none; color:#333;
-      position: relative;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-    header nav a:hover {
-      color:#2563eb;
-      background-color: rgba(37, 99, 235, 0.05);
-    }
-    
-    /* 蓝色下划线动画效果 */
-    header nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 16px;
-      right: 16px;
-      height: 2px;
-      background-color: #2563eb;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-    
-    header nav a:hover::after {
-      transform: scaleX(1);
-    }
-    main {
-      max-width: 900px;   /* 控制正文宽度，不至于太长 */
-      margin: 40px auto;  /* 上下留白 + 居中 */
-      padding: 0 20px;    /* 两侧留点空白，避免贴边 */
-      line-height: 1.7;   /* 提高可读性 */
-      font-size: 16px;
-      color: #333;
-    }
-
-    main h2 {
-      text-align: center;  /* ✅ 标题居中 */
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    /* ===== 横幅区域 ===== */
-    .hero {
-      height: 160px;
-      background-image: url('gallery_photo/7.gif');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      position: relative;
+    .logo-link {
       display: flex;
       align-items: center;
-      justify-content: center;
+      text-decoration: none;
+      color: #2c3e50;
     }
 
-    .centered-img {
+    /* 导航菜单样式 */
+    .nav-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 0; /* 已由 a 标签 padding 控制间距 */
+    }
+
+    .nav-menu li {
+      margin: 0;
+    }
+
+    .nav-menu a {
       display: block;
-      margin: 0 auto;          /* 左右自动外边距 = 居中 */
-      width: 600px;
-      height: 600px;
-      object-fit: cover;
-      border: 3px solid #ddd;
-      border-radius: 8px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: #007acc;
+      border-bottom: 3px solid #007acc;
     }
 
 
-    /* ===== 底部导航 ===== */
+    /* 页面标题 */
+    .page-header {
+      text-align: center;
+      padding: 60px 20px 30px;
+      background: linear-gradient(135deg, #007acc, #005a8f);
+      color: white;
+    }
+    .page-header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      font-weight: 300;
+    }
+
+    /* 年份索引导航 */
+    .year-nav {
+      background: #f1f5f9;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 1.2em;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 50px;
+      z-index: 900;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .year-nav a {
+      color: #444;
+      margin: 0 15px;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+    .year-nav a:hover,
+    .year-nav a.active {
+      background: #007acc;
+      color: white;
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* 时间轴样式 */
+    .timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 40px auto;
+    }
+
+    /* 垂直线 */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: #007acc;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      padding: 20px 0;
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 30px;
+
+      /* 关键：为锚点设置额外的上边距，防止被导航遮挡 */
+      scroll-margin-top: 80px;
+    }
+
+    /* 左右交替布局 */
+    .timeline-item:nth-child(even) {
+      justify-content: flex-end;
+    }
+
+    .timeline-content {
+      width: 45%;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      text-align: right;
+    }
+
+    /* 时间点圆圈 */
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #007acc;
+      border: 4px solid white;
+      top: 25px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #007acc;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      left: -110px;
+    }
+    .timeline-item:nth-child(even) .timeline-content::before {
+      right: -110px;
+    }
+
+    .section-title {
+      font-size: 1.6em;
+      color: #2c3e50;
+      margin: 0 0 15px;
+    }
+
+    /* 图片网格 */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .image-item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .image-item img:hover {
+      transform: scale(1.05);
+    }
+
+    /* 灯箱模态框 */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      margin: auto;
+      display: block;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    .lightbox .close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 50px;
+      color: #fff;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+     /* ===== 底部导航 ===== */
     footer{ background:#2f62ee; color:#fff; }
     .footer-wrap { max-width:1200px; margin:0 auto; padding:16px 20px 8px; }
     
@@ -163,6 +292,7 @@
       align-items: flex-start;
     }
     .footer-col p{ margin:.35rem 0; opacity:.95; }
+    .footer-contact{ display:grid; row-gap: 14px; }
     .footer-qrcode{
       align-self: start;
       justify-self: end;
@@ -189,7 +319,7 @@
     .footer-bottom .legal-right { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
     .sep { margin:0 8px; opacity:.7; }
     .beian-icon { height:18px; vertical-align:middle; margin:0 4px; }
-
+  
     @media (max-width: 900px){
       .footer-grid{ grid-template-columns: 1fr; gap:12px; }
       
@@ -209,88 +339,195 @@
         gap: 16px;
       }
     }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      .timeline::after {
+        left: 30px;
+      }
+      .timeline-content {
+        width: calc(100% - 70px);
+      }
+      .timeline-item:nth-child(odd)::before,
+      .timeline-item:nth-child(even)::before {
+        left: -80px !important;
+      }
+      .timeline-item {
+        justify-content: flex-start !important;
+      }
+      .year-nav {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ===== 全局导航 ===== -->
-  <header>
-    <nav>
-      <!-- <a href="https://gentel.com/zh/home" target="_blank" rel="noopener"> -->
-        <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px; margin-left:10px;">
-      <!-- </a> -->
-      <ul>
-        <li><a href="index.html">Home</a></li>    
-        <li><a href="研究方向.html">Research</a></li>          
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <!-- 左侧 Logo -->
+      <a href="index.html" class="logo-link">
+        <img src="主页图片/gentel.png" alt="Gentel Logo" style="height:30px;">
+      </a>
+
+      <!-- 右侧导航菜单 -->
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="研究方向.html">Research</a></li>
         <li><a href="publications.html">Publications</a></li>
         <li><a href="team.html">Team</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
         <li><a href="join_us.html">Join Us</a></li>
       </ul>
-    </nav>
+    </div>
+  </nav>
+
+  <!-- 页面标题 -->
+  <header class="page-header">
+    <h1>Group Gallery</h1>
   </header>
 
-  <main>
-  <!-- ===== 横幅区（背景图） ===== -->
-  <section class="hero">
-  </section>
-
-  <!-- ===== 页面主体内容 ===== -->
-  <div class="content-section">
-    <h2>新气象：乔迁新址</h2>
-    <p>金秋九月，杭州仍似盛夏，人工智能发展一派热火朝天，城市和产业的热烈气象相映成趣。君同迎来乔迁之喜，完成了一次重要的“空间跃迁”。</p>
-  </div>
-  </main>
-
-  <!-- ===== 图片 ===== -->
-  <img src="gallery_photo/1.png" alt="实验平台搭建" class="centered-img">
-
-  <div class="content-section">
-    <p>从埋头钻研底层算法、构筑学研壁垒的静谧园区，搬至科技氛围浓厚的核心商业区，从此身处更繁华的城市界面，坐拥更广阔的空间视野，将与众多科技互联网大厂为伍，以新姿态、新面貌、新气象开启新征程。</p>
+  <!-- 年份索引 -->
+  <div class="year-nav" id="year-nav">
+    <a href="#year-2022">2022</a>
+    <a href="#year-2023">2023</a>
+    <a href="#year-2024">2024</a>
+    <a href="#year-2025">2025</a>
   </div>
 
-  <!-- ===== 图片 ===== -->
-  <img src="gallery_photo/2.png" alt="实验平台搭建" class="centered-img">
+  <!-- 主体内容 -->
+  <div class="container">
+    <div class="timeline">
 
-  <div class="content-section">
-    <p>人工智能浪潮席卷而来，全球范围内百舸争流，君同将加速推进十年模型可信研究的积累，赋能成千上万人工智能业务场景，持续引领“人工智能治理”技术落地，勇立潮头，乘风破浪，创造可信未来。</p>
+      <!-- 2022 -->
+      <div id="year-2022" class="timeline-item">
+        <div class="timeline-content">
+          <h2 class="section-title">2022 · 初创启航</h2>
+          <div class="image-grid">
+            <div class="image-item"><img src="gallery_photo/1.png" alt="初创团队"></div>
+            <div class="image-item"><img src="gallery_photo/2.png" alt="学术研讨"></div>
+            <div class="image-item"><img src="gallery_photo/3.png" alt="项目立项"></div>
+            <div class="image-item"><img src="gallery_photo/4.png" alt="实验室搭建"></div>
+            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
+          
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div id="year-2023" class="timeline-item">
+        <div class="timeline-content">
+          <h2 class="section-title">2023 · 技术突破</h2>
+          <div class="image-grid">
+            <div class="image-item"><img src="gallery_photo/5.png" alt="会议报告"></div>
+            <div class="image-item"><img src="gallery_photo/6.png" alt="产品原型"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="客户交流"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="团建活动"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div id="year-2024" class="timeline-item">
+        <div class="timeline-content">
+          <h2 class="section-title">2024 · 快速成长</h2>
+          <div class="image-grid">
+            <div class="image-item"><img src="gallery_photo/1.png" alt="融资仪式"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="乔迁揭牌"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="新办公室"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="战略会议"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div id="year-2025" class="timeline-item">
+        <div class="timeline-content">
+          <h2 class="section-title">2025 · 再创新高</h2>
+          <div class="image-grid">
+            <div class="image-item"><img src="gallery_photo/1.png" alt="全国拓展"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="生态合作"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="国际交流"></div>
+            <div class="image-item"><img src="gallery_photo/1.png" alt="未来展望"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <!-- ===== 图片 ===== -->
-  <img src="gallery_photo/3.png" alt="实验平台搭建" class="centered-img">
-
-  <div class="content-section">
-    <p>2025年以来，业务版图不断扩展，办公环境全面升级，公司也搭建完成覆盖全国的营销与服务网络，推动企业发展战略迈入新的里程碑。</p>
+  <!-- 灯箱（图片放大） -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged image">
   </div>
 
-  <div class="content-section">
-    <h2>新环境：全面升级</h2>
-    <p>空间的变迁，见证了企业的高速成长，团队从最初几个人到如今近百人，不断发展壮大。2024年6月28日，君同未来企业主体注册成立，仅4个月后完成数千万元天使轮融资，并在年底实现盈利。凭借持续近十年的产学研经验探索和积累，在短短几年完成数款人工智能治理产品的自主研发和落地应用。在新的环境里，我们期待创造商业传奇。
-      办公空间配备开放式办公区、智能会议室、舒适茶水间与多功能休闲区，在这里，每一个君同er都可以尽情享受协作创新的乐趣，也可以充分体验开放进取、快速成长的氛围。</p>
-  </div>
+  
 
-  <!-- ===== 图片 ===== -->
-  <img src="gallery_photo/4.png" alt="实验平台搭建" class="centered-img">
+  <!-- JavaScript 控制灯箱和年份高亮 -->
+  <script>
+    // === 图片点击放大 ===
+    const images = document.querySelectorAll('.image-item img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-  <!-- ===== 图片 ===== -->
-  <img src="gallery_photo/5.png" alt="实验平台搭建" class="centered-img">
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 防止背景滚动
+      });
+    });
 
-  <div class="content-section">
-    <p>新址位于滨江区高新技术企业的集聚地，毗邻白马湖实验室能源科技创新中心与AIGC产业创新中心，创新氛围浓厚。周边环绕山泽里、保利·时光里等成熟商圈，交通便捷、商业配套完善，为员工工作与生活平衡提供更多可能。</p>
-  </div>
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
 
+    // 点击空白区域关闭
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
 
-  <!-- ===== 图片 ===== -->
-  <img src="gallery_photo/6.png" alt="实验平台搭建" class="centered-img">
+    // ESC 键关闭
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
 
-  <div class="content-section">
-    <h2>新起点：共赴未来</h2>
-    <p>一路走来，我们诚挚感谢各界领导的关怀，感谢各行业客户的认可，感谢生态伙伴的大力支持，也感谢每一位君同er的辛勤付出。人工智能之途，虽历攻坚之苦，更怀致远之明。路途虽远，行则将至，星汉灿烂，未来可期。
-      乔迁火炬创新中心，既是空间的迁移，更是创新的进阶，君同将继续怀揣着 “助力人类基础脑力劳动可信替代” 的使命，聚焦人工智能生态治理，加速全栈治理技术研发与场景落地。未来，君同将通过更完善的产品矩阵与生态合作，持续为客户提供安全、合规、可信的人工智能治理解决方案，推动人工智能产业健康有序发展。</p>
-  </div>
+    // === 年份导航高亮 ===
+    const navLinks = document.querySelectorAll('.year-nav a');
+    const sections = document.querySelectorAll('.timeline-item');
 
-  </main>
-  <!-- ===== 底部导航 ===== -->
+    function setActiveYear() {
+      let current = '';
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 200) {
+          current = section.querySelector('[id]').id;
+        }
+      });
+
+      navLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) {
+          a.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', setActiveYear);
+    window.addEventListener('load', setActiveYear);
+  </script>
+
+<!-- ===== 底部导航 ===== -->
+<!-- ===== 底部导航 ===== -->
 <footer>
   <div class="footer-wrap">
   
@@ -327,20 +564,90 @@
   </div>
   <div class="footer-bottom">
         <div class="legal-left">
-      <span>© Hangzhou Gentel Technology Co., Ltd</span>
-      <!-- <span class="sep">|</span>
+      <span>© Hangzhou Juntong Future Technology Co., Ltd. Copyright</span>
+      <span class="sep">|</span>
       <span>浙ICP备2021034072号</span>
         <span class="sep">|</span>
       <img src="主页图片/Slice 99.png" alt="备案图标" class="beian-icon">
-      <span>浙公网安备33010802013572号</span> -->
+      <span>浙公网安备33010802013572号</span>
         </div>
         <div class="legal-right">
       <a href="/legal.html">Legal Statement</a>  
         <span class="sep">|</span>
-      <a href="/privacy.html">Privacy Policy</a>     
+      <a href="/privacy.html">Privacy Policy</a>    
         </div>
     </div>
     </footer>
+
+  <!-- JS -->
+  <script>
+    // 整卡跳转（不影响右下角 PDF 的单独点击）
+    document.querySelectorAll('.pub .card[data-href]').forEach(card => {
+      card.addEventListener('click', e => {
+        // 如果点到的是 PDF 链接，则不拦截
+        if (e.target.closest('.pdf')) return;
+        window.location.href = card.dataset.href;
+      });
+      // 键盘可达性：Enter/Space 触发
+      card.addEventListener('keydown', e => {
+        if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.pdf')) {
+          e.preventDefault();
+          window.location.href = card.dataset.href;
+        }
+      });
+    });
+
+    // 横幅轮播功能已移除
+     
+  </script>
+
+<script>
+  // 设置最大悬停时间（决定光条满宽所需时间）
+  const MAX_DURATION = 2000; // 4秒充满
+  
+  document.querySelectorAll('.research .card').forEach(card => {
+    let startTime = null;
+    let timer = null;
+  
+    card.addEventListener('mouseenter', () => {
+      startTime = Date.now();
+  
+      // 启动定时器，每 60ms 更新一次光条宽度
+      timer = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / MAX_DURATION, 1); // 限制在 [0,1]
+        card.style.setProperty('--hover-progress', `${progress * 100}%`);
+      }, 60);
+    });
+  
+    card.addEventListener('mouseleave', () => {
+      if (timer) clearInterval(timer);
+  
+      const totalTime = Date.now() - startTime;
+      console.log(`卡片悬停时间: ${totalTime}ms (${(totalTime/1000).toFixed(1)}s)`);
+  
+      // 可选：发送埋点数据
+      // analytics.track('card_hover_duration', { duration: totalTime });
+  
+      // 恢复光条
+      setTimeout(() => {
+        card.style.setProperty('--hover-progress', `0%`);
+      }, 100);
+    });
+  
+    // 初始设置
+    card.style.setProperty('--hover-progress', '0%');
+  });
+  
+  // 应用 CSS 中使用变量控制宽度
+  document.head.insertAdjacentHTML('beforeend', `
+    <style>
+      .research .card::after {
+        width: var(--hover-progress);
+      }
+    </style>
+  `);
+  </script>
 
 </body>
 </html>
