@@ -139,10 +139,10 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background-image: url('主页图片/Slice 100.png');
       background-repeat: no-repeat;
       background-position: center top -240px;
       background-size: cover;
+      transition: background-image 1s ease-in-out, background-position 1s ease-in-out;
     }
     .hero-content { 
       text-align: center; 
@@ -753,7 +753,38 @@
       });
     });
 
-    // 横幅轮播功能已移除
+    // 横幅背景图片自动轮播功能
+    const heroImages = [
+      {
+        url: '主页图片/Slice 100.png',  // 原始背景图片
+        position: 'center top -240px'   // 原始位置
+      },
+      {
+        url: 'gallery_photo/10.png',     // 新增图片1
+        position: 'center top -500px'    // 向上移动更多
+      },
+      {
+        url: 'gallery_photo/6.png',      // 新增图片2
+        position: 'center top -500px'    // 向上移动
+      }
+    ];
+    
+    let currentImageIndex = 0;
+    const heroElement = document.querySelector('.hero');
+    
+    // 设置初始背景图片和位置
+    heroElement.style.backgroundImage = `url('${heroImages[currentImageIndex].url}')`;
+    heroElement.style.backgroundPosition = heroImages[currentImageIndex].position;
+    
+    // 轮播函数
+    function rotateHeroBackground() {
+      currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+      heroElement.style.backgroundImage = `url('${heroImages[currentImageIndex].url}')`;
+      heroElement.style.backgroundPosition = heroImages[currentImageIndex].position;
+    }
+    
+    // 每5秒自动切换背景图片
+    setInterval(rotateHeroBackground, 5000);
      
   </script>
 
