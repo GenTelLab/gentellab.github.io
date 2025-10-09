@@ -76,14 +76,15 @@
       /* ===== 横幅区域 ===== */
       .hero {
         height: 540px;
-        background-image: url("主页图片/Slice 101.png");
-        background-repeat: no-repeat;
-        background-position: center top 56%;
-        background-size: cover;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position: center top 56%;
+        background-size: cover;
+        transition: background-image 1s ease-in-out, background-position 1s ease-in-out;
       }
       .hero-content {
         text-align: center;
@@ -1202,6 +1203,35 @@
           });
         });
       });
+
+      // 横幅背景图片自动轮播功能
+      const heroImages = [
+        {
+          url: '主页图片/Slice 101.png',  // 原始背景图片
+          position: 'center top 56%'      // 原始位置
+        },
+        {
+          url: '主页图片/disney.png',      // 新增disney图片
+          position: 'center top 50%'      // 适合disney图片的位置
+        }
+      ];
+      
+      let currentImageIndex = 0;
+      const heroElement = document.querySelector('.hero');
+      
+      // 设置初始背景图片和位置
+      heroElement.style.backgroundImage = `url('${heroImages[currentImageIndex].url}')`;
+      heroElement.style.backgroundPosition = heroImages[currentImageIndex].position;
+      
+      // 轮播函数
+      function rotateHeroBackground() {
+        currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+        heroElement.style.backgroundImage = `url('${heroImages[currentImageIndex].url}')`;
+        heroElement.style.backgroundPosition = heroImages[currentImageIndex].position;
+      }
+      
+      // 每5秒自动切换背景图片
+      setInterval(rotateHeroBackground, 5000);
     </script>
   </body>
 </html>
