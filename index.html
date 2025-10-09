@@ -641,31 +641,31 @@
     <div class="pub-row">
   
       <!-- 卡片 1 -->
-      <article class="card" data-href="https://arxiv.org/pdf/2506.12551" tabindex="0" role="link" aria-label="查看 MEraser 详情"> 
+      <article class="card"> 
         
         <h3 class="title">MEraser: An Effective Fingerprint Erasure Approach for Large Language Models</h3>
         <div class="meta">ACL2025Main</div>
         <a class="pdf" href="https://arxiv.org/pdf/2506.12551" target="_blank" rel="noopener">PDF</a>   
       </article>
-  
+
       <!-- 卡片 2 -->
-      <article class="card" data-href="https://www.sciengine.com/cfs/files/pdfs/view/1674-7267/C50A865C76A5412E930988FC372575BE.pdf" tabindex="0" role="link" aria-label="查看 InSty 详情">
+      <article class="card">
        
         <h3 class="title">InSty: A Robust Multi-Level Cross-Granularity Fingerprint Embedding Algorithm for Multi-Turn Dialogue in Large Language Models</h3>
         <div class="meta">SCIENTIA SINICA Informationis</div>
         <a class="pdf" href="https://www.sciengine.com/cfs/files/pdfs/view/1674-7267/C50A865C76A5412E930988FC372575BE.pdf" target="_blank" rel="noopener">PDF</a>   
       </article>
-  
+
       <!-- 卡片 3 -->
-      <article class="card" data-href="https://arxiv.org/pdf/2509.09703v1" tabindex="0" role="link" aria-label="查看 CTCC 详情">
+      <article class="card">
         
         <h3 class="title">CTCC: A Robust and Stealthy Fingerprinting Framework for Large Language Models via Cross-Turn Contextual Correlation Backdoor</h3>
         <div class="meta">EMNLP2025Main</div>
         <a class="pdf" href="https://arxiv.org/pdf/2509.09703v1" target="_blank" rel="noopener">PDF</a>   
       </article>
-  
+
       <!-- 卡片 4 -->
-      <article class="card" data-href="https://arxiv.org/abs/2509.03058" tabindex="0" role="link" aria-label="查看 LoRA-FP 详情">
+      <article class="card">
         
         <h3 class="title">EverTracer:Hunting Stolen Larg Language Models via Stealthy and Robust Probabilistic Fingerprint</h3>
         <div class="meta">EMNLP2025Main</div>
@@ -737,21 +737,6 @@
 
   <!-- JS -->
   <script>
-    // 整卡跳转（不影响右下角 PDF 的单独点击）
-    document.querySelectorAll('.pub .card[data-href]').forEach(card => {
-      card.addEventListener('click', e => {
-        // 如果点到的是 PDF 链接，则不拦截
-        if (e.target.closest('.pdf')) return;
-        window.location.href = card.dataset.href;
-      });
-      // 键盘可达性：Enter/Space 触发
-      card.addEventListener('keydown', e => {
-        if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.pdf')) {
-          e.preventDefault();
-          window.location.href = card.dataset.href;
-        }
-      });
-    });
 
     // 横幅背景图片自动轮播功能
     const heroImages = [
