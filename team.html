@@ -486,8 +486,8 @@
           <button class="content-category-tab active" data-category="Faculty">
             Faculty
           </button>
-          <button class="content-category-tab" data-category="Student">
-            Student
+          <button class="content-category-tab" data-category="Scholar">
+            Scholar
           </button>
           <button class="content-category-tab" data-category="Alumni">
             Alumni
@@ -507,12 +507,12 @@
           </div>
         </div>
 
-        <!-- Student内容 -->
-        <div class="category-content" id="Student-content">
-          <div class="team-grid" id="Student-grid">
-            <!-- Student卡片将通过JavaScript动态生成 -->
+        <!-- Scholar内容 -->
+        <div class="category-content" id="Scholar-content">
+          <div class="team-grid" id="Scholar-grid">
+            <!-- Scholar卡片将通过JavaScript动态生成 -->
           </div>
-          <div class="pagination" id="Student-pagination">
+          <div class="pagination" id="Scholar-pagination">
             <!-- 分页将通过JavaScript动态生成 -->
           </div>
         </div>
@@ -683,7 +683,7 @@
             avatar: "孔德.jpeg",
           },
         ],
-        Student: [
+        Scholar: [
           {
             id: 8,
             name: "Zhenhua Xu",
@@ -966,7 +966,7 @@
       let currentPage = {
         Collaborator: 1,
         Faculty: 1,
-        Student: 1,
+        Scholar: 1,
         Alumni: 1,
       };
 
@@ -1136,7 +1136,7 @@
         return {
           Collaborator: collaboratorPage,
           Faculty: facultyPage,
-          Student: studentPage,
+          Scholar: studentPage,
           Alumni: alumniPage,
         };
       }
@@ -1183,7 +1183,7 @@
 
         // 初始化渲染所有内容
         renderTeamContent("Faculty");
-        renderTeamContent("Student");
+        renderTeamContent("Scholar");
         renderTeamContent("Alumni");
         renderTeamContent("Collaborator");
 
