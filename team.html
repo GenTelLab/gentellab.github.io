@@ -1130,13 +1130,13 @@
         const params = new URLSearchParams(window.location.search);
         const collaboratorPage = parseInt(params.get("collaboratorPage")) || 1;
         const facultyPage = parseInt(params.get("facultyPage")) || 1;
-        const studentPage = parseInt(params.get("studentPage")) || 1;
+        const scholarPage = parseInt(params.get("scholarPage")) || 1;
         const alumniPage = parseInt(params.get("alumniPage")) || 1;
 
         return {
           Collaborator: collaboratorPage,
           Faculty: facultyPage,
-          Scholar: studentPage,
+          Scholar: scholarPage,
           Alumni: alumniPage,
         };
       }
